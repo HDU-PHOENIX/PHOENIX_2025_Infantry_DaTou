@@ -7,5 +7,6 @@
 #include "FreeRTOS.h"
 #include "Task.h"
 #include "judge.h"
+#include "SuperPower.h"
 
 #endif

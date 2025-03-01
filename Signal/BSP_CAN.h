@@ -7,6 +7,7 @@
 #include "GM6020.h"
 #include "M3508.h"
 #include "M2006.h"
+#include "SuperPower.h"
 
 void CAN_Filter_Init(void);
 

@@ -62,7 +62,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     }else if(rx_header.StdId >= 0x201 && rx_header.StdId <= 0x204)
     {
       Get_M3508_Chassis_Message(rx_header.StdId,rx_data);
-    }
+    }else if(rx_header.StdId == 0x0C2)
+	{
+		SuperPower_Rx(rx_data);
+	}
 	}else if(hcan->Instance == CAN2)
 		{
 			if(rx_header.StdId == 0x201)
