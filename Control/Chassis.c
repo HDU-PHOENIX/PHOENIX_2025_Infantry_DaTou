@@ -17,6 +17,7 @@ void Chassis_Solution(void);
 void Chassis_Motor_Solution(void);
 float Find_Angle(void);
 void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_speed);
+float Find_Min_Angle(void);
 
 /********************输入控制部分********************/
 void Chassis_Remote_Control(void);
@@ -104,7 +105,7 @@ float Find_Angle(void)
 	float Angle,Zero;
 	Angle = GM6020_Yaw.rotor_angle;
 	Zero = Gimbal_Yaw_ZERO;
-	
+
 	if(Angle - Zero > 4096)
 	{
 		Zero+=8190;
@@ -113,7 +114,9 @@ float Find_Angle(void)
 	{
 		Zero-=8190;
 	}
-    err = Angle - Zero;
+    
+	err = Angle-Zero;
+	
 	float temp1 = err * 2 * 3.1415926f / 8192;
     if(temp1 > 3.141593f)
         temp1 = 3.141593f;
@@ -121,6 +124,25 @@ float Find_Angle(void)
         temp1 = -3.141593f;
     return temp1;
 }
+
+float Find_Min_Angle(void) 
+{
+	float Angle = GM6020_Yaw.rotor_angle;
+    float temp1=Angle-Gimbal_Yaw_ZERO;
+    float temp2=Angle-Gimbal_Yaw_HALF;
+	float mintemp1;
+    if(temp1>4096)
+        temp1-=8192;
+    else if(temp1<-4096)
+        temp1+=8192;
+    if(temp2>4096)
+        temp2-=8192;
+    else if(temp2<-4096)
+        temp2+=8192;
+	mintemp1 = (fabs(temp1) < fabs(temp2) ? temp1 : temp2);
+    return mintemp1;
+}
+
 
 /**
  * @file Chassis.c
@@ -145,7 +167,7 @@ void Chassis_Remote_Control(void)
     case FOLLOW:
         Temp1_Chassis_Speed.vx = (float)RC.ch3/250;
         Temp1_Chassis_Speed.vy = (float)RC.ch2/250;
-		PID_Calc_Angle(&Follow_PID,0.0f,err);
+		PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle());
         Temp1_Chassis_Speed.vw = Follow_PID.output/Follow_Set;
     default:
         break;
@@ -181,7 +203,7 @@ void Chassis_PID_Calc(void)
  */
 void Chassis_PID_Init_All(void)
 {
-    PID_init(&Follow_PID,0.007,0,0.02,16308,16308);
+    PID_init(&Follow_PID,6,0,250,16308,16308);
     PID_init(&(M3508_Chassis[0].PID),10,1,10,16308,16308);
     PID_init(&(M3508_Chassis[1].PID),10,1,10,16308,16308);
     PID_init(&(M3508_Chassis[2].PID),10,1,10,16308,16308);
@@ -222,7 +244,7 @@ void  Chassis_KeyBoard_Control(void)
             Temp1_Chassis_Speed.vy = 2.0f;
         if(IF_KEY_PRESSED_A == 0 && IF_KEY_PRESSED_D == 0)
             Temp1_Chassis_Speed.vy = 0.0f;
-        Temp1_Chassis_Speed.vw = 4.6;
+        Temp1_Chassis_Speed.vw = 4.6f;
         break;
     case NORMAL:
         if(IF_KEY_PRESSED_W == 1)
@@ -252,7 +274,7 @@ void  Chassis_KeyBoard_Control(void)
             Temp1_Chassis_Speed.vy = 2.5f;
         if(IF_KEY_PRESSED_A == 0 && IF_KEY_PRESSED_D == 0)
             Temp1_Chassis_Speed.vy = 0.0f;
-        PID_Calc_Angle(&Follow_PID,0.0f,err);
+        PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle());
         Temp1_Chassis_Speed.vw = Follow_PID.output/Follow_Set;
     default:
         break;
