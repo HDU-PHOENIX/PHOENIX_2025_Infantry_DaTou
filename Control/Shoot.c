@@ -146,9 +146,9 @@ void Shoot_PID_Calc(void)
  */
 void Shoot_PID_Init_ALL(void)
 {
-    PID_init(&(M3508_Shoot[0].PID),40,0,0,16380,16380);//40,0,0
-    PID_init(&(M3508_Shoot[1].PID),40,0,0,16380,16380);//40,0,0
-    PID_init(&(M2006_Rammer.Speed_PID),20,0,10,16380,16380);
+    PID_init(&(M3508_Shoot[0].PID),50,5,0,16380,16380);//40,0,0
+    PID_init(&(M3508_Shoot[1].PID),50,5,0,16380,16380);//40,0,0
+    PID_init(&(M2006_Rammer.Speed_PID),45,0,10,16380,16380);
 }
 
 /**

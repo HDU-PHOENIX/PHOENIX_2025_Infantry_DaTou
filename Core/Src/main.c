@@ -41,6 +41,7 @@
 #include "M2006.h"
 #include "IMU_Task.h"
 #include "judge.h"
+#include "SuperPower.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,6 +70,8 @@ Computer_Tx_Message_t Computer_Tx_Message;
 uint8_t judge_rx_buff[JUDGE_MAX_LENGTH];
 /*******************************裁判系统相关系数******************************/
 float Chassis_Power_Limit,Chassis_Power_Now,Chassis_Power_Buffer;
+SuperPower_Tx_Message_t SuperPower_Tx_Message;
+SuperPower_Rx_Message_t SuperPower_Rx_Message;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
