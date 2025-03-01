@@ -51,6 +51,7 @@ osThreadId ChassisHandle;
 osThreadId GimbalHandle;
 osThreadId ShootHandle;
 osThreadId IMU_TASKHandle;
+osThreadId UIHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -61,6 +62,7 @@ void ChassisTask(void const * argument);
 void GimbalTask(void const * argument);
 void ShootTask(void const * argument);
 void INS_Task(void const * argument);
+void UI_Task(void const * argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -123,6 +125,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of IMU_TASK */
   osThreadDef(IMU_TASK, INS_Task, osPriorityAboveNormal, 0, 256);
   IMU_TASKHandle = osThreadCreate(osThread(IMU_TASK), NULL);
+
+  /* definition and creation of UI */
+  osThreadDef(UI, UI_Task, osPriorityNormal, 0, 256);
+  UIHandle = osThreadCreate(osThread(UI), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -202,6 +208,24 @@ __weak void INS_Task(void const * argument)
     osDelay(1);
   }
   /* USER CODE END INS_Task */
+}
+
+/* USER CODE BEGIN Header_UI_Task */
+/**
+* @brief Function implementing the UI thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_UI_Task */
+__weak void UI_Task(void const * argument)
+{
+  /* USER CODE BEGIN UI_Task */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END UI_Task */
 }
 
 /* Private application code --------------------------------------------------*/

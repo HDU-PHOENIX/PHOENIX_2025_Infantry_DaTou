@@ -1774,6 +1774,16 @@
               <FileType>5</FileType>
               <FilePath>..\Task\IMU_Task.h</FilePath>
             </File>
+            <File>
+              <FileName>UITask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Task\UITask.c</FilePath>
+            </File>
+            <File>
+              <FileName>UITask.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Task\UITask.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

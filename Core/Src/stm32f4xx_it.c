@@ -377,16 +377,16 @@ void USART6_IRQHandler(void)
 
 		if((__HAL_UART_GET_FLAG(&huart6,UART_FLAG_IDLE)!=RESET))
 		{		
-			__HAL_UART_CLEAR_IDLEFLAG(&huart6);//清除标志位		
-			HAL_UART_DMAStop(&huart6); //暂停dma通信用于数据处理
+			__HAL_UART_CLEAR_IDLEFLAG(&huart6);//閿熸枻鎷烽敓鏂ゆ嫹閿熻鐤氾拷		
+			HAL_UART_DMAStop(&huart6); //閿熸枻鎷峰仠dma閫氶敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鎹疯揪鎷烽敓鏂ゆ嫹
 			
-			temp  = hdma_usart6_rx.Instance->NDTR;//获取未传输的数据的个数
-			temp = 2000 - temp;//相减求得已传输的个数
+			temp  = hdma_usart6_rx.Instance->NDTR;//閿熸枻鎷峰彇鏈敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷疯幐姣嶉敓鏂ゆ嫹閿燂拷
+			temp = 2000 - temp;//閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓绐栬揪鎷烽敓鏂ゆ嫹姣嶉敓鏂ゆ嫹閿燂拷
 
-			Judge_Read_Data(judge_rx_buff);	//裁判系统读取数据	
+			Judge_Read_Data(judge_rx_buff);	//閿熸枻鎷烽敓鏂ゆ嫹绯荤粺閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹	
 			memset(judge_rx_buff, 0, 2000);
 
-			HAL_UART_Receive_DMA(&huart6,judge_rx_buff,2000);//重新开启串口dma接受
+			HAL_UART_Receive_DMA(&huart6,judge_rx_buff,2000);//閿熸枻鎷烽敓閾板尅鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹dma閿熸枻鎷烽敓鏂ゆ嫹
 		}
   /* USER CODE END USART6_IRQn 0 */
   HAL_UART_IRQHandler(&huart6);

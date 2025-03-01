@@ -1,20 +1,3 @@
-/**
-  ******************************************************************************
-  * @file    tuxin.c
-  * @brief   图传界面画图用于显示状态、辅助瞄准。
-  * @author  CHY
-  ******************************************************************************
-  * @attention
-  *
-  * 2021.3 设计大致完成。
-  * 2021.4.11 暂时还显示不了字符，只能显示图形。已经实现了图形根据车的某些状态进行动态的变化。
-  * 暂时还不知道为什么会有这么诡异的事。
-  *
-  *
-  *
-  *
-  ******************************************************************************
-  */
 #include "judge.h"
 #include "tuxin.h"
 #include "crc.h"
@@ -235,18 +218,18 @@ void draw_seven_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART,
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[0] = *(Data[j]+2);
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[1] = i;
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[2] = j;
-        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//图形操讈E
+        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//图形操作
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//图形类型
-        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//图瞾E
+        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//图层
         show_data.operate_data.show_seven.grapic_data_struct[j].color = *(Data[j]+3);//1;//颜色
         show_data.operate_data.show_seven.grapic_data_struct[j].start_angle = *(Data[j]+4);//10;//
         show_data.operate_data.show_seven.grapic_data_struct[j].end_angle = *(Data[j]+5);//10;//
-        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//线条窥胰
+        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//线条宽度
         show_data.operate_data.show_seven.grapic_data_struct[j].start_x = *(Data[j]+7);//x;
         show_data.operate_data.show_seven.grapic_data_struct[j].start_y =	*(Data[j]+8);//y;
-        show_data.operate_data.show_seven.grapic_data_struct[j].radius = *(Data[j]+9);//10;//皝E?
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_x = *(Data[j]+10);//10;//皝E?
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_y = *(Data[j]+11);//10;//皝E?
+        show_data.operate_data.show_seven.grapic_data_struct[j].radius = *(Data[j]+9);
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_x = *(Data[j]+10);
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_y = *(Data[j]+11);
     }
 
     //show_single
@@ -287,7 +270,7 @@ void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, 
         show_data.operate_data.show_five.grapic_data_struct[j].color = *(Data[j]+3);//1;//颜色
         show_data.operate_data.show_five.grapic_data_struct[j].start_angle = *(Data[j]+4);//10;//
         show_data.operate_data.show_five.grapic_data_struct[j].end_angle = *(Data[j]+5);//10;//
-        show_data.operate_data.show_five.grapic_data_struct[j].width = *(Data[j]+6);//10;//线条窥胰
+        show_data.operate_data.show_five.grapic_data_struct[j].width = *(Data[j]+6);//10;//线条宽度
         show_data.operate_data.show_five.grapic_data_struct[j].start_x = *(Data[j]+7);//x;
         show_data.operate_data.show_five.grapic_data_struct[j].start_y =	*(Data[j]+8);//y;
         show_data.operate_data.show_five.grapic_data_struct[j].radius = *(Data[j]+9);//10;//皝E?
@@ -311,8 +294,8 @@ void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, 
 
 //operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y
 uint32_t Change_Data[7][12]= {{add,oval,1,black,0,0,4,960,540,10,10,25},
-                              {add,oval,1,black,0,0,4,960,200,10,10,25},
-                              {add,circle,1,black,0,0,4,960,700,10,0,0}
+                            {add,oval,1,black,0,0,4,960,200,10,10,25},
+                            {add,circle,1,black,0,0,4,960,700,10,0,0}
 };//判断(之前)
 uint32_t Change_capacitance[7][12]={//电容
 												{add,straight_line,3,yellow,0,0,60,500,900,10,540,900},
@@ -337,10 +320,10 @@ uint32_t Data_P[7][12]={//P
 
 
 uint32_t Change_arrow0[7][12]= {{add,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
-                               {add,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
+                            {add,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
 };//指针
 uint32_t Change_arrow1[7][12]= {{modify,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
-                               {modify,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
+                            {modify,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
 };
 
 uint32_t pose[6][12]  = {
@@ -348,37 +331,36 @@ uint32_t pose[6][12]  = {
 	{add,arc,6,green,30,330,3,1600,780,5,30,30},//大圆弧1600,780,5,30,30
 	{add,arc,6,pink,330,30,3,1600,780,0,30,30},//底盘前面的圆弧
     };
-uint32_t pose1[3][12]  = {
+uint32_t Pose_Modify[3][12]  = {
 	{modify,straight_line,6,green,0,0,3,1600,780,0,1600,830},//朝前的线
 	{modify,arc,6,green,30,330,3,1600,780,5,30,30},//大圆弧1600,780,5,30,30
 	{modify,arc,6,pink,330,30,3,1600,780,0,30,30},//底盘前面的圆弧
 	
     };
-//////7条线，一条竖线，一条15射速的5m线，一条30射速的线（几乎没下坠），一条18射速5m线，一条30射速远点	
+
 uint32_t zhunxin[7][12]={
 ////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y	//
-	{add,straight_line,4,yellow,0,0,1,960,530,0,960,380},
-	{add,straight_line,4,green,0,0,1,945,500,0,975,500},//30M/S   看看30
-	{add,straight_line,4,qing,0,0,1,950,460,0,970,460},//18M/S 
-	{add,straight_line,4,zihong,0,0,1,957,440,0,963,440},//15M/S
-	//视觉框
-	{add,straight_line,4,white,0,0,2,660,750,0,660,250},	// |
-	{add,straight_line,4,white,0,0,2,1260,750,0,1260,250},	// |
-	{add,straight_line,4,white,0,0,2,660,750,0,1260,750},			// ——						
+	//自瞄框
+	{add,straight_line,4,white,0,0,3,699,321,0,699,749},// |
+	{add,straight_line,4,white,0,0,3,699,321,0,1216,321},// —
+	{add,straight_line,4,white,0,0,3,699,749,0,1216,749},// —
+	{add,straight_line,4,white,0,0,3,1216,321,0,1216,749},// |
+	
+	{add,straight_line,4,white,0,0,2,0,0,0,0,0},
+	{add,straight_line,4,white,0,0,2,0,0,0,0,0},
+	{add,straight_line,4,white,0,0,2,0,0,0,0,0},
 };
 uint32_t zhunxin2[7][12]={
 ////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y	//
-	{modify,straight_line,4,yellow,0,0,1,960,530,0,960,380},
-	{modify,straight_line,4,green,0,0,1,940,500,0,980,500},//30M/S   看看30
-	{modify,straight_line,4,qing,0,0,1,950,460,0,970,460},//18M/S 
-	{modify,straight_line,4,zihong,0,0,1,955,440,0,965,440},//15M/S
-	//视觉框
-	{modify,straight_line,4,white,0,0,2,660,750,0,660,250},	// |
-	{modify,straight_line,4,white,0,0,2,1260,750,0,1260,250},	// |
-	{modify,straight_line,4,white,0,0,2,660,750,0,1260,750},			// ——						
+//自瞄框	
+	{modify,straight_line,4,white,0,0,3,699,321,0,699,749},// |
+	{modify,straight_line,4,white,0,0,3,699,321,0,1216,321},// —
+	{modify,straight_line,4,white,0,0,3,699,749,0,1216,749},// —
+	{modify,straight_line,4,white,0,0,3,1216,321,0,1216,749},// |
+	
+	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},
+	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},					
 };
 
-//uint32_t zimiao[1][12]=
-//{
-//	{add,straight_line,4,white,0,0,2,660,250,0,1260,250}
-//};
+
+
