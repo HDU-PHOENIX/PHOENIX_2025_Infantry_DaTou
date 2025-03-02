@@ -135,11 +135,11 @@ void draw_a_line(uint8_t (*txbuff)[50], uint8_t i, int Start_x, int Start_y, int
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[0] = 'r';
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[1] = 'o';
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[2] = 'd';
-    show_data.operate_data.show_single.grapic_data_struct.operate_type = Operate_type;//图形操讈E
-    show_data.operate_data.show_single.grapic_data_struct.graphic_type = straight_line;
-    show_data.operate_data.show_single.grapic_data_struct.layer = i;//图瞾E
-    show_data.operate_data.show_single.grapic_data_struct.color = color;//1黄色
-    show_data.operate_data.show_single.grapic_data_struct.width = 2;//线条窥胰
+    show_data.operate_data.show_single.grapic_data_struct.operate_type = Operate_type;//图形操作
+    show_data.operate_data.show_single.grapic_data_struct.graphic_type = straight_line;//图形类型
+    show_data.operate_data.show_single.grapic_data_struct.layer = i;//图层
+    show_data.operate_data.show_single.grapic_data_struct.color = color;//颜色
+    show_data.operate_data.show_single.grapic_data_struct.width = 2;//线条宽度
     show_data.operate_data.show_single.grapic_data_struct.start_x = Start_x;
     show_data.operate_data.show_single.grapic_data_struct.start_y =	Start_y;
     show_data.operate_data.show_single.grapic_data_struct.end_x = End_x;//10;//皝E?
@@ -178,7 +178,7 @@ void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t
 	show_data.operate_data.show_char.grapic_data_struct.graphic_type = string;
 	show_data.operate_data.show_char.grapic_data_struct.layer = layer;
 	show_data.operate_data.show_char.grapic_data_struct.color = yellow;
-	show_data.operate_data.show_char.grapic_data_struct.start_angle = 15;	//字体大小
+	show_data.operate_data.show_char.grapic_data_struct.start_angle = 30;	//字体大小
 	show_data.operate_data.show_char.grapic_data_struct.end_angle = len;	//字体长度
 	show_data.operate_data.show_char.grapic_data_struct.width = 3;
 	show_data.operate_data.show_char.grapic_data_struct.start_x = start_x;
@@ -191,9 +191,7 @@ void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t
 	memcpy(txbuff + STU_DATA ,&show_data.operate_data.show_char.grapic_data_struct, LEN_SINGLE_GRAPH + 30);
 	Append_CRC16_Check_Sum(txbuff,length);
 	HAL_UART_Transmit(&UART,txbuff,length,0xffff);	
-	//HAL_UART_Transmit_DMA(&UART, txbuff , length);
 	memset(txbuff,0,sizeof(txbuff));
-	
 }
 
 void draw_seven_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, uint32_t (*Data)[12])
@@ -236,15 +234,13 @@ void draw_seven_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART,
     memcpy(txbuff[i] + STU_DATA, &show_data.operate_data.show_seven.grapic_data_struct, LEN_SEVEN_GRAPH);
     Append_CRC16_Check_Sum(*(txbuff + i), length);
     HAL_UART_Transmit(&UART, *(txbuff + i), length,50);
-	
-	//HAL_UART_Transmit_DMA(&UART, *(txbuff + i), length);
+
     memset(txbuff + i, 0, 200);
 }
 
 void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, uint32_t (*Data)[12])
 {
     uint32_t length = 0;
-//		memset(txbuff + i, 0, 200);
     //按要求帖齑帧头
     length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_five.grapic_data_struct) + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
     show_data.frame_header.SOF = Judge_Data_SOF;
@@ -264,18 +260,18 @@ void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, 
         show_data.operate_data.show_five.grapic_data_struct[j].graphic_name[0] = '0';
         show_data.operate_data.show_five.grapic_data_struct[j].graphic_name[1] = '0';
         show_data.operate_data.show_five.grapic_data_struct[j].graphic_name[2] = j;
-        show_data.operate_data.show_five.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//图形操讈E
+        show_data.operate_data.show_five.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//图形操作
         show_data.operate_data.show_five.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//图形类型
-        show_data.operate_data.show_five.grapic_data_struct[j].layer = *(Data[j]+2);//5;//图瞾E
+        show_data.operate_data.show_five.grapic_data_struct[j].layer = *(Data[j]+2);//5;//图层
         show_data.operate_data.show_five.grapic_data_struct[j].color = *(Data[j]+3);//1;//颜色
-        show_data.operate_data.show_five.grapic_data_struct[j].start_angle = *(Data[j]+4);//10;//
-        show_data.operate_data.show_five.grapic_data_struct[j].end_angle = *(Data[j]+5);//10;//
+        show_data.operate_data.show_five.grapic_data_struct[j].start_angle = *(Data[j]+4);//起始角度
+        show_data.operate_data.show_five.grapic_data_struct[j].end_angle = *(Data[j]+5);//终点角度
         show_data.operate_data.show_five.grapic_data_struct[j].width = *(Data[j]+6);//10;//线条宽度
-        show_data.operate_data.show_five.grapic_data_struct[j].start_x = *(Data[j]+7);//x;
-        show_data.operate_data.show_five.grapic_data_struct[j].start_y =	*(Data[j]+8);//y;
-        show_data.operate_data.show_five.grapic_data_struct[j].radius = *(Data[j]+9);//10;//皝E?
-        show_data.operate_data.show_five.grapic_data_struct[j].end_x = *(Data[j]+10);//10;//皝E?
-        show_data.operate_data.show_five.grapic_data_struct[j].end_y = *(Data[j]+11);//10;//皝E?
+        show_data.operate_data.show_five.grapic_data_struct[j].start_x = *(Data[j]+7);//起点x
+        show_data.operate_data.show_five.grapic_data_struct[j].start_y = *(Data[j]+8);//起点y
+        show_data.operate_data.show_five.grapic_data_struct[j].radius = *(Data[j]+9);//半径
+        show_data.operate_data.show_five.grapic_data_struct[j].end_x = *(Data[j]+10);//终点x
+        show_data.operate_data.show_five.grapic_data_struct[j].end_y = *(Data[j]+11);//终点y
     }
 
     //show_single
@@ -286,45 +282,44 @@ void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, 
 			osDelay(1);
 		}
 		HAL_UART_Transmit(&UART, *(txbuff + i), length,20);
-	//HAL_UART_Transmit_DMA(&UART, *(txbuff + i), length);
 		
 		memset(txbuff + i, 0, 200);
     
 }
 
-//operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y
-uint32_t Change_Data[7][12]= {{add,oval,1,black,0,0,4,960,540,10,10,25},
-                            {add,oval,1,black,0,0,4,960,200,10,10,25},
-                            {add,circle,1,black,0,0,4,960,700,10,0,0}
-};//判断(之前)
-uint32_t Change_capacitance[7][12]={//电容
-												{add,straight_line,3,yellow,0,0,60,500,900,10,540,900},
-												{add,straight_line,3,yellow,0,0,60,550,900,10,590,900},
-												{add,straight_line,3,yellow,0,0,60,600,900,10,640,900},
-												{add,straight_line,3,yellow,0,0,60,650,900,10,690,900},
-												{add,straight_line,3,yellow,0,0,60,700,900,10,740,900}
-};
-uint32_t Data_S[7][12]={//S
-												{add,straight_line,5,yellow,0,0,5,500,800,10,470,800},
-												{add,straight_line,5,yellow,0,0,5,470,800,10,470,770},
-												{add,straight_line,5,yellow,0,0,5,470,770,10,500,770},
-												{add,straight_line,5,yellow,0,0,5,500,770,10,500,740},
-												{add,straight_line,5,yellow,0,0,5,500,740,10,470,740}
-};
-uint32_t Data_P[7][12]={//P
-												{add,straight_line,4,yellow,0,0,5,470,640,10,500,640},
-												{add,straight_line,4,yellow,0,0,5,500,640,10,500,610},
-												{add,straight_line,4,yellow,0,0,5,500,610,10,470,610},
-												{add,straight_line,4,yellow,0,0,5,470,640,10,470,580}
-};
+////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y
+//uint32_t Change_Data[7][12]= {{add,oval,1,black,0,0,4,960,540,10,10,25},
+//                            {add,oval,1,black,0,0,4,960,200,10,10,25},
+//                            {add,circle,1,black,0,0,4,960,700,10,0,0}
+//};//判断(之前)
+//uint32_t Change_capacitance[7][12]={//电容
+//												{add,straight_line,3,yellow,0,0,60,500,900,10,540,900},
+//												{add,straight_line,3,yellow,0,0,60,550,900,10,590,900},
+//												{add,straight_line,3,yellow,0,0,60,600,900,10,640,900},
+//												{add,straight_line,3,yellow,0,0,60,650,900,10,690,900},
+//												{add,straight_line,3,yellow,0,0,60,700,900,10,740,900}
+//};
+//uint32_t Data_S[7][12]={//S
+//												{add,straight_line,5,yellow,0,0,5,500,800,10,470,800},
+//												{add,straight_line,5,yellow,0,0,5,470,800,10,470,770},
+//												{add,straight_line,5,yellow,0,0,5,470,770,10,500,770},
+//												{add,straight_line,5,yellow,0,0,5,500,770,10,500,740},
+//												{add,straight_line,5,yellow,0,0,5,500,740,10,470,740}
+//};
+//uint32_t Data_P[7][12]={//P
+//												{add,straight_line,4,yellow,0,0,5,470,640,10,500,640},
+//												{add,straight_line,4,yellow,0,0,5,500,640,10,500,610},
+//												{add,straight_line,4,yellow,0,0,5,500,610,10,470,610},
+//												{add,straight_line,4,yellow,0,0,5,470,640,10,470,580}
+//};
 
 
-uint32_t Change_arrow0[7][12]= {{add,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
-                            {add,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
-};//指针
-uint32_t Change_arrow1[7][12]= {{modify,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
-                            {modify,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
-};
+//uint32_t Change_arrow0[7][12]= {{add,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
+//                            {add,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
+//};//指针
+//uint32_t Change_arrow1[7][12]= {{modify,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
+//                            {modify,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
+//};
 
 uint32_t pose[6][12]  = {
 	{add,straight_line,6,green,0,0,3,1600,780,0,1600,830},//朝前的线
@@ -360,7 +355,6 @@ uint32_t zhunxin2[7][12]={
 	
 	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},
 	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},					
+	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},					
 };
-
-
 
