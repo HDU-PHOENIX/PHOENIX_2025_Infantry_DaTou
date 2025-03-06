@@ -13,8 +13,8 @@
 #include "SuperPower.h"
 
 
-#define Gimbal_Yaw_ZERO 5427 //云台正方向和底盘正方向重合时候的编码值
-#define Gimbal_Yaw_HALF 1331 //云台正方向和底盘负方向重合时候的编码值
+#define Gimbal_Yaw_ZERO 3359 //云台正方向和底盘正方向重合时候的编码值
+#define Gimbal_Yaw_HALF 7455 //云台正方向和底盘负方向重合时候的编码值
 
 #define Transmission_Ratio 19.0f //电机减速比
 #define Wheel_Radius 0.07656f //轮子半径m

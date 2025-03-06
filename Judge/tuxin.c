@@ -68,18 +68,18 @@ void draw_CHASSIS_GYROSCOPE(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDe
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[0] = *(Data[j]+7);
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[1] = *(Data[j]+8);
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[2] = j;
-        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//图形操讈E
+        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//图形操作
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//图形类型
-        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//图瞾E
+        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//图层
         show_data.operate_data.show_seven.grapic_data_struct[j].color = *(Data[j]+3);//1;//颜色
-        show_data.operate_data.show_seven.grapic_data_struct[j].start_angle = *(Data[j]+4);//10;//
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_angle = *(Data[j]+5);//10;//
-        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//线条窥胰
-        show_data.operate_data.show_seven.grapic_data_struct[j].start_x = *(Data[j]+7);//x;
-        show_data.operate_data.show_seven.grapic_data_struct[j].start_y =	*(Data[j]+8);//y;
-        show_data.operate_data.show_seven.grapic_data_struct[j].radius = *(Data[j]+9);//10;//皝E?
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_x = *(Data[j]+10);//10;//皝E?
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_y = *(Data[j]+11);//10;//皝E?
+        show_data.operate_data.show_seven.grapic_data_struct[j].start_angle = *(Data[j]+4);//起始角度
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_angle = *(Data[j]+5);//终止角度
+        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//线条宽度
+        show_data.operate_data.show_seven.grapic_data_struct[j].start_x = *(Data[j]+7);//起始x
+        show_data.operate_data.show_seven.grapic_data_struct[j].start_y =	*(Data[j]+8);//起始y
+        show_data.operate_data.show_seven.grapic_data_struct[j].radius = *(Data[j]+9);//半径
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_x = *(Data[j]+10);//终止x
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_y = *(Data[j]+11);//终止y
     }
 
     //show_single
@@ -287,51 +287,23 @@ void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, 
     
 }
 
-////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y
-//uint32_t Change_Data[7][12]= {{add,oval,1,black,0,0,4,960,540,10,10,25},
-//                            {add,oval,1,black,0,0,4,960,200,10,10,25},
-//                            {add,circle,1,black,0,0,4,960,700,10,0,0}
-//};//判断(之前)
-//uint32_t Change_capacitance[7][12]={//电容
-//												{add,straight_line,3,yellow,0,0,60,500,900,10,540,900},
-//												{add,straight_line,3,yellow,0,0,60,550,900,10,590,900},
-//												{add,straight_line,3,yellow,0,0,60,600,900,10,640,900},
-//												{add,straight_line,3,yellow,0,0,60,650,900,10,690,900},
-//												{add,straight_line,3,yellow,0,0,60,700,900,10,740,900}
-//};
-//uint32_t Data_S[7][12]={//S
-//												{add,straight_line,5,yellow,0,0,5,500,800,10,470,800},
-//												{add,straight_line,5,yellow,0,0,5,470,800,10,470,770},
-//												{add,straight_line,5,yellow,0,0,5,470,770,10,500,770},
-//												{add,straight_line,5,yellow,0,0,5,500,770,10,500,740},
-//												{add,straight_line,5,yellow,0,0,5,500,740,10,470,740}
-//};
-//uint32_t Data_P[7][12]={//P
-//												{add,straight_line,4,yellow,0,0,5,470,640,10,500,640},
-//												{add,straight_line,4,yellow,0,0,5,500,640,10,500,610},
-//												{add,straight_line,4,yellow,0,0,5,500,610,10,470,610},
-//												{add,straight_line,4,yellow,0,0,5,470,640,10,470,580}
-//};
 
-
-//uint32_t Change_arrow0[7][12]= {{add,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
-//                            {add,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
-//};//指针
-//uint32_t Change_arrow1[7][12]= {{modify,straight_line,2,yellow,0,0,4,1200,630,10,1200,840},
-//                            {modify,straight_line,2,yellow,0,0,4,1130,700,10,1270,700}//上
-//};
-
-uint32_t pose[6][12]  = {
+uint32_t pose[5][12]  = {
 	{add,straight_line,6,green,0,0,3,1600,780,0,1600,830},//朝前的线
 	{add,arc,6,green,30,330,3,1600,780,5,30,30},//大圆弧1600,780,5,30,30
 	{add,arc,6,pink,330,30,3,1600,780,0,30,30},//底盘前面的圆弧
+	
+	{add,straight_line,6,green,0,0,3,530,0,0,765,290},
+	{add,straight_line,6,green,0,0,3,1445,0,0,1200,290},
     };
-uint32_t Pose_Modify[3][12]  = {
+uint32_t Pose_Modify[5][12]  = {
 	{modify,straight_line,6,green,0,0,3,1600,780,0,1600,830},//朝前的线
 	{modify,arc,6,green,30,330,3,1600,780,5,30,30},//大圆弧1600,780,5,30,30
 	{modify,arc,6,pink,330,30,3,1600,780,0,30,30},//底盘前面的圆弧
 	
-    };
+ 	{modify,straight_line,6,green,0,0,3,530,0,0,765,290},
+	{modify,straight_line,6,green,0,0,3,1445,0,0,1200,290},
+   };
 
 uint32_t zhunxin[7][12]={
 ////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y	//

@@ -12,35 +12,35 @@ extern uint32_t Change_arrow1[7][12];
 extern uint32_t Change_capacitance[7][12];
 extern uint32_t Data_P[7][12];
 extern uint32_t Data_P[7][12];
-extern uint32_t pose[6][12];
+extern uint32_t pose[5][12];
 extern uint32_t line[12];
-extern uint32_t Pose_Modify[3][12];
+extern uint32_t Pose_Modify[5][12];
 extern uint32_t zhunxin[7][12];
 extern uint32_t zimiao[1][12];
 extern uint32_t zhunxin2[7][12];
 typedef enum
 {
-    add = 1,								//增加
-    modify = 2,							//修改
-    Delete = 3 						  //删除
+    add = 1,                         //增加
+    modify = 2,						 //修改
+    Delete = 3 						 //删除
 } operate_type;
 
 
 typedef enum
 {
     straight_line = 0,				//直线
-    rectangle,								//矩形
-    circle,										//整圆
-    oval,											//椭圆
-    arc,											//圆弧
-    floating,									//浮点数
-    integer,									//整数
-    string										//字穪E
+    rectangle,						//矩形
+    circle,							//整圆
+    oval,							//椭圆
+    arc,							//圆弧
+    floating,						//浮点数
+    integer,						//整数
+    string							//字符
 } graphic_type;
 
 typedef enum
 {
-    red_blue = 0,				//簛E吨魃?
+    red_blue = 0,				
     yellow,						//黄色
     green,							//绿色
     orange,							//橙色

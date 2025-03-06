@@ -8,7 +8,7 @@
 #include "Car_Mode.h"
 #include "Computer.h"
 
-#define Gimbal_Pitch_MAX 41.0f
+#define Gimbal_Pitch_MAX 30.0f
 #define Gimbal_Pitch_MIN -18.0f
 #define Gimbal_Pithch_Remote 2000
 #define Gimbal_Yaw_Remote 2000

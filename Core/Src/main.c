@@ -60,8 +60,7 @@ uint8_t RC_Data[18];
 float Set_Yaw,Set_Pitch;
 Car_Mode_t Car_Mode;
 /******************************底盘解算相关系数*******************************/
-Chassis_Speed_t Temp1_Chassis_Speed,Temp2_Chassis_Speed;
-Chassis_Speed_t Chassis_Speed;
+Chassis_Speed_t Temp1_Chassis_Speed,Temp2_Chassis_Speed;Chassis_Speed_t Chassis_Speed;
 Gimbal_Add_t Gimbal_Add;
 PID_struct_t Follow_PID;
 /******************************小电脑通信相关系数*******************************/

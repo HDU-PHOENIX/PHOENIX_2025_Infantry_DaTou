@@ -20,7 +20,7 @@ void UI_Task(void const * argument)
     while(1)
 	{
         UI_PushUp_Counter++;
-		if(UI_PushUp_Counter%671 == 0)
+		if(UI_PushUp_Counter%599 == 0)
 		{
 		    draw_five_line(chassis_gyro1,0,huart6,pose);    
 		}
@@ -45,13 +45,13 @@ void UI_Task(void const * argument)
             if(Car_Mode.Action == FOLLOW)
                 show_str(FOLLOW_Str,20,4,900,130,modify,4,huart6);				
 		}
-        if(UI_PushUp_Counter%27 == 0)
+        if(UI_PushUp_Counter%3 == 0)
 		{
 		    yaw_error_cal();
 		    draw_five_line(chassis_gyro1,0,huart6,Pose_Modify);
 		}
 
-		if(UI_PushUp_Counter%43 == 0)
+		if(UI_PushUp_Counter%8 == 0)
 	    {
 			if(Computer_Rx_Message.find_bool=='1')
 			{
@@ -67,17 +67,17 @@ void UI_Task(void const * argument)
 			}
 				draw_seven_line(zhunxing1,1,huart6,zhunxin2);
         }
-		if(UI_PushUp_Counter%14 == 0)
+		if(UI_PushUp_Counter%6 == 0)
 		{
-			Speed_Str[2]=(int)Temp2_Chassis_Speed.vx%10+48;			    //取第一位
+			Speed_Str[2]=(int)Temp2_Chassis_Speed.vx%10+48;			    //第一位
 			Speed_Str[4]=(int)(Temp2_Chassis_Speed.vx*10)%10+48;		//第二位
 			Speed_Str[5]=(int)(Temp2_Chassis_Speed.vx*100)%10+48;		//第三位
 				
-			Speed_Str[9]=(int)Temp2_Chassis_Speed.vy%10+48;		        //取第一位
+			Speed_Str[9]=(int)Temp2_Chassis_Speed.vy%10+48;		        //第一位
 			Speed_Str[11]=(int)(Temp2_Chassis_Speed.vy*10)%10+48;		//第二位
 			Speed_Str[12]=(int)(Temp2_Chassis_Speed.vy*100)%10+48;		//第三位
 									
-			Speed_Str[16]=(int)Temp2_Chassis_Speed.vw%10+48;			//取第一位
+			Speed_Str[16]=(int)Temp2_Chassis_Speed.vw%10+48;			//第一位
 			Speed_Str[18]=(int)(Temp2_Chassis_Speed.vw*10)%10+48;		//第二位
 			Speed_Str[19]=(int)(Temp2_Chassis_Speed.vw*100)%10+48;		//第三位
 			
