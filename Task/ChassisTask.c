@@ -13,7 +13,6 @@ void ChassisTask(void const * argument)
         Chassis_Power_Now=JUDGE_fGetChassisPower();
         Chassis_Power_Limit=JUDGE_usGetPowerLimit();
         Chassis_Power_Buffer=JUDGE_fGetRemainEnergy();
-		SuperPower_Tx();
         switch (Car_Mode.State)
         {
         case Car_Remote:

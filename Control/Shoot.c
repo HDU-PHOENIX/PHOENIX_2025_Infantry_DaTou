@@ -146,9 +146,9 @@ void Shoot_PID_Calc(void)
  */
 void Shoot_PID_Init_ALL(void)
 {
-    PID_init(&(M3508_Shoot[0].PID),50,5,0,16380,16380);//40,0,0
-    PID_init(&(M3508_Shoot[1].PID),50,5,0,16380,16380);//40,0,0
-    PID_init(&(M2006_Rammer.Speed_PID),45,0,10,16380,16380);
+    PID_init(&(M3508_Shoot[0].PID),45,0.8,0,16380,16380);//40,0,0//45,5,0//10,0.8,2
+    PID_init(&(M3508_Shoot[1].PID),45,0.8,0,16380,16380);//40,0,0//45,5,0/10,0.8,2
+    PID_init(&(M2006_Rammer.Speed_PID),80,0,0,16380,16380);//10,4,0
 }
 
 /**
@@ -216,8 +216,8 @@ void Shoot_KeyBoard_Control(void)
 
     if(Shoot == true)
     {
-        M3508_Shoot[0].Set_Speed = M3508_Speed;//6688
-        M3508_Shoot[1].Set_Speed = -M3508_Speed;//-6688
+        M3508_Shoot[0].Set_Speed = M3508_Speed;
+        M3508_Shoot[1].Set_Speed = -M3508_Speed;
     }else if(Shoot == false)
     {
         M3508_Shoot[0].Set_Speed = 0;

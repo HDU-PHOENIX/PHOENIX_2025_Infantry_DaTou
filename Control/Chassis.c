@@ -244,7 +244,7 @@ void  Chassis_KeyBoard_Control(void)
             Temp1_Chassis_Speed.vy = 2.0f;
         if(IF_KEY_PRESSED_A == 0 && IF_KEY_PRESSED_D == 0)
             Temp1_Chassis_Speed.vy = 0.0f;
-        Temp1_Chassis_Speed.vw = 12.56f;;
+        Temp1_Chassis_Speed.vw = 12.56f;
         break;
     case NORMAL:
         if(IF_KEY_PRESSED_W == 1)

@@ -312,10 +312,10 @@ uint32_t zhunxin[7][12]={
 	{add,straight_line,4,white,0,0,3,699,321,0,1216,321},// ¡ª
 	{add,straight_line,4,white,0,0,3,699,749,0,1216,749},// ¡ª
 	{add,straight_line,4,white,0,0,3,1216,321,0,1216,749},// |
-	
-	{add,straight_line,4,white,0,0,2,0,0,0,0,0},
-	{add,straight_line,4,white,0,0,2,0,0,0,0,0},
-	{add,straight_line,4,white,0,0,2,0,0,0,0,0},
+	//Éä»÷ÂäµãÏß
+	{add,straight_line,4,white,0,0,2,935,450,0,980,450},//3m
+	{add,straight_line,4,qing,0,0,2,935,448,0,980,448},//5m
+	{add,straight_line,4,white,0,0,2,935,420,0,980,420},//8m
 };
 uint32_t zhunxin2[7][12]={
 ////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y	//
@@ -325,8 +325,8 @@ uint32_t zhunxin2[7][12]={
 	{modify,straight_line,4,white,0,0,3,699,749,0,1216,749},// ¡ª
 	{modify,straight_line,4,white,0,0,3,1216,321,0,1216,749},// |
 	
-	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},
-	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},					
-	{modify,straight_line,4,white,0,0,2,0,0,0,0,0},					
+	{modify,straight_line,4,white,0,0,2,935,450,0,980,450},//3m
+	{modify,straight_line,4,qing,0,0,2,935,448,0,980,448},//5m
+	{modify,straight_line,4,white,0,0,2,935,420,0,980,420},//8m			
 };
 

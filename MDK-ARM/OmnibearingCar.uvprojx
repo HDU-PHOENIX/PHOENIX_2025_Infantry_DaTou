@@ -191,7 +191,7 @@
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -1854,6 +1854,16 @@
               <FileType>5</FileType>
               <FilePath>..\Signal\bsp_spi.h</FilePath>
             </File>
+            <File>
+              <FileName>VOFT_Uartx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Signal\VOFT_Uartx.c</FilePath>
+            </File>
+            <File>
+              <FileName>VOFT_Uartx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Signal\VOFT_Uartx.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1895,14 +1905,14 @@
           <GroupName>Control</GroupName>
           <Files>
             <File>
-              <FileName>Chassis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Control\Chassis.c</FilePath>
-            </File>
-            <File>
               <FileName>Chassis.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Control\Chassis.h</FilePath>
+            </File>
+            <File>
+              <FileName>Chassis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\Chassis.c</FilePath>
             </File>
             <File>
               <FileName>Gimbal.c</FileName>

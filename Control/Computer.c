@@ -36,19 +36,19 @@ void Computer_Rx(void)
 	USBD_Interface_fops_FS.Receive(Rx_data,&len);
 
 /***************************²âÊÔ´úÂë*********************************/
-    if(Task_Time>=3000)
-    {
-        Task_Time=0;
-        if(Task_Pitch==0){Task_Pitch=0.08722f;}//0.17444f
-        if(Task_Pitch!=0.0f){Task_Pitch = -Task_Pitch;}
-        Task_Yaw += 0.52333f;
-				if(Task_Yaw>3.14f)
-					Task_Yaw -=6.28f;
-			
-    }
-    Computer_Rx_Message.pitch = Task_Pitch*57.32484f;
-		Computer_Rx_Message.yaw = Task_Yaw*57.32484f;
-    Task_Time++;
+//    if(Task_Time>=3000)
+//    {
+//        Task_Time=0;
+//        if(Task_Pitch==0){Task_Pitch=0.08722f;}//0.17444f
+//        if(Task_Pitch!=0.0f){Task_Pitch = -Task_Pitch;}
+//        Task_Yaw += 0.52333f;
+//				if(Task_Yaw>3.14f)
+//					Task_Yaw -=6.28f;
+//			
+//    }
+//    Computer_Rx_Message.pitch = Task_Pitch*57.32484f;
+//		Computer_Rx_Message.yaw = Task_Yaw*57.32484f;
+//    Task_Time++;
 /******************************²âÊÔÍê************************************/
 
 	if(Rx_data[0] == 's'&&Rx_data[31] == 'e')

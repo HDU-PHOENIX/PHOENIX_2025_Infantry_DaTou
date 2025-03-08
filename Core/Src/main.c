@@ -142,8 +142,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   CAN_Filter_Init();
 	HAL_UART_Receive_DMA(&huart3,RC_Data,sizeof(RC_Data));
-  __HAL_UART_ENABLE_IT(&huart6, UART_IT_IDLE);//使能 中断,用于裁判系统读取
-	HAL_UART_Receive_DMA(&huart6,judge_rx_buff,2000);//打开DMA接收，数据存入rx_buffer_judge数组中。
+    __HAL_UART_ENABLE_IT(&huart6, UART_IT_IDLE);//使能 中断,用于裁判系统读取
+	HAL_UART_Receive_DMA(&huart6,judge_rx_buff,2000);//打开DMA接收，数据存入rx_buffer_judge数组中
 	Car_Init();
 	MX_USB_DEVICE_Init();
 	Computer_Init();

@@ -6,5 +6,6 @@
 #include "Remote.h"
 #include "Gimbal.h"
 #include "Task.h"
+#include "stdio.h"
 
 #endif
