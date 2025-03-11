@@ -163,77 +163,37 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>M3508_Chassis,0x0A</ItemText>
+          <ItemText>Chassis_Power_Limit</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Temp2_Chassis_Speed,0x0A</ItemText>
+          <ItemText>Chassis_Power_Buffer</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Temp1_Chassis_Speed,0x0A</ItemText>
+          <ItemText>judge_frame_rx.data.power_heat_data.buffer_energy,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Car_Mode</ItemText>
+          <ItemText>SuperPower_Rx_Message,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Chassis_Power_Limit</ItemText>
+          <ItemText>SuperPower_Tx_Message,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Chassis_Power_Buffer</ItemText>
+          <ItemText>Follow_PID,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>judge_frame_rx.data.power_heat_data,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>judge_frame_rx.data.power_heat_data.buffer_energy,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>M3508_Chassis[0].PID.output</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>M3508_Chassis[1].PID.output</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>M3508_Chassis[2].PID.output</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>M3508_Chassis[3].PID.output</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SuperPower_Rx_Message,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>13</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SuperPower_Tx_Message,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>14</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>tx_data,0x10</ItemText>
+          <ItemText>Temp1_Chassis_Speed,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

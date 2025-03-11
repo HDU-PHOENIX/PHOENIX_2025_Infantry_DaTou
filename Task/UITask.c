@@ -25,6 +25,8 @@ void UI_Task(void const * argument)
     while(1)
 	{
         UI_PushUp_Counter++;
+		if(UI_PushUp_Counter>=65500)
+			UI_PushUp_Counter = 0;
 		if(UI_PushUp_Counter%401 == 0)
 		{
             draw_five_line(chassis_gyro1,0,huart6,pose);    
@@ -39,7 +41,7 @@ void UI_Task(void const * argument)
 		}
 		if(UI_PushUp_Counter%259 == 0)
 		{
-            show_str(NORMAL_Str,20,5,900,130, add,4,huart6);
+            show_str(NORMAL_Str,20,5,600,130, add,4,huart6);
 		}
 		if(UI_PushUp_Counter%499 == 0)
 		{
