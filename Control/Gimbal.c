@@ -6,7 +6,7 @@ extern Moto_GM6020_t GM6020_Yaw,GM6020_Pitch;
 extern Car_Mode_t Car_Mode;
 extern RC_t RC;
 extern Gimbal_Add_t Gimbal_Add;
-extern float Set_Yaw,Set_Pitch;
+extern float Set_Yaw,Set_Pitch,ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
 extern Computer_Rx_Message_t Computer_Rx_Message;
 //自喵过滤器
 float Yaw_ZiMiao_Filter[2]={0.01,0.99};
@@ -57,7 +57,7 @@ void Gimbal_Calculate(void)
         Set_Yaw -= Gimbal_Add.Yaw;
         Set_Pitch += Gimbal_Add.Pitch;
         break;
-    case Shoot_Single: 
+    case Shoot_Single:
 		if(Computer_Rx_Message.find_bool == '1')
 		{
             Set_Yaw=Computer_Rx_Message.yaw*Yaw_ZiMiao_Filter[0]+Set_Yaw*Yaw_ZiMiao_Filter[1];
@@ -68,11 +68,18 @@ void Gimbal_Calculate(void)
             Set_Pitch += Gimbal_Add.Pitch;
 		}
         break;
-    case Shoot_Plugins:
+    case Shoot_Plugins://装甲板自喵
 		if(Computer_Rx_Message.find_bool == '1')
 		{
-            Set_Yaw=Computer_Rx_Message.yaw*Yaw_ZiMiao_Filter[0]+Set_Yaw*Yaw_ZiMiao_Filter[1];
-            Set_Pitch=Computer_Rx_Message.pitch*Pitch_ZiMiao_Filter[0]+Set_Pitch*Pitch_ZiMiao_Filter[1];
+            Set_Yaw = Computer_Rx_Message.yaw*Yaw_ZiMiao_Filter[0]+Set_Yaw*Yaw_ZiMiao_Filter[1];
+            Set_Pitch = Computer_Rx_Message.pitch*Pitch_ZiMiao_Filter[0]+Set_Pitch*Pitch_ZiMiao_Filter[1];
+			if(IF_KEY_PRESSED_SHIFT==1)
+			{
+                ZiMiao_Add_Yaw -= Gimbal_Add.Yaw/1000;
+                ZiMiao_Add_Pitch += Gimbal_Add.Pitch/1000;
+                Set_Yaw += ZiMiao_Add_Yaw;
+                Set_Pitch += ZiMiao_Add_Pitch;
+			}
 		}else
 		{
             Set_Yaw -= Gimbal_Add.Yaw;
@@ -165,7 +172,7 @@ void Gimbal_PID_Init_All(void)
 {
 	Gimbal_Init();
 
-	PID_init(&GM6020_Yaw.Angle_PID,25,0,700,16380,25000);//60,0,2500//80,0,1600//60,0,1800//10,0,200//20,0,200
+	PID_init(&GM6020_Yaw.Angle_PID,60,0,1800,16380,25000);//60,0,2500//80,0,1600//60,0,1800//10,0,200//20,0,200//25,0,700
 	//110,0.05,830//110,0.045,800
     PID_init(&(GM6020_Yaw.Speed_PID),180,1.3,0,16380,25000);//200,1.3.0//195,1.3,0//142,2,0//185,1.3,0
 	//80,0.45,150//80,0.45,150

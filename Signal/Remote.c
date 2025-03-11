@@ -5,6 +5,8 @@ extern RC_t RC;
 extern uint8_t RC_Data[18];
 extern Car_Mode_t Car_Mode;
 extern Computer_Tx_Message_t Computer_Tx_Message;
+extern float ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
+extern SuperPower_Switch_t SuperPower_Switch;
 
 /* 获取遥控器摇杆偏移量
 	根据遥控器文档：
@@ -81,7 +83,8 @@ void Control_Mode_Choose(void)
 				Chassis_PID_Clean_All();
 				Gimbal_PID_Clean_All();
 				Shoot_PID_Clean_ALL();
-			}
+				SuperPower_Switch = SuperPower_Stop;
+            }
 			Car_Mode.State = Car_Stop;
 			break;
 		case 3:
@@ -99,6 +102,7 @@ void Control_Mode_Choose(void)
 				Chassis_PID_Init_All();
 				Gimbal_PID_Init_All();
 				Shoot_PID_Init_ALL();
+				SuperPower_Switch = SuperPower_Work;
 			}
 			Car_Mode.State = Car_Keyboard;
 			break;
@@ -146,10 +150,12 @@ void Control_Mode_Choose(void)
 	}
 	if(Car_Mode.State == Car_Keyboard)
 	{
+//按住SHIFT开小陀螺
 		if(IF_KEY_PRESSED_SHIFT == 1)
 			Car_Mode.Action = GYROSCOPE;
 		if(IF_KEY_PRESSED_SHIFT == 0)
 			Car_Mode.Action = Last_Action;
+//点击F进退跟随
 		if(IF_KEY_PRESSED_F == 1 && F_judge == true)
 		{
 			if(Car_Mode.Action == FOLLOW)
@@ -162,13 +168,19 @@ void Control_Mode_Choose(void)
 				Car_Mode.Action = FOLLOW;
 				Last_Action = FOLLOW;
 			}
-		F_judge = false;
+            F_judge = false;
 		}
 		if(IF_KEY_PRESSED_F == 0)
-		F_judge = true;
+            F_judge = true;
+//按住右键开启自喵		
 		if(RC.mouse.press_r == 1)
 			Car_Mode.Shoot = Shoot_Plugins;
 		else if(RC.mouse.press_r == 0 && Car_Mode.Shoot != Shoot_Single)
+		{
 			Car_Mode.Shoot = Shoot_Sustain;
+            ZiMiao_Add_Yaw = 0;
+			ZiMiao_Add_Pitch = 0;
+		}
+		
 	}
 }

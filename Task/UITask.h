@@ -8,6 +8,7 @@
 #include "GM6020.h"
 #include "Chassis.h"
 #include "Computer.h"
+#include "SuperPower.h"
 
 
 #endif

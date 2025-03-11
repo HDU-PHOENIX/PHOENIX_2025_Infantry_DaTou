@@ -18,7 +18,7 @@ void ShootTask(void const * argument)
         switch (Car_Mode.State)
         {
         case Car_Remote:
-            Shoot_Remote_Control();
+ 		    Shoot_Remote_Control();
             Shoot_Move();
             break;
         case Car_Keyboard:

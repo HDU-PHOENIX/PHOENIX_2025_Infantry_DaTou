@@ -35,12 +35,29 @@ void Shoot_PID_Calc(void);
  */
 void Shoot_Reload_Choose(void)
 {
-    if(RC.wheel <= -300)
-    {
-        __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,2500);
-    }else
-    {
-        __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,850);
+	switch (Car_Mode.State)
+	{
+	case Car_Remote:
+		if(RC.wheel <= -300)
+		{
+			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,2500);
+		}else
+		{
+			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,850);
+		}
+		break;
+	case Car_Keyboard:
+//按住R开关弹舱		
+        if(IF_KEY_PRESSED_R == 1)
+			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,2500);
+		else if(IF_KEY_PRESSED_R == 0)
+			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,850);
+
+		break;
+	case Car_Stop:
+		break;
+	default:
+		break;
     }
 }
 
@@ -87,7 +104,7 @@ void Shoot_Remote_Control(void)
                 M2006_Rammer.Set_Speed = 0;
 			}
         break;
-    case Shoot_Single:
+    case Shoot_Single://单发模式
         if(RC.wheel >= 300 && Single_Mode == 0 && RC.s1 == 2)
         {
             Have_Shoot = 1;
@@ -193,25 +210,26 @@ void Speed17mm_Control(void)
 	}
 }
 
-bool Shoot = false,R_judge = false;
+bool Shoot = false,CTRL_judge = false;
 void Shoot_KeyBoard_Control(void)
 {
-    if(IF_KEY_PRESSED_R == 1)
+//
+    if(IF_KEY_PRESSED_CTRL == 1)
     {
-        if(Shoot == false && R_judge == true)
+        if(Shoot == false && CTRL_judge == true)
         {
             Shoot = true;
-            R_judge = false;
+            CTRL_judge = false;
         }
-				if(Shoot == true && R_judge == true)
+				if(Shoot == true && CTRL_judge == true)
         {
             Shoot = false;
-            R_judge = false;
+            CTRL_judge = false;
         }
     }
-		if(IF_KEY_PRESSED_R == 0)//松手检测
+		if(IF_KEY_PRESSED_CTRL == 0)//松手检测
 		{
-        R_judge = true;
+        CTRL_judge = true;
 		}
 
     if(Shoot == true)

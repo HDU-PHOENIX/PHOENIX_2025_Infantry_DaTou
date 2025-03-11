@@ -72,6 +72,9 @@ float Chassis_Power_Limit,Chassis_Power_Buffer;
 /*******************************超电相关系数******************************/
 SuperPower_Tx_Message_t SuperPower_Tx_Message;
 SuperPower_Rx_Message_t SuperPower_Rx_Message;
+SuperPower_Mode_t SuperPower_Mode;
+SuperPower_Switch_t SuperPower_Switch;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

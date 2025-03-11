@@ -7,7 +7,10 @@ extern Chassis_Speed_t Temp1_Chassis_Speed,Temp2_Chassis_Speed;
 extern Moto_GM6020_t GM6020_Yaw;
 extern Moto_M3508_t M3508_Chassis[4];
 extern PID_struct_t Follow_PID;
-extern float Chassis_Power_Limit,Chassis_Power_Now,Chassis_Power_Buffer;
+extern float Chassis_Power_Limit,Chassis_Power_Buffer;
+extern SuperPower_Mode_t SuperPower_Mode;
+extern SuperPower_Switch_t SuperPower_Switch;
+extern SuperPower_Rx_Message_t SuperPower_Rx_Message;
 
 float Angle;
 float err;
@@ -48,8 +51,12 @@ void Chassis_Solution(void)
 	if(Chassis_Power_Buffer>0 && Chassis_Power_Limit>0)
 	{
 		Chassis_Speed_XiePo(&Temp2_Chassis_Speed,&Chassis_Speed);
+        if(Car_Mode.Action == FOLLOW)//跟随模式vw不限功率
+        {
+            Temp2_Chassis_Speed.vw = Temp1_Chassis_Speed.vw;
+        }
 	}else{
-	    Chassis_Speed=Temp2_Chassis_Speed;
+        Chassis_Speed=Temp2_Chassis_Speed;
 	}
 }
 
@@ -292,8 +299,11 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
     Speed_W_Fabs = fabs(XiePo_speed->vw);
     Speed_W_Dif = fabs(target_speed->vw - XiePo_speed->vw);
 
-    step_l.t = 0.004f * powf((60-Chassis_Power_Buffer)/(60-Chassis_Power_Set),2);
-
+    if(SuperPower_Switch == SuperPower_Work && SuperPower_Mode == SuperPower_Off)//超电开启且不充电
+        step_l.t = 0.004f * powf(SuperPower_Rx_Message.Now_power/(Chassis_Power_Limit-5),2);
+    else
+        step_l.t = 0.004f * powf((60-Chassis_Power_Buffer)/(60-Chassis_Power_Set),2);
+	
     if (Speed_W_Fabs > 0.006f) {
         step_l.w = (0 - XiePo_speed->vw) / Speed_W_Fabs * step_l.t * 2;
     }
@@ -344,7 +354,7 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
 		XiePo_speed->vw = 0;
 	}
 	float bx,by;
-	  if(Speed_V1_Fabs > 0.002f && Speed_W_Fabs > 0.002f){
+	if(Speed_V1_Fabs > 0.002f && Speed_W_Fabs > 0.002f){
         bx = XiePo_speed->vw / 440 * XiePo_speed->vy;
         by = -XiePo_speed->vw / 440 * XiePo_speed->vx;
     }else{
