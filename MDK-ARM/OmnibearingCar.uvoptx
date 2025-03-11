@@ -183,37 +183,57 @@
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Chassis_Power_Now,0x0A</ItemText>
+          <ItemText>Chassis_Power_Limit</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Chassis_Power_Limit</ItemText>
+          <ItemText>Chassis_Power_Buffer</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Chassis_Power_Buffer</ItemText>
+          <ItemText>judge_frame_rx.data.power_heat_data,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Chassis_Power_Now</ItemText>
+          <ItemText>judge_frame_rx.data.power_heat_data.buffer_energy,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>\\OmnibearingCar\../Core/Src/main.c\Chassis_Power_Limit</ItemText>
+          <ItemText>M3508_Chassis[0].PID.output</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>judge_frame_rx.data.power_heat_data,0x0A</ItemText>
+          <ItemText>M3508_Chassis[1].PID.output</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>judge_frame_rx.data.power_heat_data.buffer_energy</ItemText>
+          <ItemText>M3508_Chassis[2].PID.output</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>M3508_Chassis[3].PID.output</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>SuperPower_Rx_Message,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>SuperPower_Tx_Message,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>14</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>tx_data,0x10</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -1002,7 +1022,7 @@
 
   <Group>
     <GroupName>Algorithm</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1406,7 +1426,7 @@
 
   <Group>
     <GroupName>IMU</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1642,7 +1662,7 @@
 
   <Group>
     <GroupName>Judge</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

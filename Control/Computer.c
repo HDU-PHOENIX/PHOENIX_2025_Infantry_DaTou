@@ -32,7 +32,7 @@ void Computer_Init(void)
  */
 void Computer_Rx(void)
 {
-  uint32_t data;
+    uint32_t data;
 	USBD_Interface_fops_FS.Receive(Rx_data,&len);
 
 /***************************²âÊÔ´úÂë*********************************/
@@ -56,7 +56,7 @@ void Computer_Rx(void)
 		Computer_Rx_Message.start = Rx_data[0];
 
 		Computer_Rx_Message.type = Rx_data[1];
-    Computer_Rx_Message.find_bool = Rx_data[2];
+        Computer_Rx_Message.find_bool = Rx_data[2];
 
 		data = ((Rx_data[3])|(Rx_data[4]<<8)|(Rx_data[5]<<16)|(Rx_data[6]<<24));
 		Computer_Rx_Message.yaw = *(float*)&data;
@@ -66,7 +66,7 @@ void Computer_Rx(void)
 		Computer_Rx_Message.end = Rx_data[31];
 		
 		Computer_Rx_Message.yaw *= 57.32484f;
-    Computer_Rx_Message.pitch *= -57.32484f;
+        Computer_Rx_Message.pitch *= -57.32484f;
 	}
 }
 
@@ -78,7 +78,7 @@ void Computer_Rx(void)
  */
 void Computer_Tx(void)
 {
-		Computer_Tx_Message.yaw = IMU_angle[0]*0.0174444f;
+    Computer_Tx_Message.yaw = IMU_angle[0]*0.0174444f;
     Computer_Tx_Message.pitch = IMU_angle[2]*-0.0174444f;
 		
     Tx_data[0] = *(char*)&Computer_Tx_Message.start;

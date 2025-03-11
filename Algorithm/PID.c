@@ -109,6 +109,8 @@ float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标
   PID->d_out  = PID->kd * (PID->err[0] - PID->err[1]);
   PID->i_out=Limit_Min_Max(PID->i_out, -PID->i_max, PID->i_max);
   
+  if(PID->err[0]>20)PID->i_out=0;
+	
   PID->output = PID->p_out + PID->i_out + PID->d_out;
   PID->output=Limit_Min_Max(PID->output, -PID->out_max, PID->out_max);
   return PID->output;

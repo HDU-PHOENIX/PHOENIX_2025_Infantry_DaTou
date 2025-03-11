@@ -53,12 +53,12 @@ float IMU_angle[3] = {0.0f, 0.0f, 0.0f};
 Moto_M3508_t M3508_Chassis[4],M3508_Shoot[2];
 Moto_GM6020_t GM6020_Yaw,GM6020_Pitch;
 Moto_M2006_t M2006_Rammer;
+float Set_Yaw,Set_Pitch;
+Car_Mode_t Car_Mode;
+float ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
 /******************************遥控器相关系数*******************************/
 RC_t RC;
 uint8_t RC_Data[18];
-/******************************其他相关系数*******************************/
-float Set_Yaw,Set_Pitch;
-Car_Mode_t Car_Mode;
 /******************************底盘解算相关系数*******************************/
 Chassis_Speed_t Temp1_Chassis_Speed,Temp2_Chassis_Speed;Chassis_Speed_t Chassis_Speed;
 Gimbal_Add_t Gimbal_Add;
@@ -68,7 +68,8 @@ Computer_Rx_Message_t Computer_Rx_Message;
 Computer_Tx_Message_t Computer_Tx_Message;
 uint8_t judge_rx_buff[JUDGE_MAX_LENGTH];
 /*******************************裁判系统相关系数******************************/
-float Chassis_Power_Limit,Chassis_Power_Now,Chassis_Power_Buffer;
+float Chassis_Power_Limit,Chassis_Power_Buffer;
+/*******************************超电相关系数******************************/
 SuperPower_Tx_Message_t SuperPower_Tx_Message;
 SuperPower_Rx_Message_t SuperPower_Rx_Message;
 /* USER CODE END PTD */
@@ -139,6 +140,7 @@ int main(void)
   MX_TIM10_Init();
   MX_I2C3_Init();
   MX_USART6_UART_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   CAN_Filter_Init();
 	HAL_UART_Receive_DMA(&huart3,RC_Data,sizeof(RC_Data));

@@ -10,9 +10,10 @@ void ChassisTask(void const * argument)
     { 
         currentTime = xTaskGetTickCount();//当前系统时间
         Control_Mode_Choose();//选择模式
-        Chassis_Power_Now=JUDGE_fGetChassisPower();
         Chassis_Power_Limit=JUDGE_usGetPowerLimit();
         Chassis_Power_Buffer=JUDGE_fGetRemainEnergy();
+		SuperPower_Tx();
+//		VOFT_Tx();
         switch (Car_Mode.State)
         {
         case Car_Remote:

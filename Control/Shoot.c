@@ -187,7 +187,7 @@ void Speed17mm_Control(void)
 	{
 		Speed17mm_Last = Speed17mm_Now;
 		if(Speed17mm_Now >= Speed17mm_Max)
-			M3508_Speed -= 500;
+			M3508_Speed -= 300;
 		if(Speed17mm_Now <= Speed17mm_Min)
 			M3508_Speed += 300;	
 	}

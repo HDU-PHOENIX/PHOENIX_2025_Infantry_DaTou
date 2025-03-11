@@ -21,7 +21,7 @@
 #define Chassis_Radius 0.290f //µ×ÅÌ°ë¾¶m
 
 #define Follow_Set 1000
-
+#define Chassis_Power_Set 50
 
 typedef struct
 {

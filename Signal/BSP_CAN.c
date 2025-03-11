@@ -50,26 +50,24 @@ void CAN_Filter_Init(void)
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-  CAN_RxHeaderTypeDef rx_header;
-  uint8_t rx_data[8];
-  HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data);
+    CAN_RxHeaderTypeDef rx_header;
+    uint8_t rx_data[8];
+    HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data);
 	if(hcan->Instance == CAN1)
-  {
-
-    if(rx_header.StdId == 0x207)
     {
-      Get_GM6020_Motor_Message(rx_header.StdId,rx_data);
-    }else if(rx_header.StdId >= 0x201 && rx_header.StdId <= 0x204)
+      if(rx_header.StdId == 0x207)
+      {
+          Get_GM6020_Motor_Message(rx_header.StdId,rx_data);
+      }else if(rx_header.StdId >= 0x201 && rx_header.StdId <= 0x204)
+      {
+          Get_M3508_Chassis_Message(rx_header.StdId,rx_data);
+      }else if(rx_header.StdId == 0x0C2)
+	  {
+		  SuperPower_Rx(rx_data);
+	  }
+    }else if(hcan->Instance == CAN2)
     {
-      Get_M3508_Chassis_Message(rx_header.StdId,rx_data);
-    }
-//	else if(rx_header.StdId == 0x0C2)
-//	{
-//		SuperPower_Rx(rx_data);
-//	}
-	}else if(hcan->Instance == CAN2)
-		{
-			if(rx_header.StdId == 0x201)
+	    if(rx_header.StdId == 0x201)
 			{
 				Get_M2006_Motor_Message(rx_header.StdId,rx_data);
 			}else if(rx_header.StdId == 0x203 || rx_header.StdId == 0x204)
