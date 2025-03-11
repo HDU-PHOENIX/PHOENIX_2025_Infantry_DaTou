@@ -22,40 +22,40 @@ void UI_Task(void const * argument)
         UI_PushUp_Counter++;
 		if(UI_PushUp_Counter%599 == 0)
 		{
-		    draw_five_line(chassis_gyro1,0,huart6,pose);    
+            draw_five_line(chassis_gyro1,0,huart6,pose);    
 		}
 		if(UI_PushUp_Counter%331 == 0)
 		{
-		    draw_seven_line(zhunxing1,1,huart6,zhunxin);					
+            draw_seven_line(zhunxing1,1,huart6,zhunxin);					
 		}
 		if(UI_PushUp_Counter%391 == 0)
 		{
-		    show_str(Speed_Str,20,2,700,80, add,5,huart6);
+            show_str(Speed_Str,20,3,700,80, add,5,huart6);
 		}
 		if(UI_PushUp_Counter%851 == 0)
 		{
-		    show_str(NORMAL_Str,20,4,900,130, add,4,huart6);
+            show_str(NORMAL_Str,20,4,900,130, add,4,huart6);
 		}
 		if(UI_PushUp_Counter%39 == 0)
 		{
-		    if(Car_Mode.Action == NORMAL)
-                show_str(NORMAL_Str,20,4,900,130,modify,4,huart6);
+            if(Car_Mode.Action == NORMAL)
+                show_str(NORMAL_Str,20,5,900,130,modify,4,huart6);
 			if(Car_Mode.Action == GYROSCOPE)
-                show_str(GYROSCOPE_Str,20,4,900,130,modify,4,huart6);                 
+                show_str(GYROSCOPE_Str,20,5,900,130,modify,4,huart6);                 
             if(Car_Mode.Action == FOLLOW)
-                show_str(FOLLOW_Str,20,4,900,130,modify,4,huart6);				
+                show_str(FOLLOW_Str,20,5,900,130,modify,4,huart6);				
 		}
         if(UI_PushUp_Counter%3 == 0)
 		{
-		    yaw_error_cal();
-		    draw_five_line(chassis_gyro1,0,huart6,Pose_Modify);
+            yaw_error_cal();
+            draw_five_line(chassis_gyro1,0,huart6,Pose_Modify);
 		}
 
 		if(UI_PushUp_Counter%8 == 0)
-	    {
+        {
 			if(Computer_Rx_Message.find_bool=='1')
 			{
-			    zhunxin2[0][3]=green;
+                zhunxin2[0][3]=green;
 				zhunxin2[1][3]=green;
 				zhunxin2[2][3]=green;	
 				zhunxin2[3][3]=green;	
@@ -81,7 +81,7 @@ void UI_Task(void const * argument)
 			Speed_Str[18]=(int)(Temp2_Chassis_Speed.vw*10)%10+48;		//第二位
 			Speed_Str[19]=(int)(Temp2_Chassis_Speed.vw*100)%10+48;		//第三位
 			
-			show_str(Speed_Str,20,2,700,80, modify,5,huart6);
+			show_str(Speed_Str,20,3,700,80, modify,5,huart6);
 		}
 		vTaskDelay(10);
 	}
