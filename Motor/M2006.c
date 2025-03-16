@@ -53,8 +53,8 @@ void Set_M2006_Motor_Voltage(CAN_HandleTypeDef* hcan,Moto_M2006_t M2006_Rammer)
     tx_header.RTR   = CAN_RTR_DATA;//数据帧
     tx_header.DLC   = 8;//字节长度
 
-    tx_data[0] = ((int16_t)M2006_Rammer.Speed_PID.output>>8)&0xff;
-    tx_data[1] = ((int16_t)M2006_Rammer.Speed_PID.output)&0xff;
+    tx_data[0] = (((int16_t)M2006_Rammer.Speed_PID.output)>>8);
+    tx_data[1] = (((int16_t)M2006_Rammer.Speed_PID.output));
 
     HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
 }

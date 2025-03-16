@@ -9,7 +9,7 @@ extern Car_Mode_t Car_Mode;
 
 void SuperPower_Init(void)
 {
-    SuperPower_Switch = SuperPower_Work;
+    SuperPower_Switch = SuperPower_Stop;
     SuperPower_Mode = SuperPower_Off;
 }
 
@@ -46,7 +46,7 @@ void SuperPower_KeyBoard_Control(void)
     {
         if(SuperPower_Mode == SuperPower_On)
             SuperPower_Mode = SuperPower_Off;
-        if(SuperPower_Mode == SuperPower_Off)
+        else if(SuperPower_Mode == SuperPower_Off)
             SuperPower_Mode = SuperPower_On;
         E_judge = false;
 	}
@@ -56,13 +56,12 @@ void SuperPower_KeyBoard_Control(void)
     }
 }
 
-bool C_judge;
+bool C_judge = false;
 void SuperPower_Switch_Control(void)
 {
     if(SuperPower_Rx_Message.Stored_Energy <= 5)
         SuperPower_Mode = SuperPower_Off;
-    if(IF_SUPERPOWER_SWITCH_OFFSET_ALIVE != 1)
-        SuperPower_Switch = SuperPower_Stop;
+
     if(IF_KEY_PRESSED_C == 1 && C_judge == true)//µã»÷CÆô¶¯³¬µç
     {
         if(SuperPower_Switch == SuperPower_Stop)
@@ -74,5 +73,7 @@ void SuperPower_Switch_Control(void)
     if(IF_KEY_PRESSED_C == 0)
     {
         C_judge = true;
+    if(IF_SUPERPOWER_SWITCH_OFFSET_ALIVE != 1)
+        SuperPower_Switch = SuperPower_Stop;
     }
 }

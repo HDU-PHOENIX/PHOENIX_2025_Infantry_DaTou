@@ -210,10 +210,10 @@ void Chassis_PID_Calc(void)
 void Chassis_PID_Init_All(void)
 {
     PID_init(&Follow_PID,10,0,1000,0,16308);
-    PID_init(&(M3508_Chassis[0].PID),10,1,0,200,8192);
-    PID_init(&(M3508_Chassis[1].PID),10,1,0,200,8192);
-    PID_init(&(M3508_Chassis[2].PID),10,1,0,200,8192);
-    PID_init(&(M3508_Chassis[3].PID),10,1,0,200,8192);
+    PID_init(&(M3508_Chassis[0].PID),10,1,10,1000,8192);
+    PID_init(&(M3508_Chassis[1].PID),10,1,10,1000,8192);
+    PID_init(&(M3508_Chassis[2].PID),10,1,10,1000,8192);
+    PID_init(&(M3508_Chassis[3].PID),10,1,10,1000,8192);
 }
 
 /**
@@ -305,7 +305,7 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
         step_l.t = 0.003f * powf((60-Chassis_Power_Buffer)/(60-Chassis_Power_Set),2);
 	
     if (Speed_W_Fabs > 0.006f) {
-        step_l.w = (0 - XiePo_speed->vw) / Speed_W_Fabs * step_l.t * 8;
+        step_l.w = (0 - XiePo_speed->vw) / Speed_W_Fabs * step_l.t * 6;
     }
     else {
         step_l.w = 0;
@@ -333,7 +333,7 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
     }
 	if (Speed_W_Dif > 0.006f)
 	{
-        step_s.w = (target_speed->vw - XiePo_speed->vw) / Speed_W_Dif * step_s.t * fen * 8;
+        step_s.w = (target_speed->vw - XiePo_speed->vw) / Speed_W_Dif * step_s.t * fen * 6;
     }
     else {
         step_s.w = 0;

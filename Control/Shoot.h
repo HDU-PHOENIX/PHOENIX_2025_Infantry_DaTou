@@ -10,7 +10,7 @@
 #include "judge.h"
 
 #define Single_Angle 1024
-#define M2006_Speed -2000
+//#define M2006_Speed -2000
 #define Speed17mm_PT 200
 
 void Shoot_Reload_Choose(void);

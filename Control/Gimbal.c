@@ -9,7 +9,7 @@ extern Gimbal_Add_t Gimbal_Add;
 extern float Set_Yaw,Set_Pitch,ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
 extern Computer_Rx_Message_t Computer_Rx_Message;
 //自喵过滤器
-float Yaw_ZiMiao_Filter[2]={0.01,0.99};
+float Yaw_ZiMiao_Filter[2]={0.025,0.975};
 float Pitch_ZiMiao_Filter[2]={0.01,0.99};
 
 /********************输入控制部分********************/
@@ -73,13 +73,10 @@ void Gimbal_Calculate(void)
 		{
             Set_Yaw = Computer_Rx_Message.yaw*Yaw_ZiMiao_Filter[0]+Set_Yaw*Yaw_ZiMiao_Filter[1];
             Set_Pitch = Computer_Rx_Message.pitch*Pitch_ZiMiao_Filter[0]+Set_Pitch*Pitch_ZiMiao_Filter[1];
-			if(IF_KEY_PRESSED_SHIFT==1)
-			{
-                ZiMiao_Add_Yaw -= Gimbal_Add.Yaw/1000;
-                ZiMiao_Add_Pitch += Gimbal_Add.Pitch/1000;
-                Set_Yaw += ZiMiao_Add_Yaw;
-                Set_Pitch += ZiMiao_Add_Pitch;
-			}
+            ZiMiao_Add_Yaw -= Gimbal_Add.Yaw/1000;
+            ZiMiao_Add_Pitch += Gimbal_Add.Pitch/1500;
+            Set_Yaw += ZiMiao_Add_Yaw;
+            Set_Pitch += ZiMiao_Add_Pitch;
 		}else
 		{
             Set_Yaw -= Gimbal_Add.Yaw;
@@ -177,9 +174,9 @@ void Gimbal_PID_Init_All(void)
     PID_init(&(GM6020_Yaw.Speed_PID),180,1.3,0,16380,25000);//200,1.3.0//195,1.3,0//142,2,0//185,1.3,0
 	//80,0.45,150//80,0.45,150
 	
-    PID_init(&(GM6020_Pitch.Angle_PID),25,0,600,16500,25000);//30,0,1000//35,0,700
+    PID_init(&(GM6020_Pitch.Angle_PID),30,0,1000,16500,25000);//30,0,1000//35,0,700
     //35,0,1000//30,0,1000
-    PID_init(&(GM6020_Pitch.Speed_PID),110,1.7,0,16500,25000);//130,1,0//155,2.8,0
+    PID_init(&(GM6020_Pitch.Speed_PID),110,1,0,16500,25000);//130,1,0//155,2.8,0
     //120,1,0//130,1,0
 }
 
@@ -224,10 +221,10 @@ void Gimbal_FastTurn(void)
     if(fastturn == true)
     {
         Set_Yaw=Fastturn_Yaw*0.01f+Set_Yaw*0.99f;
-				if(fabs(Set_Yaw - Temp_Yaw)<5)
-				{
-						fastturn = false;
-				}
+		if(fabs(Set_Yaw - Temp_Yaw)<5)
+		{
+			fastturn = false;
+		}
     }
 
 }

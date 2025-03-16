@@ -139,7 +139,7 @@ typedef struct
 void draw_a_line(uint8_t (*txbuff)[50],uint8_t i,int Start_x, int Start_y,int End_x, int End_y,uint8_t Operate_type,int color, UART_HandleTypeDef UART);
 void draw_a_cricle(uint8_t (*txbuff)[50],uint8_t i,int x, int y,uint8_t Operate_type, UART_HandleTypeDef UART);
 void draw_a_string(uint8_t (*txbuff)[50],uint8_t i,uint8_t *str,uint8_t len, uint16_t start_x,uint16_t start_y, uint8_t Operate_type, UART_HandleTypeDef UART);
-void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t start_y, operate_type operate, uint8_t j,UART_HandleTypeDef UART);
+void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t start_y, operate_type operate, uint8_t j,UART_HandleTypeDef UART,uint8_t color);
 void draw_CHASSIS_GYROSCOPE(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, uint32_t (*Data)[12]);
 void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, uint32_t (*Data)[12]);
 	

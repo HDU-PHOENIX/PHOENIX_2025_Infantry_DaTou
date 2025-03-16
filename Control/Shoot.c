@@ -8,6 +8,8 @@ extern Computer_Rx_Message_t Computer_Rx_Message;
 
 static uint8_t Single_Mode,Have_Shoot;
 int16_t M3508_Speed=6666;
+bool Shoot = false;
+float M2006_Speed = -1800;
 
 /********************换弹部分********************/
 void Shoot_Reload_Choose(void);
@@ -113,10 +115,9 @@ void Shoot_Remote_Control(void)
         {
             Single_Mode = 0;
         }
-
         if(Have_Shoot == 1) //还未打弹
         {
-            if(ABS(M2006_Rammer.total_angle) < MOTOR_2006_CIRCLE_ANGLE / 8.0f) //未转过一个齿位
+            if(ABS(M2006_Rammer.total_angle)< MOTOR_2006_CIRCLE_ANGLE /8.0f) //未转过一个齿位
             {
                 M2006_Rammer.Set_Speed = M2006_Speed;
             }
@@ -163,9 +164,9 @@ void Shoot_PID_Calc(void)
  */
 void Shoot_PID_Init_ALL(void)
 {
-    PID_init(&(M3508_Shoot[0].PID),45,0.8,0,16380,16380);//40,0,0//45,5,0//10,0.8,2
-    PID_init(&(M3508_Shoot[1].PID),45,0.8,0,16380,16380);//40,0,0//45,5,0/10,0.8,2
-    PID_init(&(M2006_Rammer.Speed_PID),80,0,0,16380,16380);//10,4,0
+    PID_init(&(M3508_Shoot[0].PID),75,0,80,16380,16380);//40,0,0//45,5,0//10,0.8,2//75,0,80
+    PID_init(&(M3508_Shoot[1].PID),75,0,80,16380,16380);//40,0,0//45,5,0/10,0.8,2//68,0,87
+    PID_init(&(M2006_Rammer.Speed_PID),10,0.02,0,16380,16380);//10,4,0//8,0.16,4.15
 }
 
 /**
@@ -195,22 +196,53 @@ void Shoot_Stop(void)
     Set_M2006_Motor_Voltage(&hcan2,M2006_Rammer);
 }
 
-float Speed17mm_Min = 22.0f, Speed17mm_Max = 24.0f;
-float Speed17mm_Now ,Speed17mm_Last;
+float Speed17mm_Now;
+uint8_t Min_cnt = 0,Max_cnt = 0;
+bool Z_judge = false,X_judge = false,G_judge = false;
 void Speed17mm_Control(void)
 {
     Speed17mm_Now = JUDGE_usGetSpeedHeat17();
-	if(Speed17mm_Now != Speed17mm_Last)
+    if(IF_KEY_PRESSED_Z == 1)
+    {
+        if(Z_judge == true)
+        {
+            M3508_Speed -= 100;
+            Z_judge = false;
+		}
+    }
+	if(IF_KEY_PRESSED_Z == 0)//松手检测
 	{
-		Speed17mm_Last = Speed17mm_Now;
-		if(Speed17mm_Now >= Speed17mm_Max)
-			M3508_Speed -= 300;
-		if(Speed17mm_Now <= Speed17mm_Min)
-			M3508_Speed += 300;	
+        Z_judge = true;
+	}
+	
+	if(IF_KEY_PRESSED_X == 1)
+    {
+        if(X_judge == true)
+        {
+            M3508_Speed += 100;
+            X_judge = false;
+        }
+    }
+	if(IF_KEY_PRESSED_X == 0)//松手检测
+	{
+        X_judge = true;
+	}
+	
+	if(IF_KEY_PRESSED_G == 1)
+    {
+        if(G_judge == true)
+        {
+            M3508_Speed = 6666;
+            G_judge = false;
+        }
+    }
+	if(IF_KEY_PRESSED_G == 0)//松手检测
+	{
+        G_judge = true;
 	}
 }
 
-bool Shoot = false,CTRL_judge = false;
+bool CTRL_judge = false;
 void Shoot_KeyBoard_Control(void)
 {
 //
@@ -266,7 +298,7 @@ void Shoot_KeyBoard_Control(void)
 
         if(Have_Shoot == 1) //还未打弹
         {
-            if(ABS(M2006_Rammer.total_angle) < MOTOR_2006_CIRCLE_ANGLE / 8.0f) //未转过一个齿位
+            if(ABS(M2006_Rammer.total_angle)<MOTOR_2006_CIRCLE_ANGLE / 8.0f) //未转过一个齿位
             {
                 M2006_Rammer.Set_Speed = M2006_Speed;
             }

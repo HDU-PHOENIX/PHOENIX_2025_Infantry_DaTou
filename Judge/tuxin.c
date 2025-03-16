@@ -153,7 +153,7 @@ void draw_a_line(uint8_t (*txbuff)[50], uint8_t i, int Start_x, int Start_y, int
 
 
 //字 字数 
-void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t start_y, operate_type operate, uint8_t j,UART_HandleTypeDef UART)
+void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t start_y, operate_type operate, uint8_t j,UART_HandleTypeDef UART,uint8_t color)
 {
 	uint32_t length = 0;
 	uint8_t txbuff[200] = {0};
@@ -177,7 +177,7 @@ void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t
 	show_data.operate_data.show_char.grapic_data_struct.operate_type = operate;
 	show_data.operate_data.show_char.grapic_data_struct.graphic_type = string;
 	show_data.operate_data.show_char.grapic_data_struct.layer = layer;
-	show_data.operate_data.show_char.grapic_data_struct.color = yellow;
+	show_data.operate_data.show_char.grapic_data_struct.color = color;
 	show_data.operate_data.show_char.grapic_data_struct.start_angle = 30;	//字体大小
 	show_data.operate_data.show_char.grapic_data_struct.end_angle = len;	//字体长度
 	show_data.operate_data.show_char.grapic_data_struct.width = 3;
