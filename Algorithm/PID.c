@@ -4,7 +4,7 @@
 /********************************************************************************************
 *角度环-KI给0
 *速度环-KD给0
-*先调速度环，等速度环能实现跳变跟随再调角度。调速度时，pitch轴如果有角度限制，叫结构先把角度限制拆除
+*先调速度环，等速度环能实现跳变跟随再调角度。
 ********************************************************************************************/
 
 float Limit_Min_Max(float value,float min,float max);
@@ -32,36 +32,39 @@ void PID_init(PID_struct_t *PID,
   PID->out_max = out_max;//输出限幅
 }
 
- void PID_Protect_Angle(PID_struct_t *pid)
+/**
+ * @brief PID过零保护
+ * @param pid PID结构体
+ * @param angle_max 角度上限
+ */
+void PID_Protect(PID_struct_t *pid,float angle_max)
 {
-	if(pid->ref - pid->fdb > 4096)
+  float half_angle = angle_max/2;
+	if(pid->ref - pid->fdb > half_angle)
 	{
-		pid->fdb+=8192;
+		pid->fdb+=angle_max;
 	}
-	else if(pid->ref - pid->fdb < -4096)
+	else if(pid->ref - pid->fdb < -half_angle)
 	{
-		pid->fdb-=8192;
+		pid->fdb-=angle_max;
 	}
 }
 
-void PID_Protect_Ink(PID_struct_t *pid)
-{
-	if(pid->ref - pid->fdb > 180)
-	{
-		pid->fdb+=360;
-	}
-	else if(pid->ref - pid->fdb < -180)
-	{
-		pid->fdb-=360;
-	}
-}
-
-float PID_Calc_Angle(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标，实际）
+/**
+ * @brief PID角度环计算函数
+ * @param PID PID结构体
+ * @param ref 设定值
+ * @param fdb 实际值
+ * @param angle_max 角度上限
+ * @param i_out 积分分离参数（为0时无效）
+ * @return PID计算结果
+ */
+float PID_Calc_Angle(PID_struct_t *PID, float ref, float fdb,float angle_max,float i_out)//PID运算函数（目标，实际）
 {
   PID->ref = ref;
   PID->fdb = fdb;
 
-	PID_Protect_Angle(PID);//过零保护
+	PID_Protect(PID,angle_max);//过零保护
 
   PID->err[1] = PID->err[0];
   PID->err[0] = PID->ref - PID->fdb;
@@ -69,33 +72,26 @@ float PID_Calc_Angle(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标
   PID->p_out  = PID->kp * PID->err[0];
   PID->i_out += PID->ki * PID->err[0];
   PID->d_out  = PID->kd * (PID->err[0] - PID->err[1]);
-  PID->i_out=Limit_Min_Max(PID->i_out, -PID->i_max, PID->i_max);
-  
+
+  if((PID->err[0]>i_out||PID->err[0]<-i_out)&&i_out!=0 )
+  {
+    PID->i_out = 0;
+  }else
+  {
+    PID->i_out=Limit_Min_Max(PID->i_out, -PID->i_max, PID->i_max);
+  }
   PID->output = PID->p_out + PID->i_out + PID->d_out;
   PID->output=Limit_Min_Max(PID->output, -PID->out_max, PID->out_max);
   return PID->output;
 }
 
-float PID_Calc_Ink(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标，实际）
-{
-  PID->ref = ref;
-  PID->fdb = fdb;
-
-	PID_Protect_Ink(PID);//过零保护
-
-  PID->err[1] = PID->err[0];
-  PID->err[0] = PID->ref - PID->fdb;
-  
-  PID->p_out  = PID->kp * PID->err[0];
-  PID->i_out += PID->ki * PID->err[0];
-  PID->d_out  = PID->kd * (PID->err[0] - PID->err[1]);
-  PID->i_out=Limit_Min_Max(PID->i_out, -PID->i_max, PID->i_max);
-  
-  PID->output = PID->p_out + PID->i_out + PID->d_out;
-  PID->output=Limit_Min_Max(PID->output, -PID->out_max, PID->out_max);
-  return PID->output;
-}
-
+/**
+ * @brief 速度环PID
+ * @param PID PID结构体
+ * @param ref 设定值
+ * @param fdb 实际值
+ * @return PID计算结果
+ */
 float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标，实际）
 {
   PID->ref = ref;
@@ -109,8 +105,6 @@ float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标
   PID->d_out  = PID->kd * (PID->err[0] - PID->err[1]);
   PID->i_out=Limit_Min_Max(PID->i_out, -PID->i_max, PID->i_max);
   
-//  if(PID->err[0]>20)PID->i_out=0;
-	
   PID->output = PID->p_out + PID->i_out + PID->d_out;
   PID->output=Limit_Min_Max(PID->output, -PID->out_max, PID->out_max);
   return PID->output;

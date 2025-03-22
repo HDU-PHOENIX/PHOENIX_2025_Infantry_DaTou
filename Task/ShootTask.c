@@ -6,7 +6,7 @@ extern Moto_M3508_t M3508_Shoot[2];
 void ShootTask(void const * argument)
 {
     portTickType currentTime;
-	__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,850);
+	__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,2500);//850
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
     M3508_Shoot[0].Set_Speed = 0;
 	M3508_Shoot[1].Set_Speed = 0;

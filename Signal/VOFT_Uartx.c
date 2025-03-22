@@ -21,8 +21,7 @@ int fputc(int ch, FILE *f)
 
 void VOFT_Tx(void)
 {
-	int aa = -2000;
-	printf("%d,%d,%d\n",M2006_Rammer.Set_Speed,M2006_Rammer.rotor_speed,aa);
+	printf("%d,%d,%d,%d,%d,%f,%f\n",M3508_Chassis[0].rotor_speed,M3508_Chassis[0].rotor_speed,M3508_Chassis[1].rotor_speed,M3508_Chassis[2].rotor_speed,M3508_Chassis[3].rotor_speed,Temp2_Chassis_Speed.vx,IMU_angle[0]);
 }
 
 //float Get_Data(void)

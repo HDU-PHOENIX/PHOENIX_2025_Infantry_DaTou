@@ -24,10 +24,8 @@ typedef struct
 }PID_struct_t;
 
 void PID_init(PID_struct_t *PID,float kp,float ki,float kd,float i_max,float out_max);
-float PID_Calc_Angle(PID_struct_t *PID, float ref, float fdb);//PID运算函数（目标，实际)
-float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb);//PID运算函数（目标，实际）
-float PID_Calc_Ink(PID_struct_t *PID, float ref, float fdb);//PID运算函数（目标，实际）
-//float PID_Calc_Follow(PID_struct_t *PID, float ref, float fdb);//PID运算函数（目标，实际）
+float PID_Calc_Angle(PID_struct_t *PID, float ref, float fdb,float angle_max,float i_out);
+float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb);
 float Limit_Min_Max(float value,float min,float max);
 
 #endif

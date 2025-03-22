@@ -5,7 +5,9 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os.h"
-
+/*
+封装过差，不建议使用，等老学长研究新的方案
+*/
 judge_show_data_t show_data = {0};
 uint8_t Tx_buff[5][50] = {0};
 uint8_t Tx_buff_seven[5][200] = {0};

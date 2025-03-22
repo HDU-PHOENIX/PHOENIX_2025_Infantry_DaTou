@@ -196,13 +196,16 @@ void Shoot_Stop(void)
     Set_M2006_Motor_Voltage(&hcan2,M2006_Rammer);
 }
 
+/**
+ * @brief 通过键鼠控制弹速
+ */
 float Speed17mm_Now;
 uint8_t Min_cnt = 0,Max_cnt = 0;
 bool Z_judge = false,X_judge = false,G_judge = false;
 void Speed17mm_Control(void)
 {
     Speed17mm_Now = JUDGE_usGetSpeedHeat17();
-    if(IF_KEY_PRESSED_Z == 1)
+    if(IF_KEY_PRESSED_Z == 1)//点击Z减弹速
     {
         if(Z_judge == true)
         {
@@ -215,7 +218,7 @@ void Speed17mm_Control(void)
         Z_judge = true;
 	}
 	
-	if(IF_KEY_PRESSED_X == 1)
+	if(IF_KEY_PRESSED_X == 1)//点击X加弹速
     {
         if(X_judge == true)
         {
@@ -228,7 +231,7 @@ void Speed17mm_Control(void)
         X_judge = true;
 	}
 	
-	if(IF_KEY_PRESSED_G == 1)
+	if(IF_KEY_PRESSED_G == 1)//点击G回复到初始设定值
     {
         if(G_judge == true)
         {
@@ -242,11 +245,14 @@ void Speed17mm_Control(void)
 	}
 }
 
+/**
+ * @brief 键鼠控制是否发射以及开启摩擦轮
+ */
 bool CTRL_judge = false;
 void Shoot_KeyBoard_Control(void)
 {
-//
-    if(IF_KEY_PRESSED_CTRL == 1)
+
+    if(IF_KEY_PRESSED_CTRL == 1)//点击ctrl开启摩擦轮
     {
         if(Shoot == false && CTRL_judge == true)
         {
@@ -274,11 +280,10 @@ void Shoot_KeyBoard_Control(void)
         M3508_Shoot[1].Set_Speed = 0;
         M2006_Rammer.Set_Speed = 0;
     }
-
     switch (Car_Mode.Shoot)
     {
     case Shoot_Plugins:
-        if(Shoot == true && RC.mouse.press_l == 1)
+        if(Shoot == true && RC.mouse.press_l == 1)//摩擦轮开启且左键按下
 			{					
                 M2006_Rammer.Set_Speed = M2006_Speed;
 			}else 

@@ -180,7 +180,9 @@ void Chassis_Remote_Control(void)
     case FOLLOW:
         Temp1_Chassis_Speed.vx = (float)RC.ch3/250;
         Temp1_Chassis_Speed.vy = (float)RC.ch2/250;
-		PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle());
+//		    if(RC.ch3 > 300) Temp1_Chassis_Speed.vx=2;
+//	           else if(RC.ch3 < 300) Temp1_Chassis_Speed.vx = 0;
+		PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle(),8192,0);
         Temp1_Chassis_Speed.vw = Follow_PID.output*0.0007666f;
     default:
         break;
@@ -209,11 +211,11 @@ void Chassis_PID_Calc(void)
  */
 void Chassis_PID_Init_All(void)
 {
-    PID_init(&Follow_PID,10,0,1000,0,16308);
-    PID_init(&(M3508_Chassis[0].PID),10,1,10,1000,8192);
-    PID_init(&(M3508_Chassis[1].PID),10,1,10,1000,8192);
-    PID_init(&(M3508_Chassis[2].PID),10,1,10,1000,8192);
-    PID_init(&(M3508_Chassis[3].PID),10,1,10,1000,8192);
+    PID_init(&Follow_PID,10,0,500,0,16308);
+    PID_init(&(M3508_Chassis[0].PID),10,1.5,0,2000,8192);
+    PID_init(&(M3508_Chassis[1].PID),10,1.5,0,2000,8192);
+    PID_init(&(M3508_Chassis[2].PID),10,1.5,0,2000,8192);
+    PID_init(&(M3508_Chassis[3].PID),10,1.5,0,2000,8192);
 }
 
 /**
@@ -231,8 +233,12 @@ void Chassis_PID_Clean_All(void)
     PID_init(&(M3508_Chassis[3].PID),0,0,0,0,0);
 }
 
-
-
+/**
+ * @file Chassis.c
+ * @brief 键盘控制底盘
+ * @author HWX
+ * @date 2025/2/10
+ */
 void  Chassis_KeyBoard_Control(void)
 {
     switch (Car_Mode.Action)
@@ -280,7 +286,7 @@ void  Chassis_KeyBoard_Control(void)
             Temp1_Chassis_Speed.vy = 2.5f;
         if(IF_KEY_PRESSED_A == 0 && IF_KEY_PRESSED_D == 0)
             Temp1_Chassis_Speed.vy = 0.0f;
-        PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle());
+		PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle(),8192,0);
         Temp1_Chassis_Speed.vw = Follow_PID.output*0.0007666f;
     default:
         break;
@@ -288,7 +294,16 @@ void  Chassis_KeyBoard_Control(void)
 }
 
 
-
+/**
+ * @file Chassis.c
+ * @brief 键盘控制底盘
+ * @author HWX
+ * @param target_speed 目标设定速度
+ * @param XiePo_speed 当前设定速度
+ * @date 2025/2/10
+ * @note 这里用了两个斜坡函数，一个始终指向目标速度，一个始终指向0，即一个加速斜坡一个减速斜坡，通过动态控制减速斜坡步长控制功率，
+ *       通过控制加速斜坡步长（fen部分）实现定功率下小陀螺速度和移动的功率分配
+ */
 Chassis_Step step_l, step_s;
 float  Speed_V1_Fabs, Speed_V_Dif, Speed_W_Fabs,Speed_W_Dif , Speed_V2_Fabs;
 void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_speed) 

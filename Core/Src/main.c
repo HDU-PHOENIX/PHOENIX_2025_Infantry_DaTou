@@ -74,7 +74,6 @@ SuperPower_Tx_Message_t SuperPower_Tx_Message;
 SuperPower_Rx_Message_t SuperPower_Rx_Message;
 SuperPower_Mode_t SuperPower_Mode;
 SuperPower_Switch_t SuperPower_Switch;
-
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -145,20 +144,19 @@ int main(void)
   MX_USART6_UART_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  CAN_Filter_Init();
-	HAL_UART_Receive_DMA(&huart3,RC_Data,sizeof(RC_Data));
-    __HAL_UART_ENABLE_IT(&huart6, UART_IT_IDLE);//使能 中断,用于裁判系统读取
+  CAN_Filter_Init();//can1,can2过滤器配置及初始化
+	HAL_UART_Receive_DMA(&huart3,RC_Data,sizeof(RC_Data));//开启uart3 DMA接收遥控器消息
+    __HAL_UART_ENABLE_IT(&huart6, UART_IT_IDLE);//使能uart6中断,用于裁判系统读取
 	HAL_UART_Receive_DMA(&huart6,judge_rx_buff,2000);//打开DMA接收，数据存入rx_buffer_judge数组中
-	Car_Init();
-	MX_USB_DEVICE_Init();
-	Computer_Init();
+	Car_Init();//初始化车辆模式
+	MX_USB_DEVICE_Init();//开启虚拟串口，接收小电脑数据
+	Computer_Init();//小电脑通信初始化
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
   MX_FREERTOS_Init();
 
   /* Start scheduler */
-  
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */

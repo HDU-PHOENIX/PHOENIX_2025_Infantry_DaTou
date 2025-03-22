@@ -150,11 +150,11 @@ void Gimbal_Remote_Control(void)
 void Gimbal_PID_Calc(void)
 {
     //Yaw
-    PID_Calc_Ink(&GM6020_Yaw.Angle_PID,Set_Yaw,IMU_angle[0]);
+    PID_Calc_Angle(&GM6020_Yaw.Angle_PID,Set_Yaw,IMU_angle[0],360,0);
     GM6020_Yaw.Set_Speed = GM6020_Yaw.Angle_PID.output;
     PID_Calc_Speed(&(GM6020_Yaw.Speed_PID),GM6020_Yaw.Set_Speed,GM6020_Yaw.rotor_speed);
     //Pitch
-    PID_Calc_Ink(&GM6020_Pitch.Angle_PID,Set_Pitch,IMU_angle[2]);
+    PID_Calc_Angle(&GM6020_Pitch.Angle_PID,Set_Pitch,IMU_angle[2],360,0);
     GM6020_Pitch.Set_Speed = -GM6020_Pitch.Angle_PID.output;
     PID_Calc_Speed(&GM6020_Pitch.Speed_PID,GM6020_Pitch.Set_Speed,GM6020_Pitch.rotor_speed);
 }
