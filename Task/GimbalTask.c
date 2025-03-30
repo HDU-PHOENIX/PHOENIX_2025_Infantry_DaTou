@@ -8,7 +8,7 @@ void GimbalTask(void const * argument)
     while(1)
     {
         currentTime = xTaskGetTickCount();//当前系统时间
-        Computer_Rx();//读取自瞄数据
+//        Computer_Rx();//读取自瞄数据
         switch (Car_Mode.State)
         {
 

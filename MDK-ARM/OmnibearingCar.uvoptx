@@ -203,7 +203,7 @@
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Computer_Rx_Message</ItemText>
+          <ItemText>Computer_Rx_Message,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
@@ -214,6 +214,26 @@
           <count>10</count>
           <WinNumber>1</WinNumber>
           <ItemText>M2006_Speed</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Buf</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Rx_data</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Buf</ItemText>
+        </Ww>
+        <Ww>
+          <count>14</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>\\OmnibearingCar\../Core/Src/main.c\Computer_Rx_Message.type</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -1522,7 +1542,7 @@
 
   <Group>
     <GroupName>Application/User/USB_DEVICE/App</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
