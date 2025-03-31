@@ -39,7 +39,8 @@ switch (Car_Mode.State)
             break;
         }
         SuperPower_Tx();
-        vTaskDelayUntil(&currentTime,2);//绝对延时
+		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_11);
+        vTaskDelayUntil(&currentTime,1);//绝对延时
     }
 
 }

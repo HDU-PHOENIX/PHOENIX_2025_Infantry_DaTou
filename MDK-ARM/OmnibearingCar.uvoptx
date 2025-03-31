@@ -235,6 +235,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>\\OmnibearingCar\../Core/Src/main.c\Computer_Rx_Message.type</ItemText>
         </Ww>
+        <Ww>
+          <count>15</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Temp2_Chassis_Speed</ItemText>
+        </Ww>
+        <Ww>
+          <count>16</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Chassis_Speed</ItemText>
+        </Ww>
       </WatchWindow1>
       <Tracepoint>
         <THDelay>0</THDelay>

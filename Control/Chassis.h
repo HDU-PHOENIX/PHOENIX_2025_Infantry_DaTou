@@ -20,7 +20,7 @@
 #define Wheel_Radius 0.07656f //ÂÖ×Ó°ë¾¶m
 #define Chassis_Radius 0.290f //µ×ÅÌ°ë¾¶m
 
-#define Chassis_Power_Set 50
+#define Chassis_Power_Set 30
 
 typedef struct
 {
