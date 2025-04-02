@@ -9,6 +9,7 @@
 #include "Chassis.h"
 #include "Computer.h"
 #include "SuperPower.h"
+#include "VOFT_Uartx.h"
 
 
 #endif

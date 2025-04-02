@@ -8,6 +8,5 @@
 #include "Task.h"
 #include "judge.h"
 #include "SuperPower.h"
-#include "VOFT_Uartx.h"
 
 #endif

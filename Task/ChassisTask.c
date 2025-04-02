@@ -7,19 +7,13 @@ void ChassisTask(void const * argument)
 {
     portTickType currentTime;
     SuperPower_Init();
-//    uint8_t voft_cnt=0;
+
     while (1)   
     { 
         currentTime = xTaskGetTickCount();//当前系统时间
         Control_Mode_Choose();//选择模式
         Chassis_Power_Limit=JUDGE_usGetPowerLimit();
         Chassis_Power_Buffer=JUDGE_fGetRemainEnergy();
-//         voft_cnt++;
-//         if(voft_cnt>=10)
-//         {
-//             voft_cnt =0;
-//             VOFT_Tx();            
-//         }
         SuperPower_Switch_Control();
 switch (Car_Mode.State)
         {
@@ -39,7 +33,7 @@ switch (Car_Mode.State)
             break;
         }
         SuperPower_Tx();
-		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_11);
+//		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_11);
         vTaskDelayUntil(&currentTime,1);//绝对延时
     }
 

@@ -26,6 +26,7 @@ void UI_Task(void const * argument)
     uint16_t UI_PushUp_Counter = 0;
     while(1)
 	{
+		VOFT_Tx();
         UI_PushUp_Counter++;
 		if(UI_PushUp_Counter>=65500)
 			UI_PushUp_Counter = 0;
