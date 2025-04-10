@@ -15,3 +15,6 @@
 
 #J-Scope波形数据忽略项
 /**/J-Scope_Data/
+
+#VOFA数据忽略
+/**/VOFA

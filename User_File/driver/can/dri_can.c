@@ -80,7 +80,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
           Get_M3508_Chassis_Message(rx_header.StdId,rx_data);
       }else if(rx_header.StdId == 0x0C2)
 	  {
-		  SuperPower_Rx(rx_data);
+		  SuperCap_Rx(rx_data);
 	  }
     }
 }

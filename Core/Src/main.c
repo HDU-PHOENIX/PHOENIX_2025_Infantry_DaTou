@@ -40,8 +40,13 @@
 #include "Gimbal.h"
 #include "dvc_dji_m2006.h"
 #include "IMU_Task.h"
+<<<<<<< HEAD
 #include "dvc_judge.h"
 #include "dvc_supercap.h"
+=======
+#include "judge.h"
+#include "SuperCap.h"
+>>>>>>> 2cda9d8ff13012d98e00b0e0391d0b19e4c9d34b
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -70,10 +75,10 @@ uint8_t judge_rx_buff[JUDGE_MAX_LENGTH];
 /*******************************裁判系统相关系数******************************/
 float Chassis_Power_Limit,Chassis_Power_Buffer;
 /*******************************超电相关系数******************************/
-SuperPower_Tx_Message_t SuperPower_Tx_Message;
-SuperPower_Rx_Message_t SuperPower_Rx_Message;
-SuperPower_Mode_t SuperPower_Mode;
-SuperPower_Switch_t SuperPower_Switch;
+SuperCap_Tx_Message_t SuperCap_Tx_Message;
+SuperCap_Rx_Message_t SuperCap_Rx_Message;
+SuperCap_Mode_t SuperCap_Mode;
+SuperCap_Switch_t SuperCap_Switch;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

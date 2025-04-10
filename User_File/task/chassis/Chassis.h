@@ -9,8 +9,13 @@
 #include "alg_pid.h"
 #include "Car_Mode.h"
 #include "stdbool.h"
+<<<<<<< HEAD:User_File/task/chassis/Chassis.h
 #include "dvc_judge.h"
 #include "dvc_supercap.h"
+=======
+#include "judge.h"
+#include "SuperCap.h"
+>>>>>>> 2cda9d8ff13012d98e00b0e0391d0b19e4c9d34b:Control/Chassis.h
 
 
 #define Gimbal_Yaw_ZERO 3260//云台正方向和底盘正方向重合时候的编码值
