@@ -9,7 +9,7 @@ extern Computer_Rx_Message_t Computer_Rx_Message;
 static uint8_t Single_Mode,Have_Shoot;
 int16_t M3508_Speed=6666;
 bool Shoot = false;
-float M2006_Speed = -1800;
+float M2006_Speed = -2000;
 
 /********************»»µ¯²¿·Ö********************/
 void Shoot_Reload_Choose(void);
@@ -164,9 +164,9 @@ void Shoot_PID_Calc(void)
  */
 void Shoot_PID_Init_ALL(void)
 {
-    PID_init(&(M3508_Shoot[0].PID),75,0,80,16380,16380);//40,0,0//45,5,0//10,0.8,2//75,0,80
-    PID_init(&(M3508_Shoot[1].PID),75,0,80,16380,16380);//40,0,0//45,5,0/10,0.8,2//68,0,87
-    PID_init(&(M2006_Rammer.Speed_PID),10,0.02,0,16380,16380);//10,4,0//8,0.16,4.15
+    PID_init(&(M3508_Shoot[0].PID),75,0,80,0,16380,16380);//40,0,0//45,5,0//10,0.8,2//75,0,80
+    PID_init(&(M3508_Shoot[1].PID),75,0,80,0,16380,16380);//40,0,0//45,5,0/10,0.8,2//68,0,87
+    PID_init(&(M2006_Rammer.Speed_PID),10,0.02,0,0,1000,16380);//10,4,0//8,0.16,4.15
 }
 
 /**
@@ -177,10 +177,10 @@ void Shoot_PID_Init_ALL(void)
  */
 void Shoot_PID_Clean_ALL(void)
 {
-    PID_init(&(M3508_Shoot[0].PID),0,0,0,0,0);
-    PID_init(&(M3508_Shoot[1].PID),0,0,0,0,0);
-    PID_init(&(M2006_Rammer.Angle_PID),0,0,0,0,0);
-    PID_init(&(M2006_Rammer.Speed_PID),0,0,0,0,0);
+    PID_init(&(M3508_Shoot[0].PID),0,0,0,0,0,0);
+    PID_init(&(M3508_Shoot[1].PID),0,0,0,0,0,0);
+    PID_init(&(M2006_Rammer.Angle_PID),0,0,0,0,0,0);
+    PID_init(&(M2006_Rammer.Speed_PID),0,0,0,0,0,0);
 }
 
 /**

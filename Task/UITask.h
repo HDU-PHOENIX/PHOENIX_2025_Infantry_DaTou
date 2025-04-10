@@ -8,8 +8,8 @@
 #include "GM6020.h"
 #include "Chassis.h"
 #include "Computer.h"
-#include "SuperPower.h"
-#include "VOFT_Uartx.h"
+#include "SuperCap.h"
+#include "VOFA_Uartx.h"
 
 
 #endif

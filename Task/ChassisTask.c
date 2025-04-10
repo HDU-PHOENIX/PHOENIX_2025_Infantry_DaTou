@@ -6,7 +6,7 @@ extern float Chassis_Power_Limit,Chassis_Power_Now,Chassis_Power_Buffer;
 void ChassisTask(void const * argument)
 {
     portTickType currentTime;
-    SuperPower_Init();
+    SuperCap_Init();
 
     while (1)   
     { 
@@ -14,7 +14,7 @@ void ChassisTask(void const * argument)
         Control_Mode_Choose();//选择模式
         Chassis_Power_Limit=JUDGE_usGetPowerLimit();
         Chassis_Power_Buffer=JUDGE_fGetRemainEnergy();
-        SuperPower_Switch_Control();
+        SuperCap_Switch_Control();
 switch (Car_Mode.State)
         {
         case Car_Remote:
@@ -22,7 +22,7 @@ switch (Car_Mode.State)
             Chassis_Move();
             break;
         case Car_Keyboard:
-            SuperPower_KeyBoard_Control();
+            SuperCap_KeyBoard_Control();
             Chassis_KeyBoard_Control();
             Chassis_Move();
             break;
@@ -32,7 +32,7 @@ switch (Car_Mode.State)
         default:
             break;
         }
-        SuperPower_Tx();
+        SuperCap_Tx();
 //		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_11);
         vTaskDelayUntil(&currentTime,1);//绝对延时
     }

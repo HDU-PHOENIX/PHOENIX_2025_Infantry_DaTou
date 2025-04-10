@@ -10,7 +10,7 @@
 #include "Car_Mode.h"
 #include "stdbool.h"
 #include "judge.h"
-#include "SuperPower.h"
+#include "SuperCap.h"
 
 
 #define Gimbal_Yaw_ZERO 3260//云台正方向和底盘正方向重合时候的编码值

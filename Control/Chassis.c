@@ -8,9 +8,9 @@ extern Moto_GM6020_t GM6020_Yaw;
 extern Moto_M3508_t M3508_Chassis[4];
 extern PID_struct_t Follow_PID;
 extern float Chassis_Power_Limit,Chassis_Power_Buffer;
-extern SuperPower_Mode_t SuperPower_Mode;
-extern SuperPower_Switch_t SuperPower_Switch;
-extern SuperPower_Rx_Message_t SuperPower_Rx_Message;
+extern SuperCap_Mode_t SuperCap_Mode;
+extern SuperCap_Switch_t SuperCap_Switch;
+extern SuperCap_Rx_Message_t SuperCap_Rx_Message;
 
 float Angle;
 float err;
@@ -209,11 +209,11 @@ void Chassis_PID_Calc(void)
  */
 void Chassis_PID_Init_All(void)
 {
-    PID_init(&Follow_PID,5,0,300,0,16308);
-    PID_init(&(M3508_Chassis[0].PID),10,1.5,0,2000,8192);
-    PID_init(&(M3508_Chassis[1].PID),10,1.5,0,2000,8192);
-    PID_init(&(M3508_Chassis[2].PID),10,1.5,0,2000,8192);
-    PID_init(&(M3508_Chassis[3].PID),10,1.5,0,2000,8192);
+    PID_init(&Follow_PID,5,0,200,0,0,16308);
+    PID_init(&(M3508_Chassis[0].PID),10,1,0,0,2000,8192);
+    PID_init(&(M3508_Chassis[1].PID),10,1,0,0,2000,8192);
+    PID_init(&(M3508_Chassis[2].PID),10,1,0,0,2000,8192);
+    PID_init(&(M3508_Chassis[3].PID),10,1,0,0,2000,8192);
 }
 
 /**
@@ -224,11 +224,11 @@ void Chassis_PID_Init_All(void)
  */
 void Chassis_PID_Clean_All(void)
 {
-    PID_init(&Follow_PID,0,0,0,0,0);
-    PID_init(&(M3508_Chassis[0].PID),0,0,0,0,0);
-    PID_init(&(M3508_Chassis[1].PID),0,0,0,0,0);
-    PID_init(&(M3508_Chassis[2].PID),0,0,0,0,0);
-    PID_init(&(M3508_Chassis[3].PID),0,0,0,0,0);
+    PID_init(&Follow_PID,0,0,0,0,0,0);
+    PID_init(&(M3508_Chassis[0].PID),0,0,0,0,0,0);
+    PID_init(&(M3508_Chassis[1].PID),0,0,0,0,0,0);
+    PID_init(&(M3508_Chassis[2].PID),0,0,0,0,0,0);
+    PID_init(&(M3508_Chassis[3].PID),0,0,0,0,0,0);
 }
 
 /**
@@ -312,8 +312,8 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
     Speed_W_Fabs = fabs(XiePo_speed->vw);
     Speed_W_Dif = fabs(target_speed->vw - XiePo_speed->vw);
 
-    if(SuperPower_Switch == SuperPower_Work && SuperPower_Mode == SuperPower_Off)//超电开启且不充电
-        step_l.t = 0.005f * powf(SuperPower_Rx_Message.Now_power/(Chassis_Power_Limit-5),2);
+    if(SuperCap_Switch == SuperCap_Work && SuperCap_Mode == SuperCap_Off)//超电开启且不充电
+        step_l.t = 0.005f * powf(SuperCap_Rx_Message.Now_power/(Chassis_Power_Limit-5),2);
     else
         step_l.t = 0.005f * powf((60-Chassis_Power_Buffer)/(60-Chassis_Power_Set),2);
 	

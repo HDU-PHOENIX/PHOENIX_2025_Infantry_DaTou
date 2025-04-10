@@ -22,12 +22,14 @@ void PID_init(PID_struct_t *PID,
               float kp,
               float ki,
               float kd,
+              float kf,
               float i_max,
               float out_max)//PID初始化函数
 {
   PID->kp      = kp;
   PID->ki      = ki;
   PID->kd      = kd;
+  PID->kf      = kf;
   PID->i_max   = i_max;//积分限幅
   PID->out_max = out_max;//输出限幅
 }
@@ -40,11 +42,11 @@ void PID_init(PID_struct_t *PID,
 void PID_Protect(PID_struct_t *pid,float angle_max)
 {
   float half_angle = angle_max/2;
-	if(pid->ref - pid->fdb > half_angle)
+	if(pid->ref[0] - pid->fdb > half_angle)
 	{
 		pid->fdb+=angle_max;
 	}
-	else if(pid->ref - pid->fdb < -half_angle)
+	else if(pid->ref[0] - pid->fdb < -half_angle)
 	{
 		pid->fdb-=angle_max;
 	}
@@ -61,27 +63,23 @@ void PID_Protect(PID_struct_t *pid,float angle_max)
  */
 float PID_Calc_Angle(PID_struct_t *PID, float ref, float fdb,float angle_max,float i_out)//PID运算函数（目标，实际）
 {
-  PID->ref = ref;
+  PID->ref[0] = ref;
   PID->fdb = fdb;
-
+  PID->f_out = PID->kf * (PID->ref[0] - PID->ref[1]);
 	PID_Protect(PID,angle_max);//过零保护
 
-  PID->err[1] = PID->err[0];
-  PID->err[0] = PID->ref - PID->fdb;
-  
+  PID->err[0] = PID->ref[0] - PID->fdb;
+
   PID->p_out  = PID->kp * PID->err[0];
   PID->i_out += PID->ki * PID->err[0];
   PID->d_out  = PID->kd * (PID->err[0] - PID->err[1]);
-
-  if((PID->err[0]>i_out||PID->err[0]<-i_out)&&i_out!=0 )
-  {
-    PID->i_out = 0;
-  }else
-  {
-    PID->i_out=Limit_Min_Max(PID->i_out, -PID->i_max, PID->i_max);
-  }
-  PID->output = PID->p_out + PID->i_out + PID->d_out;
+  PID->i_out=Limit_Min_Max(PID->i_out, -PID->i_max, PID->i_max);
+  
+  PID->output = PID->p_out + PID->i_out + PID->d_out + PID->f_out;
   PID->output=Limit_Min_Max(PID->output, -PID->out_max, PID->out_max);
+
+  PID->err[1] = PID->err[0];
+  PID->ref[1] = PID->ref[0];
   return PID->output;
 }
 
@@ -92,13 +90,14 @@ float PID_Calc_Angle(PID_struct_t *PID, float ref, float fdb,float angle_max,flo
  * @param fdb 实际值
  * @return PID计算结果
  */
-float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标，实际）
+float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb)
 {
-  PID->ref = ref;
+  PID->ref[0] = ref;
   PID->fdb = fdb;
 
-  PID->err[1] = PID->err[0];
-  PID->err[0] = PID->ref - PID->fdb;
+  PID->f_out = PID->kf * (PID->ref[0] - PID->ref[1]);
+
+  PID->err[0] = PID->f_out + PID->ref[0] - PID->fdb;
 
   PID->p_out  = PID->kp * PID->err[0];
   PID->i_out += PID->ki * PID->err[0];
@@ -107,6 +106,10 @@ float PID_Calc_Speed(PID_struct_t *PID, float ref, float fdb)//PID运算函数（目标
   
   PID->output = PID->p_out + PID->i_out + PID->d_out;
   PID->output=Limit_Min_Max(PID->output, -PID->out_max, PID->out_max);
+
+  PID->ref[1] = PID->ref[0];
+  PID->err[1] = PID->err[0];
+
   return PID->output;
 }
 

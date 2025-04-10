@@ -6,7 +6,7 @@ extern uint8_t RC_Data[18];
 extern Car_Mode_t Car_Mode;
 extern Computer_Tx_Message_t Computer_Tx_Message;
 extern float ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
-extern SuperPower_Switch_t SuperPower_Switch;
+extern SuperCap_Switch_t SuperCap_Switch;
 
 /* »ñÈ¡Ò£¿ØÆ÷Ò¡¸ËÆ«ÒÆÁ¿
 	¸ù¾ÝÒ£¿ØÆ÷ÎÄµµ£º
@@ -83,7 +83,7 @@ void Control_Mode_Choose(void)
 				Chassis_PID_Clean_All();
 				Gimbal_PID_Clean_All();
 				Shoot_PID_Clean_ALL();
-				SuperPower_Switch = SuperPower_Stop;
+				SuperCap_Switch = SuperCap_Stop;
             }
 			Car_Mode.State = Car_Stop;
 			break;
@@ -102,7 +102,7 @@ void Control_Mode_Choose(void)
 				Chassis_PID_Init_All();
 				Gimbal_PID_Init_All();
 				Shoot_PID_Init_ALL();
-				SuperPower_Switch = SuperPower_Work;
+				SuperCap_Switch = SuperCap_Work;
 			}
 			Car_Mode.State = Car_Keyboard;
 			break;

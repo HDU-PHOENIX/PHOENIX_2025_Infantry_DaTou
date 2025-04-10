@@ -13,7 +13,7 @@ typedef struct
     uint16_t can_id;//电机ID
     uint16_t rotor_angle;//电机角度
     int16_t  rotor_speed;//电机速度
-    int16_t  torque_current;//电机扭矩
+    int16_t  torque_current;//电机扭矩电流
     uint8_t  temp;//温度
     int16_t Set_Speed;//设定速度
     uint16_t Set_Angle;//设定角度

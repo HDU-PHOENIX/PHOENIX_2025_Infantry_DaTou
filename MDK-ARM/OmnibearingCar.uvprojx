@@ -1855,14 +1855,14 @@
               <FilePath>..\Signal\bsp_spi.h</FilePath>
             </File>
             <File>
-              <FileName>VOFT_Uartx.c</FileName>
+              <FileName>VOFA_Uartx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Signal\VOFT_Uartx.c</FilePath>
+              <FilePath>..\Signal\VOFA_Uartx.c</FilePath>
             </File>
             <File>
-              <FileName>VOFT_Uartx.h</FileName>
+              <FileName>VOFA_Uartx.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Signal\VOFT_Uartx.h</FilePath>
+              <FilePath>..\Signal\VOFA_Uartx.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1950,14 +1950,14 @@
               <FilePath>..\Control\Computer.h</FilePath>
             </File>
             <File>
-              <FileName>SuperPower.c</FileName>
+              <FileName>SuperCap.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Control\SuperPower.c</FilePath>
+              <FilePath>..\Control\SuperCap.c</FilePath>
             </File>
             <File>
-              <FileName>SuperPower.h</FileName>
+              <FileName>SuperCap.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Control\SuperPower.h</FilePath>
+              <FilePath>..\Control\SuperCap.h</FilePath>
             </File>
           </Files>
         </Group>

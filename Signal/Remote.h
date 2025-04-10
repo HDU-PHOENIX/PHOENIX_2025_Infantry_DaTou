@@ -6,7 +6,7 @@
 #include "Chassis.h"
 #include "Gimbal.h"
 #include "Shoot.h"
-#include "SuperPower.h"
+#include "SuperCap.h"
 
 #define    KEY_PRESSED_OFFSET_W        ((uint16_t)0x01<<0)
 #define    KEY_PRESSED_OFFSET_S        ((uint16_t)0x01<<1)

@@ -4,10 +4,10 @@ extern Moto_GM6020_t GM6020_Yaw;
 extern Computer_Rx_Message_t Computer_Rx_Message;
 extern Chassis_Speed_t Temp1_Chassis_Speed,Temp2_Chassis_Speed;
 extern Car_Mode_t Car_Mode;
-extern SuperPower_Rx_Message_t SuperPower_Rx_Message;
-extern SuperPower_Mode_t SuperPower_Mode;
+extern SuperCap_Rx_Message_t SuperCap_Rx_Message;
+extern SuperCap_Mode_t SuperCap_Mode;
 extern bool Shoot;
-extern SuperPower_Switch_t SuperPower_Switch;
+extern SuperCap_Switch_t SuperCap_Switch;
 extern Moto_M3508_t M3508_Shoot[2];
 
 void yaw_error_cal(void);
@@ -19,14 +19,14 @@ uint8_t Speed_Str[20] = {"   Shoot    W:10.23"};
 uint8_t FOLLOW_Str[20] = {"FOLLOW"};
 uint8_t NORMAL_Str[20] = {"NORMAL"};
 uint8_t GYROSCOPE_Str[20] = {"GYROSCOPE"};
-uint8_t SuperPower_Str[20] = {"CAP:"};
+uint8_t SuperCap_Str[20] = {"CAP:"};
 
 void UI_Task(void const * argument)
 {
     uint16_t UI_PushUp_Counter = 0;
     while(1)
 	{
-		VOFT_Tx();
+		VOFA_Tx();
         UI_PushUp_Counter++;
 		if(UI_PushUp_Counter>=65500)
 			UI_PushUp_Counter = 0;
@@ -48,7 +48,7 @@ void UI_Task(void const * argument)
 		}
 		if(UI_PushUp_Counter%499 == 0)
 		{
-            show_str(SuperPower_Str,20,2,1000,130,add,0,huart6,yellow);				
+            show_str(SuperCap_Str,20,2,1000,130,add,0,huart6,yellow);				
 		}
 
 		if(UI_PushUp_Counter%16 == 0)
@@ -63,33 +63,33 @@ void UI_Task(void const * argument)
 
 		if(UI_PushUp_Counter%13 == 0)
 		{
-            SuperPower_Str[4] = 48 + (SuperPower_Rx_Message.Stored_Energy/100)%10;
-            SuperPower_Str[5] = 48 + (SuperPower_Rx_Message.Stored_Energy/10)%10;
-			SuperPower_Str[6] = 48 + SuperPower_Rx_Message.Stored_Energy%10;
-			uint8_t SuperPower_Color;
-			if(SuperPower_Mode == SuperPower_On && SuperPower_Switch == SuperPower_Work)
+            SuperCap_Str[4] = 48 + (SuperCap_Rx_Message.Stored_Energy/100)%10;
+            SuperCap_Str[5] = 48 + (SuperCap_Rx_Message.Stored_Energy/10)%10;
+			SuperCap_Str[6] = 48 + SuperCap_Rx_Message.Stored_Energy%10;
+			uint8_t SuperCap_Color;
+			if(SuperCap_Mode == SuperCap_On && SuperCap_Switch == SuperCap_Work)
 			{
-				SuperPower_Str[8] = 'O';
-				SuperPower_Str[9] = 'N';
-				SuperPower_Str[10] = ' ';
-				SuperPower_Str[11] = ' ';
-				SuperPower_Color = green;
-			}else if(SuperPower_Mode == SuperPower_Off && SuperPower_Switch == SuperPower_Work)
+				SuperCap_Str[8] = 'O';
+				SuperCap_Str[9] = 'N';
+				SuperCap_Str[10] = ' ';
+				SuperCap_Str[11] = ' ';
+				SuperCap_Color = green;
+			}else if(SuperCap_Mode == SuperCap_Off && SuperCap_Switch == SuperCap_Work)
 			{
-				SuperPower_Str[8] = 'O';
-				SuperPower_Str[9] = 'F';
-				SuperPower_Str[10] = 'F';
-				SuperPower_Str[11] = ' ';
-				SuperPower_Color = yellow;
-			}else if(SuperPower_Switch == SuperPower_Stop)
+				SuperCap_Str[8] = 'O';
+				SuperCap_Str[9] = 'F';
+				SuperCap_Str[10] = 'F';
+				SuperCap_Str[11] = ' ';
+				SuperCap_Color = yellow;
+			}else if(SuperCap_Switch == SuperCap_Stop)
 			{
-				SuperPower_Str[8] = 'S';
-				SuperPower_Str[9] = 'T';
-				SuperPower_Str[10] = 'O';
-				SuperPower_Str[11] = 'P';
-				SuperPower_Color = pink;
+				SuperCap_Str[8] = 'S';
+				SuperCap_Str[9] = 'T';
+				SuperCap_Str[10] = 'O';
+				SuperCap_Str[11] = 'P';
+				SuperCap_Color = pink;
 			}
-            show_str(SuperPower_Str,20,2,1000,130,modify,0,huart6,SuperPower_Color);				
+            show_str(SuperCap_Str,20,2,1000,130,modify,0,huart6,SuperCap_Color);				
 		}
 
         if(UI_PushUp_Counter%6 == 0)

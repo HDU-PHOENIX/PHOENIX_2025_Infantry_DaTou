@@ -1,5 +1,5 @@
-#ifndef __VOFT_UARTX_H__
-#define __VOFT_UARTX_H__
+#ifndef __VOFA_UARTX_H__
+#define __VOFA_UARTX_H__
 
 #include "main.h"
 #include "Gimbal.h"
@@ -8,6 +8,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void VOFT_Tx(void);
+void VOFA_Tx(void);
 
 #endif
