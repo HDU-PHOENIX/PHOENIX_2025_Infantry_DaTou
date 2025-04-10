@@ -40,48 +40,7 @@ PHOENIX25赛季上供弹式全向步兵机器人电控代码
 点击 Download（F8）按钮，将程序烧录到C板。
 ## 嵌入式架构
 ### 软件架构
-+ Application <u>CUBEMX生成的应用层代码</u>
-    + MDK-ARM
-    + User
-        + main <u>主函数，所有全局变量在此文件定义</u>
-        + stm32f4xx_it <u>部分中断函数写在这个文件下，DMA2_Stream2_IRQHandler函数需注释掉</u>
-+ Drivers <u>CUBEMX生成驱动层代码，包括HAL库和CMSIS库</u>
-    + STM32F4xx_HAL_Driver
-    + CMSIS
-+ Middlewares <u>CUBEMX生成中间文件</u>
-    + FreeRTOS
-    + USB_DEVICE_Library
-+ Task <u>FreeRTOS的全部任务在此文件夹里编写</u>
-    + GimbalTask
-    + ChassisTask
-    + ShootTask
-    + IMU_Task
-    + UITask
-+ Algorithm <u>计算相关的文件</u>
-    + PID <u>PID计算函数</u>
-    + MahonyAHRS <u>姿态解算函数</u>
-+ Signal <u>通信相关文件</u>
-    + BSP_CAN <u>CAN相关通信函数，电机通信</u>
-    + Remote <u>遥控器数据处理及状态切换函数</u>
-    + bsp_imu_pwm <u>PWM控制IMU温度函数</u>
-    + bsp_spi <u>SPI通信，陀螺仪通信</u>
-    + VOFT_Uartx <u>VOFA+调试时所需函数（~~文件名打错了，不要在意~~）</u>
-+ Motor <u>不同电机相关函数</u>
-    + M3508
-    + GM6020
-    + M2006
-+ Control
-    + Chassis <u>底盘控制相关函数</u>
-    + Gimbal <u>云台控制相关函数</u>
-    + Shoot <u>射击控制相关函数</u>
-    + Car_Mode <u>车辆状态设置</u>
-    + Computer <u>小电脑相关函数</u>
-    + SuperPower <u>超电相关函数（~~其实应该叫SuperCup，我英语不好，见谅~~）</u>
-+ IMU <u>读取陀螺仪数据相关中间文件</u>
-+ Judge <u>裁判系统相关文件</u>
-    + crc <u>CRC校验</u>
-    + judge <u>读取裁判系统相关函数</u>
-    + tuxin <u>图传画UI相关函数</u>
+![](Project_structure.png)
 ### 硬件架构
 + 电源线
     + Chassis <u>四个底盘电机（M3508*4），超电</u>

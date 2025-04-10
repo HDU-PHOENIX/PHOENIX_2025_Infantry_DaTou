@@ -22,7 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-#include "Computer.h"
+#include "dvc_minipc.h"
 #include "String.h"
 /* USER CODE END INCLUDE */
 

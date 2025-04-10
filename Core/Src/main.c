@@ -30,18 +30,18 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "BSP_CAN.h"
-#include "BSP_UART.h"
+#include "dri_can.h"
+#include "dri_uart.h"
 #include "Car_Mode.h"
-#include "GM6020.h"
-#include "M3508.h"
-#include "Remote.h"
+#include "dvc_dji_gm6020.h"
+#include "dvc_dji_m3508.h"
+#include "dvc_dr16.h"
 #include "Chassis.h"
 #include "Gimbal.h"
-#include "M2006.h"
+#include "dvc_dji_m2006.h"
 #include "IMU_Task.h"
-#include "judge.h"
-#include "SuperPower.h"
+#include "dvc_judge.h"
+#include "dvc_supercap.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

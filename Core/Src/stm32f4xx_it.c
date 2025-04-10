@@ -22,8 +22,8 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "Remote.h"
-#include "judge.h"
+#include "dvc_dr16.h"
+#include "dvc_judge.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
