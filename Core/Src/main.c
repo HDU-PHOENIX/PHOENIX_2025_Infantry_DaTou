@@ -40,13 +40,9 @@
 #include "Gimbal.h"
 #include "dvc_dji_m2006.h"
 #include "IMU_Task.h"
-<<<<<<< HEAD
 #include "dvc_judge.h"
 #include "dvc_supercap.h"
-=======
-#include "judge.h"
-#include "SuperCap.h"
->>>>>>> 2cda9d8ff13012d98e00b0e0391d0b19e4c9d34b
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

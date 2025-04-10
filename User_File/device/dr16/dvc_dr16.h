@@ -6,11 +6,8 @@
 #include "Chassis.h"
 #include "Gimbal.h"
 #include "Shoot.h"
-<<<<<<< HEAD:User_File/device/dr16/dvc_dr16.h
 #include "dvc_supercap.h"
-=======
-#include "SuperCap.h"
->>>>>>> 2cda9d8ff13012d98e00b0e0391d0b19e4c9d34b:Signal/Remote.h
+
 
 #define    KEY_PRESSED_OFFSET_W        ((uint16_t)0x01<<0)
 #define    KEY_PRESSED_OFFSET_S        ((uint16_t)0x01<<1)

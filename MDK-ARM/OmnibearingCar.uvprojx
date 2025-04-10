@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,_USE_MATH_DEFINES</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;..\User_File\algorithm\mahony;..\User_File\algorithm\pid;..\User_File\device\dr16;..\User_File\device\imu\bmi088;..\User_File\device\judge;..\User_File\device\minipc;..\User_File\device\motor\dji_gm6020;..\User_File\device\supercap;..\User_File\driver\can;..\User_File\driver\crc;..\User_File\driver\pwm;..\User_File\driver\spi;..\User_File\driver\uart;..\User_File\task\chassis;..\User_File\task\gimbal;..\User_File\task\imu;..\User_File\task\shoot;..\User_File\task\ui;..\User_File\device\imu\ist8310;..\User_File\device\motor\dji_m2006;..\User_File\device\motor\dji_m3508;..\User_File\task;..\User_File\device\minipc</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;..\User_File\algorithm\mahony;..\User_File\algorithm\pid;..\User_File\device\dr16;..\User_File\device\imu\bmi088;..\User_File\device\judge;..\User_File\device\minipc;..\User_File\device\supercap;..\User_File\driver\can;..\User_File\driver\crc;..\User_File\driver\spi;..\User_File\driver\uart;..\User_File\task\chassis;..\User_File\task\gimbal;..\User_File\task\imu;..\User_File\task\shoot;..\User_File\task\ui;..\User_File\device\motor\dji_gm6020;..\User_File\device\motor\dji_m2006;..\User_File\device\motor\dji_m3508;..\User_File\device\minipc;..\User_File\device\imu\ist8310;..\User_File\driver\pwm;..\User_File\task</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1732,289 +1732,6 @@
           </Files>
         </Group>
         <Group>
-<<<<<<< HEAD
-=======
-          <GroupName>Task</GroupName>
-          <Files>
-            <File>
-              <FileName>GimbalTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Task\GimbalTask.c</FilePath>
-            </File>
-            <File>
-              <FileName>GimbalTask.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Task\GimbalTask.h</FilePath>
-            </File>
-            <File>
-              <FileName>ChassisTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Task\ChassisTask.c</FilePath>
-            </File>
-            <File>
-              <FileName>ChassisTask.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Task\ChassisTask.h</FilePath>
-            </File>
-            <File>
-              <FileName>ShootTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Task\ShootTask.c</FilePath>
-            </File>
-            <File>
-              <FileName>ShootTask.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Task\ShootTask.h</FilePath>
-            </File>
-            <File>
-              <FileName>IMU_Task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Task\IMU_Task.c</FilePath>
-            </File>
-            <File>
-              <FileName>IMU_Task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Task\IMU_Task.h</FilePath>
-            </File>
-            <File>
-              <FileName>UITask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Task\UITask.c</FilePath>
-            </File>
-            <File>
-              <FileName>UITask.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Task\UITask.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Algorithm</GroupName>
-          <Files>
-            <File>
-              <FileName>PID.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\algorithm\PID.c</FilePath>
-            </File>
-            <File>
-              <FileName>PID.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\algorithm\PID.h</FilePath>
-            </File>
-            <File>
-              <FileName>MahonyAHRS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Algorithm\MahonyAHRS.c</FilePath>
-            </File>
-            <File>
-              <FileName>MahonyAHRS.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Algorithm\MahonyAHRS.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Signal</GroupName>
-          <Files>
-            <File>
-              <FileName>BSP_CAN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Signal\BSP_CAN.c</FilePath>
-            </File>
-            <File>
-              <FileName>BSP_CAN.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Signal\BSP_CAN.h</FilePath>
-            </File>
-            <File>
-              <FileName>Remote.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Signal\Remote.c</FilePath>
-            </File>
-            <File>
-              <FileName>Remote.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Signal\Remote.h</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_imu_pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Signal\bsp_imu_pwm.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_imu_pwm.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Signal\bsp_imu_pwm.h</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Signal\bsp_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Signal\bsp_spi.h</FilePath>
-            </File>
-            <File>
-              <FileName>VOFA_Uartx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Signal\VOFA_Uartx.c</FilePath>
-            </File>
-            <File>
-              <FileName>VOFA_Uartx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Signal\VOFA_Uartx.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Motor</GroupName>
-          <Files>
-            <File>
-              <FileName>M3508.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Motor\M3508.c</FilePath>
-            </File>
-            <File>
-              <FileName>M3508.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Motor\M3508.h</FilePath>
-            </File>
-            <File>
-              <FileName>GM6020.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Motor\GM6020.c</FilePath>
-            </File>
-            <File>
-              <FileName>GM6020.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Motor\GM6020.h</FilePath>
-            </File>
-            <File>
-              <FileName>M2006.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Motor\M2006.c</FilePath>
-            </File>
-            <File>
-              <FileName>M2006.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Motor\M2006.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Control</GroupName>
-          <Files>
-            <File>
-              <FileName>Chassis.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Control\Chassis.h</FilePath>
-            </File>
-            <File>
-              <FileName>Chassis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Control\Chassis.c</FilePath>
-            </File>
-            <File>
-              <FileName>Gimbal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Control\Gimbal.c</FilePath>
-            </File>
-            <File>
-              <FileName>Gimbal.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Control\Gimbal.h</FilePath>
-            </File>
-            <File>
-              <FileName>Shoot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Control\Shoot.c</FilePath>
-            </File>
-            <File>
-              <FileName>Shoot.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Control\Shoot.h</FilePath>
-            </File>
-            <File>
-              <FileName>Car_Mode.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Control\Car_Mode.h</FilePath>
-            </File>
-            <File>
-              <FileName>Computer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Control\Computer.c</FilePath>
-            </File>
-            <File>
-              <FileName>Computer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Control\Computer.h</FilePath>
-            </File>
-            <File>
-              <FileName>SuperCap.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Control\SuperCap.c</FilePath>
-            </File>
-            <File>
-              <FileName>SuperCap.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Control\SuperCap.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>IMU</GroupName>
-          <Files>
-            <File>
-              <FileName>BMI088driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\IMU\BMI088driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>BMI088driver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\IMU\BMI088driver.h</FilePath>
-            </File>
-            <File>
-              <FileName>BMI088Middleware.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\IMU\BMI088Middleware.c</FilePath>
-            </File>
-            <File>
-              <FileName>BMI088Middleware.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\IMU\BMI088Middleware.h</FilePath>
-            </File>
-            <File>
-              <FileName>BMI088reg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\IMU\BMI088reg.h</FilePath>
-            </File>
-            <File>
-              <FileName>ist8310driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\IMU\ist8310driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>ist8310driver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\IMU\ist8310driver.h</FilePath>
-            </File>
-            <File>
-              <FileName>ist8310driver_middleware.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\IMU\ist8310driver_middleware.c</FilePath>
-            </File>
-            <File>
-              <FileName>ist8310driver_middleware.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\IMU\ist8310driver_middleware.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
->>>>>>> 2cda9d8ff13012d98e00b0e0391d0b19e4c9d34b
           <GroupName>Application/User/USB_DEVICE/App</GroupName>
           <GroupOption>
             <CommonProperty>
@@ -2685,6 +2402,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Algorithm</GroupName>
+          <Files>
+            <File>
+              <FileName>alg_pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_File\algorithm\pid\alg_pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>alg_pid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User_File\algorithm\pid\alg_pid.h</FilePath>
+            </File>
+            <File>
+              <FileName>alg_mahony.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User_File\algorithm\mahony\alg_mahony.h</FilePath>
+            </File>
+            <File>
+              <FileName>alg_mahony.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_File\algorithm\mahony\alg_mahony.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Driver</GroupName>
           <Files>
             <File>
@@ -2708,19 +2450,14 @@
               <FilePath>..\User_File\driver\crc\dri_crc.h</FilePath>
             </File>
             <File>
-              <FileName>dri_pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User_File\driver\pwm\dri_pwm.c</FilePath>
-            </File>
-            <File>
-              <FileName>dri_pwm.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User_File\driver\pwm\dri_pwm.h</FilePath>
-            </File>
-            <File>
               <FileName>dri_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User_File\driver\spi\dri_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>dri_spi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User_File\driver\spi\dri_spi.h</FilePath>
             </File>
             <File>
               <FileName>dri_uart.c</FileName>
@@ -2732,36 +2469,41 @@
               <FileType>5</FileType>
               <FilePath>..\User_File\driver\uart\dri_uart.h</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Algorithm</GroupName>
-          <Files>
             <File>
-              <FileName>alg_mahony.c</FileName>
+              <FileName>dri_pwm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User_File\algorithm\mahony\alg_mahony.c</FilePath>
+              <FilePath>..\User_File\driver\pwm\dri_pwm.c</FilePath>
             </File>
             <File>
-              <FileName>alg_mahony.h</FileName>
+              <FileName>dri_pwm.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\User_File\algorithm\mahony\alg_mahony.h</FilePath>
-            </File>
-            <File>
-              <FileName>alg_pid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User_File\algorithm\pid\alg_pid.c</FilePath>
-            </File>
-            <File>
-              <FileName>alg_pid.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User_File\algorithm\pid\alg_pid.h</FilePath>
+              <FilePath>..\User_File\driver\pwm\dri_pwm.h</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Device</GroupName>
           <Files>
+            <File>
+              <FileName>dvc_judge.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_File\device\judge\dvc_judge.c</FilePath>
+            </File>
+            <File>
+              <FileName>dvc_judge.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User_File\device\judge\dvc_judge.h</FilePath>
+            </File>
+            <File>
+              <FileName>dvc_minipc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_File\device\minipc\dvc_minipc.c</FilePath>
+            </File>
+            <File>
+              <FileName>dvc_minipc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User_File\device\minipc\dvc_minipc.h</FilePath>
+            </File>
             <File>
               <FileName>BMI088driver.c</FileName>
               <FileType>1</FileType>
@@ -2808,21 +2550,6 @@
               <FilePath>..\User_File\device\imu\ist8310\ist8310driver_middleware.h</FilePath>
             </File>
             <File>
-              <FileName>dvc_judge.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User_File\device\judge\dvc_judge.c</FilePath>
-            </File>
-            <File>
-              <FileName>dvc_minipc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User_File\device\minipc\dvc_minipc.c</FilePath>
-            </File>
-            <File>
-              <FileName>dvc_minipc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User_File\device\minipc\dvc_minipc.h</FilePath>
-            </File>
-            <File>
               <FileName>dvc_dji_gm6020.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User_File\device\motor\dji_gm6020\dvc_dji_gm6020.c</FilePath>
@@ -2853,16 +2580,6 @@
               <FilePath>..\User_File\device\motor\dji_m3508\dvc_dji_m3508.c</FilePath>
             </File>
             <File>
-              <FileName>dvc_supercap.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User_File\device\supercap\dvc_supercap.c</FilePath>
-            </File>
-            <File>
-              <FileName>dvc_supercap.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User_File\device\supercap\dvc_supercap.h</FilePath>
-            </File>
-            <File>
               <FileName>dvc_dr16.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User_File\device\dr16\dvc_dr16.c</FilePath>
@@ -2872,21 +2589,21 @@
               <FileType>5</FileType>
               <FilePath>..\User_File\device\dr16\dvc_dr16.h</FilePath>
             </File>
+            <File>
+              <FileName>dvc_supercap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_File\device\supercap\dvc_supercap.c</FilePath>
+            </File>
+            <File>
+              <FileName>dvc_supercap.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User_File\device\supercap\dvc_supercap.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Task</GroupName>
           <Files>
-            <File>
-              <FileName>Chassis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User_File\task\chassis\Chassis.c</FilePath>
-            </File>
-            <File>
-              <FileName>Chassis.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User_File\task\chassis\Chassis.h</FilePath>
-            </File>
             <File>
               <FileName>ChassisTask.c</FileName>
               <FileType>1</FileType>
@@ -2896,6 +2613,16 @@
               <FileName>ChassisTask.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User_File\task\chassis\ChassisTask.h</FilePath>
+            </File>
+            <File>
+              <FileName>Chassis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_File\task\chassis\Chassis.c</FilePath>
+            </File>
+            <File>
+              <FileName>Chassis.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User_File\task\chassis\Chassis.h</FilePath>
             </File>
             <File>
               <FileName>Gimbal.c</FileName>
