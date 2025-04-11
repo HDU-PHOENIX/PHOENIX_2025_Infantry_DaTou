@@ -189,8 +189,7 @@ void INS_Task(void const *pvParameters)
     
     BMI088_read(bmi088_real_data.gyro, bmi088_real_data.accel, &bmi088_real_data.temp);
     imu_cali_slove(INS_gyro, INS_accel, INS_mag, &bmi088_real_data, &ist8310_real_data);
-    
-    PID_init(&imu_temp_pid,TEMPERATURE_PID_KP, TEMPERATURE_PID_KI, TEMPERATURE_PID_KD ,0, TEMPERATURE_PID_MAX_OUT, TEMPERATURE_PID_MAX_IOUT);
+    vPidInit(&imu_temp_pid,TEMPERATURE_PID_KP,TEMPERATURE_PID_KI,TEMPERATURE_PID_KD,0,0,0,0,0,0,0,TEMPERATURE_PID_MAX_IOUT,TEMPERATURE_PID_MAX_OUT);
     AHRS_init(INS_quat, INS_accel, INS_mag);
 
     //get the handle of task
@@ -407,7 +406,7 @@ static void imu_temp_control(float temp)
     static uint8_t temp_constant_time = 0;
     if (first_temperate)
     {
-        PID_Calc_Speed(&imu_temp_pid,temp,45.0f);
+        fPidCalc(&imu_temp_pid,temp,45.0f);
         if (imu_temp_pid.output < 0.0f)
         {
             imu_temp_pid.output = 0.0f;

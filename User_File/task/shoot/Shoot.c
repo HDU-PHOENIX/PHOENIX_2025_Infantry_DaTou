@@ -26,7 +26,7 @@ void Speed17mm_Control(void);
 /********************PID²¿·Ö********************/
 void Shoot_PID_Init_ALL(void);
 void Shoot_PID_Clean_ALL(void);
-void Shoot_PID_Calc(void);
+void Shoot_fPidCalc(void);
 
 
 /**
@@ -71,7 +71,7 @@ void Shoot_Reload_Choose(void)
  */
 void Shoot_Move(void)
 {
-    Shoot_PID_Calc();
+    Shoot_fPidCalc();
 
     Set_M3508_Shoot_Voltage(&hcan2,M3508_Shoot);
     Set_M2006_Motor_Voltage(&hcan2,M2006_Rammer);
@@ -149,11 +149,11 @@ void Shoot_Remote_Control(void)
  * @author HWX
  * @date 2024/10/20
  */
-void Shoot_PID_Calc(void)
+void Shoot_fPidCalc(void)
 {
-    PID_Calc_Speed(&(M3508_Shoot[0].PID),M3508_Shoot[0].Set_Speed,M3508_Shoot[0].rotor_speed);
-    PID_Calc_Speed(&(M3508_Shoot[1].PID),M3508_Shoot[1].Set_Speed,M3508_Shoot[1].rotor_speed);
-    PID_Calc_Speed(&(M2006_Rammer.Speed_PID),M2006_Rammer.Set_Speed,M2006_Rammer.rotor_speed);
+    fPidCalc(&(M3508_Shoot[0].PID),M3508_Shoot[0].Set_Speed,M3508_Shoot[0].rotor_speed);
+    fPidCalc(&(M3508_Shoot[1].PID),M3508_Shoot[1].Set_Speed,M3508_Shoot[1].rotor_speed);
+    fPidCalc(&(M2006_Rammer.Speed_PID),M2006_Rammer.Set_Speed,M2006_Rammer.rotor_speed);
 }
 
 /**
@@ -164,9 +164,9 @@ void Shoot_PID_Calc(void)
  */
 void Shoot_PID_Init_ALL(void)
 {
-    PID_init(&(M3508_Shoot[0].PID),75,0,80,0,16380,16380);//40,0,0//45,5,0//10,0.8,2//75,0,80
-    PID_init(&(M3508_Shoot[1].PID),75,0,80,0,16380,16380);//40,0,0//45,5,0/10,0.8,2//68,0,87
-    PID_init(&(M2006_Rammer.Speed_PID),10,0.02,0,0,1000,16380);//10,4,0//8,0.16,4.15
+    vPidInit(&(M3508_Shoot[0].PID),75,0,80,0,0,0,0,0,0,0,16380,16380);//40,0,0//45,5,0//10,0.8,2//75,0,80
+    vPidInit(&(M3508_Shoot[1].PID),75,0,80,0,0,0,0,0,0,0,16380,16380);//40,0,0//45,5,0/10,0.8,2//68,0,87
+    vPidInit(&(M2006_Rammer.Speed_PID),10,0.02,0,0,0,0,0,0,0,0,1000,16380);//10,4,0//8,0.16,4.15
 }
 
 /**
@@ -177,10 +177,10 @@ void Shoot_PID_Init_ALL(void)
  */
 void Shoot_PID_Clean_ALL(void)
 {
-    PID_init(&(M3508_Shoot[0].PID),0,0,0,0,0,0);
-    PID_init(&(M3508_Shoot[1].PID),0,0,0,0,0,0);
-    PID_init(&(M2006_Rammer.Angle_PID),0,0,0,0,0,0);
-    PID_init(&(M2006_Rammer.Speed_PID),0,0,0,0,0,0);
+    vPidInit(&(M3508_Shoot[0].PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(M3508_Shoot[1].PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(M2006_Rammer.Angle_PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(M2006_Rammer.Speed_PID),0,0,0,0,0,0,0,0,0,0,0,0);
 }
 
 /**
@@ -191,7 +191,7 @@ void Shoot_PID_Clean_ALL(void)
  */
 void Shoot_Stop(void)
 {
-    Shoot_PID_Calc();
+    Shoot_fPidCalc();
     Set_M3508_Shoot_Voltage(&hcan2,M3508_Shoot);
     Set_M2006_Motor_Voltage(&hcan2,M2006_Rammer);
 }

@@ -43,7 +43,7 @@ void Chassis_Remote_Mode(void);
 void Chassis_PID_Init_All(void);
 void Chassis_PID_Clean_All(void);
 void Chassis_Stop(void);
-void Chassis_PID_Calc(void);
+void Chassis_fPidCalc(void);
 float Find_Angle(void);
 void  Chassis_KeyBoard_Control(void);
 

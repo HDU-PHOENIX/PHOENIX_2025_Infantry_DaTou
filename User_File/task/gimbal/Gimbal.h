@@ -26,7 +26,7 @@ void Gimbal_KeyBorad_Control(void);
 void Gimbal_Init(void);
 void Gimbal_Move(void);
 void Gimbal_Stop(void);
-void Gimbal_PID_Calc(void);
+void Gimbal_fPidCalc(void);
 void Gimbal_PID_Init_All(void);
 void Gimbal_PID_Clean_All(void);
 void Gimbal_FastTurn(void);

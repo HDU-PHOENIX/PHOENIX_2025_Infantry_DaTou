@@ -29,7 +29,7 @@ void  Chassis_KeyBoard_Control(void);
 /********************PID部分********************/
 void Chassis_PID_Init_All(void);
 void Chassis_PID_Clean_All(void);
-void Chassis_PID_Calc(void);
+void Chassis_fPidCalc(void);
 
 /********************输出控制部分********************/
 void Chassis_Move(void);
@@ -89,7 +89,7 @@ void Chassis_Move(void)
 
     Chassis_Motor_Solution();
 
-	Chassis_PID_Calc();
+	Chassis_fPidCalc();
 
     Set_M3508_Chassis_Voltage(&hcan1,M3508_Chassis);
 }
@@ -102,7 +102,7 @@ void Chassis_Move(void)
  */
 void Chassis_Stop(void)
 {
-    Chassis_PID_Calc();
+    Chassis_fPidCalc();
     Set_M3508_Chassis_Voltage(&hcan1,M3508_Chassis);
 }
 
@@ -180,7 +180,7 @@ void Chassis_Remote_Control(void)
     case FOLLOW:
         Temp1_Chassis_Speed.vx = (float)RC.ch3/132;
         Temp1_Chassis_Speed.vy = (float)RC.ch2/132;
-		PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle(),8192,0);
+		fPidCalc(&Follow_PID,0.0f,Find_Min_Angle());
         Temp1_Chassis_Speed.vw = Follow_PID.output*0.0007666f;
     default:
         break;
@@ -193,12 +193,12 @@ void Chassis_Remote_Control(void)
  * @author HWX
  * @date 2024/10/20
  */
-void Chassis_PID_Calc(void)
+void Chassis_fPidCalc(void)
 {
-    PID_Calc_Speed(&M3508_Chassis[0].PID,M3508_Chassis[0].Set_Speed,M3508_Chassis[0].rotor_speed);
-    PID_Calc_Speed(&M3508_Chassis[1].PID,M3508_Chassis[1].Set_Speed,M3508_Chassis[1].rotor_speed);
-    PID_Calc_Speed(&M3508_Chassis[2].PID,M3508_Chassis[2].Set_Speed,M3508_Chassis[2].rotor_speed);
-    PID_Calc_Speed(&M3508_Chassis[3].PID,M3508_Chassis[3].Set_Speed,M3508_Chassis[3].rotor_speed);
+    fPidCalc(&M3508_Chassis[0].PID,M3508_Chassis[0].Set_Speed,M3508_Chassis[0].rotor_speed);
+    fPidCalc(&M3508_Chassis[1].PID,M3508_Chassis[1].Set_Speed,M3508_Chassis[1].rotor_speed);
+    fPidCalc(&M3508_Chassis[2].PID,M3508_Chassis[2].Set_Speed,M3508_Chassis[2].rotor_speed);
+    fPidCalc(&M3508_Chassis[3].PID,M3508_Chassis[3].Set_Speed,M3508_Chassis[3].rotor_speed);
 }
 
 /**
@@ -209,11 +209,11 @@ void Chassis_PID_Calc(void)
  */
 void Chassis_PID_Init_All(void)
 {
-    PID_init(&Follow_PID,5,0,200,0,0,16308);
-    PID_init(&(M3508_Chassis[0].PID),10,1,0,0,2000,8192);
-    PID_init(&(M3508_Chassis[1].PID),10,1,0,0,2000,8192);
-    PID_init(&(M3508_Chassis[2].PID),10,1,0,0,2000,8192);
-    PID_init(&(M3508_Chassis[3].PID),10,1,0,0,2000,8192);
+    vPidInit(&Follow_PID,5,0,200,0,0,0,0,0,0,0,0,16308);
+    vPidInit(&(M3508_Chassis[0].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
+    vPidInit(&(M3508_Chassis[1].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
+    vPidInit(&(M3508_Chassis[2].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
+    vPidInit(&(M3508_Chassis[3].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
 }
 
 /**
@@ -224,11 +224,11 @@ void Chassis_PID_Init_All(void)
  */
 void Chassis_PID_Clean_All(void)
 {
-    PID_init(&Follow_PID,0,0,0,0,0,0);
-    PID_init(&(M3508_Chassis[0].PID),0,0,0,0,0,0);
-    PID_init(&(M3508_Chassis[1].PID),0,0,0,0,0,0);
-    PID_init(&(M3508_Chassis[2].PID),0,0,0,0,0,0);
-    PID_init(&(M3508_Chassis[3].PID),0,0,0,0,0,0);
+    vPidInit(&Follow_PID,0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(M3508_Chassis[0].PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(M3508_Chassis[1].PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(M3508_Chassis[2].PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(M3508_Chassis[3].PID),0,0,0,0,0,0,0,0,0,0,0,0);
 }
 
 /**
@@ -284,7 +284,7 @@ void  Chassis_KeyBoard_Control(void)
             Temp1_Chassis_Speed.vy = 2.5f;
         if(IF_KEY_PRESSED_A == 0 && IF_KEY_PRESSED_D == 0)
             Temp1_Chassis_Speed.vy = 0.0f;
-		PID_Calc_Angle(&Follow_PID,0.0f,Find_Min_Angle(),8192,0);
+		fPidCalc(&Follow_PID,0.0f,Find_Min_Angle());
         Temp1_Chassis_Speed.vw = Follow_PID.output*0.0007666f;
     default:
         break;

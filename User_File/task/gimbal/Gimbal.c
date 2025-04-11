@@ -28,7 +28,7 @@ void Gimbal_Stop(void);
 /********************PID¿ØÖÆ²¿·Ö********************/
 void Gimbal_PID_Init_All(void);
 void Gimbal_PID_Clean_All(void);
-void Gimbal_PID_Calc(void);
+void Gimbal_fPidCalc(void);
 
 /**
  * @file Gimbal.c
@@ -112,7 +112,7 @@ void Gimbal_Move(void)
 {
     Gimbal_Calculate();
 
-    Gimbal_PID_Calc();
+    Gimbal_fPidCalc();
 
     Set_GM6020_Gimbal_Voltage(&hcan1,GM6020_Yaw,GM6020_Pitch);
 }
@@ -125,7 +125,7 @@ void Gimbal_Move(void)
  */
 void Gimbal_Stop(void)
 {
-    Gimbal_PID_Calc();
+    Gimbal_fPidCalc();
     Set_GM6020_Gimbal_Voltage(&hcan1,GM6020_Yaw,GM6020_Pitch);
 }
 
@@ -147,16 +147,16 @@ void Gimbal_Remote_Control(void)
  * @author HWX
  * @date 2024/10/20
  */
-void Gimbal_PID_Calc(void)
+void Gimbal_fPidCalc(void)
 {
     //Yaw
-    PID_Calc_Angle(&GM6020_Yaw.Angle_PID,Set_Yaw,IMU_angle[0],360,0);
+    fPidCalc(&GM6020_Yaw.Angle_PID,Set_Yaw,IMU_angle[0]);
     GM6020_Yaw.Set_Speed = GM6020_Yaw.Angle_PID.output;
-    PID_Calc_Speed(&(GM6020_Yaw.Speed_PID),GM6020_Yaw.Set_Speed,GM6020_Yaw.rotor_speed);
+    fPidCalc(&(GM6020_Yaw.Speed_PID),GM6020_Yaw.Set_Speed,GM6020_Yaw.rotor_speed);
     //Pitch
-    PID_Calc_Angle(&GM6020_Pitch.Angle_PID,Set_Pitch,IMU_angle[2],360,0);
+    fPidCalc(&GM6020_Pitch.Angle_PID,Set_Pitch,IMU_angle[2]);
     GM6020_Pitch.Set_Speed = -GM6020_Pitch.Angle_PID.output;
-    PID_Calc_Speed(&GM6020_Pitch.Speed_PID,GM6020_Pitch.Set_Speed,GM6020_Pitch.rotor_speed);
+    fPidCalc(&GM6020_Pitch.Speed_PID,GM6020_Pitch.Set_Speed,GM6020_Pitch.rotor_speed);
 }
 
 /**
@@ -169,14 +169,14 @@ void Gimbal_PID_Init_All(void)
 {
 	Gimbal_Init();
 
-	PID_init(&GM6020_Yaw.Angle_PID,60,0,1800,0,16380,25000);//60,0,2500//80,0,1600//60,0,1800//10,0,200//20,0,200//25,0,700
+	vPidInit(&GM6020_Yaw.Angle_PID,60,0,1800,0,0,360,0,0,0,0,16380,25000);//60,0,2500//80,0,1600//60,0,1800//10,0,200//20,0,200//25,0,700
 	//110,0.05,830//110,0.045,800
-    PID_init(&(GM6020_Yaw.Speed_PID),180,1.3,0,0,16380,25000);//200,1.3.0//195,1.3,0//142,2,0//185,1.3,0
+    vPidInit(&(GM6020_Yaw.Speed_PID),180,1.3,0,0,0,0,0,0,0,0,16380,25000);//200,1.3.0//195,1.3,0//142,2,0//185,1.3,0
 	//80,0.45,150//80,0.45,150
 	
-    PID_init(&(GM6020_Pitch.Angle_PID),30,0,1000,0,16500,25000);//30,0,1000//35,0,700
+    vPidInit(&(GM6020_Pitch.Angle_PID),30,0,1000,0,0,360,0,0,0,0,16500,25000);//30,0,1000//35,0,700
     //35,0,1000//30,0,1000
-    PID_init(&(GM6020_Pitch.Speed_PID),110,1,0,0,16500,25000);//130,1,0//155,2.8,0
+    vPidInit(&(GM6020_Pitch.Speed_PID),110,1,0,0,0,0,0,0,0,0,16500,25000);//130,1,0//155,2.8,0
     //120,1,0//130,1,0
 }
 
@@ -188,10 +188,10 @@ void Gimbal_PID_Init_All(void)
  */
 void Gimbal_PID_Clean_All(void)
 {
-    PID_init(&(GM6020_Pitch.Angle_PID),0,0,0,0,0,0);
-    PID_init(&(GM6020_Pitch.Speed_PID),0,0,0,0,0,0);
-    PID_init(&(GM6020_Yaw.Angle_PID),0,0,0,0,0,0);
-    PID_init(&(GM6020_Yaw.Speed_PID),0,0,0,0,0,0);
+    vPidInit(&(GM6020_Pitch.Angle_PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(GM6020_Pitch.Speed_PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(GM6020_Yaw.Angle_PID),0,0,0,0,0,0,0,0,0,0,0,0);
+    vPidInit(&(GM6020_Yaw.Speed_PID),0,0,0,0,0,0,0,0,0,0,0,0);
 }
 
 bool fastturn = false, Q_judge = false;
