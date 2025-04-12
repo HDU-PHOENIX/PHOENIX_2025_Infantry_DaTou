@@ -40,7 +40,7 @@ PHOENIX25赛季上供弹式全向步兵机器人电控代码
 点击 Download（F8）按钮，将程序烧录到C板。
 ## 嵌入式架构
 ### 软件架构
-![](Project_structure.png)
+![](pic/ProjectStructure.png)
 ### 硬件架构
 + 电源线
     + Chassis <u>四个底盘电机（M3508*4），超电</u>
@@ -57,6 +57,8 @@ PHOENIX25赛季上供弹式全向步兵机器人电控代码
 + 裁判系统线材 <u>详见裁判系统手册</u>
     + 航空线
     + GH线材
+## 键鼠操作指南
+![](pic/KeyboardControl.png)
 ## 未来优化方向
 - [ ] 尝试新的限功率模型
 - [x] 斜坡函数步长调整
