@@ -8,7 +8,7 @@ extern Chassis_Speed_t Temp1_Chassis_Speed,Temp2_Chassis_Speed;
 extern Moto_M3508_t M3508_Chassis[4];
 extern Moto_M2006_t M2006_Rammer;
 
-#define TX_BUFFER_SIZE 32
+#define TX_BUFFER_SIZE 256
 uint8_t txBuffer[TX_BUFFER_SIZE];  // 发送缓冲区
 volatile uint16_t txLength = 0;    // 当前缓冲区数据长度
 
@@ -35,10 +35,8 @@ int fputc(int ch, FILE *f)
 }
 
 void VOFA_Tx(void) {
-    printf("%d,%d,%d,%d,%f\r\n",
-           M3508_Chassis[0].torque_current,
-           M3508_Chassis[1].torque_current,
-           M3508_Chassis[2].torque_current,
-           M3508_Chassis[3].torque_current,
-           Temp2_Chassis_Speed.vx);
+    printf("%f,%f,%f\r\n",
+           GM6020_Yaw.Angle_PID.p_out,
+	       GM6020_Yaw.Angle_PID.d_out,
+	       GM6020_Yaw.Angle_PID.f_out);
 }
