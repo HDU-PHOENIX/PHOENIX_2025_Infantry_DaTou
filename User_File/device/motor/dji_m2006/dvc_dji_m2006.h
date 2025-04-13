@@ -1,13 +1,9 @@
 #ifndef __DVC_DJI_M2006_H__
 #define __DVC_DJI_M2006_H__
 
-#include "main.h"
-#include "can.h"
-#include "stm32f4xx_hal_can.h"
-#include "alg_pid.h"
-#include "stdint.h"
-
 #define MOTOR_2006_CIRCLE_ANGLE 36*8192
+
+extern Moto_M2006_t M2006_Rammer;
 
 typedef struct
 {

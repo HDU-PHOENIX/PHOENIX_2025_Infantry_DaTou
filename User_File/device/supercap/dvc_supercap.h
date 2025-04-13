@@ -1,13 +1,12 @@
 #ifndef __SUPERPOWER_H__
 #define __SUPERPOWER_H__
 
-#include "main.h"
-#include "can.h"
-#include "dvc_judge.h"
-#include "string.h"
-#include "dvc_dr16.h"
-#include "Car_Mode.h"
-
+extern SuperCap_Tx_Message_t SuperCap_Tx_Message;
+extern SuperCap_Rx_Message_t SuperCap_Rx_Message;
+extern RC_t RC;
+extern SuperCap_Mode_t SuperCap_Mode;
+extern SuperCap_Switch_t SuperCap_Switch;
+extern Car_Mode_t Car_Mode;
 
 #define    SUPERPOWER_SWITCH_OFFSET_ISON      ((uint16_t)0x01<<0)
 #define    SUPERPOWER_SWITCH_OFFSET_ALIVE     ((uint16_t)0x01<<1)

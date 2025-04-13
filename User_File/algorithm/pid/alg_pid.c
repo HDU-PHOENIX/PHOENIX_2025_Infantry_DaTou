@@ -1,7 +1,7 @@
 /**
  * @file alg_pid.c
- * @author He WenXuan(hewenxuan040923@gmail.com)
  * @brief PIDÀ„∑®
+ * @author He WenXuan(hewenxuan040923@gmail.com)
  * @date 2025-4-11
  * @version 1.0
  * @copyright HDU-PHOENIX (c) 2025

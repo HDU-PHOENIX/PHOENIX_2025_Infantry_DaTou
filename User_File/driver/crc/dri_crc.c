@@ -1,14 +1,14 @@
 #include "dri_crc.h"
 
-//֡ͷcrc8У�飺(����֡ͷ����������frame_header[]����)
+//甯уごcrc8鏍￠敓浠嬶細(閿熸枻鎷烽敓鏂ゆ嫹甯уご閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷穎rame_header[]閿熸枻鎷烽敓鏂ゆ嫹)
 unsigned char frame_header[3];//4-Byte
 unsigned int frame_crc_dwLength = 3;//stream length
 
-//�Ƚ������ݵ�����frame_header[3];//4-Byte
-//Ȼ�����Verify_CRC8_Check_Sum()������TRUE/FAULSE
+//閿熼ズ鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸嵎纰夋嫹閿熸枻鎷烽敓鏂ゆ嫹frame_header[3];//4-Byte
+//鐒堕敓鏂ゆ嫹閿熸枻鎷烽敓绲峞rify_CRC8_Check_Sum()閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷稵RUE/FAULSE
 
-/************************************֡ͷCRC8У��**************************************************************/
-//crc8 generator polynomial:G(x)=x8+x5+x4+1//���ɶ���ʽ
+/************************************甯уごCRC8鏍￠敓鏂ゆ嫹**************************************************************/
+//crc8 generator polynomial:G(x)=x8+x5+x4+1//閿熸枻鎷烽敓缂磋鎷烽敓鏂ゆ嫹寮�
 const unsigned char CRC8_INIT = 0xff;
 const unsigned char CRC8_TAB[256] =
 {
@@ -39,10 +39,10 @@ unsigned char Get_CRC8_Check_Sum(unsigned char *pchMessage,unsigned int dwLength
     unsigned char ucIndex;
     while (dwLength--)//Stream length
     {
-        ucIndex = ucCRC8^(*pchMessage++);//^λ����:���
+        ucIndex = ucCRC8^(*pchMessage++);//^浣嶉敓鏂ゆ嫹閿熸枻鎷�:閿熸枻鎷烽敓锟�
         ucCRC8 = CRC8_TAB[ucIndex];
     }
-    return(ucCRC8);//���
+    return(ucCRC8);//閿熸枻鎷烽敓锟�
 }
 
 /*
@@ -74,7 +74,7 @@ void Append_CRC8_Check_Sum(unsigned char *pchMessage, unsigned int dwLength)
 }
 
 
-/************************************����βCRC16У��**************************************************************/
+/************************************閿熸枻鎷烽敓鏂ゆ嫹灏綜RC16鏍￠敓鏂ゆ嫹**************************************************************/
 uint16_t CRC_INIT = 0xffff;
 const uint16_t wCRC_Table[256] =
 {

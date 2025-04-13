@@ -1,16 +1,24 @@
+/**
+ * @file dvc_dji_gm6020.c
+ * @brief djigm6020电机控制函数
+ * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @date 2025-4-13
+ * @version 1.0
+ * @copyright HDU-PHOENIX (c) 2025
+ */
 #include "dvc_dji_gm6020.h"
 
-extern Moto_GM6020_t GM6020_Yaw,GM6020_Pitch;
+#include "main.h"
+#include "can.h"
+#include "stm32f4xx.h"
+#include "alg_pid.h"
 HAL_StatusTypeDef can_1;
 HAL_StatusTypeDef can_2;
 
 /**
- * @file GM6020.c
  * @brief GM6020接受反馈报文函数
  * @param StdId 电机ID
  * @param rx_data CAN通道收到的数据
- * @author HWX
- * @date 2024/10/20
  */
 void Get_GM6020_Motor_Message(uint32_t StdId,uint8_t rx_data[8])
 {
@@ -36,13 +44,10 @@ void Get_GM6020_Motor_Message(uint32_t StdId,uint8_t rx_data[8])
 }
 
 /**
- * @file GM6020.c
  * @brief 发送电压控制报文
  * @param hcan CAN通道
  * @param GM6020_Pitch Pitch轴电机
  * @param GM6020_Yaw Yaw轴电机
- * @author HWX
- * @date 2024/10/20
  */
 void Set_GM6020_Gimbal_Voltage(CAN_HandleTypeDef* hcan,Moto_GM6020_t GM6020_Yaw,Moto_GM6020_t GM6020_Pitch)
 {

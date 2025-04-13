@@ -1,10 +1,24 @@
+/**
+ * @file dri_can.c
+ * @brief CAN通信接口函数
+ * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @date 2025-4-13
+ * @version 1.0
+ * @copyright HDU-PHOENIX (c) 2025
+ */
+
 #include "dri_can.h"
 
+#include "main.h"
+#include "can.h"
+#include "stm32f4xx.h"
+#include "dvc_dji_gm6020.h"
+#include "dvc_dji_m3508.h"
+#include "dvc_dji_m2006.h"
+#include "dvc_supercap.h"
+
 /**
- * @file BSP_Can.c
- * @brief 初始化筛选器（这里显码和掩码都是0x0000）
- * @author HWX
- * @date 2024/10/20
+ * @brief 过滤器初始化（这里显码和掩码都是0x0000）
  */
 void CAN_Filter_Init(void)
 {
@@ -31,7 +45,7 @@ void CAN_Filter_Init(void)
     can2_filter_st.FilterScale = CAN_FILTERSCALE_32BIT;
     can2_filter_st.FilterBank = 14;
     can2_filter_st.SlaveStartFilterBank = 14;
-	//使能CAN通道
+
     if (HAL_CAN_ConfigFilter(&hcan1, &can1_filter_st) != HAL_OK)// 配置 CAN1 过滤器
     {
         Error_Handler();  // 处理错误
@@ -59,11 +73,9 @@ void CAN_Filter_Init(void)
     }}
 
 /**
- * @file BSP_Can.c
  * @brief CAN接受中断函数
  * @param hcan CAN通道
- * @author HWX
- * @date 2024/10/20
+ * @note FIFO0仅接收CAN1的消息
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
@@ -86,11 +98,9 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 }
 
 /**
- * @file BSP_Can.c
  * @brief CAN接受中断函数
  * @param hcan CAN通道
- * @author HWX
- * @date 2024/10/20
+ * @note FIFO1仅接收CAN2的消息
  */
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {

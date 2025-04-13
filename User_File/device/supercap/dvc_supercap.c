@@ -1,20 +1,23 @@
+/**
+ * @file dvc_supercap.c
+ * @brief 25赛季超电协议以及超电控制
+ * 
+ * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @date 2025-4-13
+ * @version 1.0
+ * @copyright HDU-PHOENIX (c) 2025
+ */
 #include "dvc_supercap.h"
 
-/*
-不同的超电有不同的协议，我写的这个仅供参考
-*/
-
-extern SuperCap_Tx_Message_t SuperCap_Tx_Message;
-extern SuperCap_Rx_Message_t SuperCap_Rx_Message;
-extern RC_t RC;
-extern SuperCap_Mode_t SuperCap_Mode;
-extern SuperCap_Switch_t SuperCap_Switch;
-extern Car_Mode_t Car_Mode;
+#include "main.h"
+#include "can.h"
+#include "dvc_judge.h"
+#include "string.h"
+#include "dvc_dr16.h"
+#include "Car_Mode.h"
 
 /**
  * @brief 超电初始化函数
- * @author HWX
- * @date 2025/3/1
  */
 void SuperCap_Init(void)
 {
@@ -24,8 +27,6 @@ void SuperCap_Init(void)
 
 /**
  * @brief 超电数据处理并发送函数
- * @author HWX
- * @date 2025/3/1
  */
 void SuperCap_Tx(void)
 {
@@ -50,8 +51,6 @@ void SuperCap_Tx(void)
 /**
  * @brief 超电接收数据处理
  * @param rx_data 接收到的原始数据
- * @author HWX
- * @date 2025/3/1
  */
 void SuperCap_Rx(uint8_t rx_data[8])
 {

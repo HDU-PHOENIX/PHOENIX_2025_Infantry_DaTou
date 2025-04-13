@@ -1,12 +1,20 @@
+/**
+ * @file dvc_dr16.c
+ * @brief 大疆遥控器数据处理
+ * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @date 2025-4-13
+ * @version 1.0
+ * @copyright HDU-PHOENIX (c) 2025
+ */
 #include "dvc_dr16.h"
 
+#include "main.h"
+#include "usart.h"
+#include "Chassis.h"
+#include "Gimbal.h"
+#include "Shoot.h"
+#include "dvc_supercap.h"
 
-extern RC_t RC;
-extern uint8_t RC_Data[18];
-extern Car_Mode_t Car_Mode;
-extern Computer_Tx_Message_t Computer_Tx_Message;
-extern float ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
-extern SuperCap_Switch_t SuperCap_Switch;
 
 /* 获取遥控器摇杆偏移量
 	根据遥控器文档：
@@ -22,10 +30,7 @@ extern SuperCap_Switch_t SuperCap_Switch;
                         下  -660  */
 
 /**
- * @file Remote.c
  * @brief 处理遥控器数据
- * @author HWX
- * @date 2024/10/20
  */
 void RC_Processing_Data(void)
 {
@@ -54,7 +59,9 @@ void RC_Processing_Data(void)
 			memset(&RC,0,sizeof(RC));
 	}
 }
-
+/**
+ * @brief 车辆状态初始化
+ */
 void Car_Init(void)
 {
 	Car_Mode.State = Car_Stop;
@@ -64,10 +71,7 @@ void Car_Init(void)
 
 
 /**
- * @file Remote.c
  * @brief 选择遥控模式
- * @author HWX
- * @date 2024/10/20
  */
 static Car_Action_t Last_Action=NORMAL;
 bool F_judge=false;

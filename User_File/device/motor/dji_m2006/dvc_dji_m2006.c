@@ -1,7 +1,23 @@
+/**
+ * @file dvc_dji_m2006.c
+ * @brief dji_m2006电机控制函数
+ * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @date 2025-4-13
+ * @version 1.0
+ * @copyright HDU-PHOENIX (c) 2025
+ */
 #include "dvc_dji_m2006.h"
 
-extern Moto_M2006_t M2006_Rammer;
-
+#include "main.h"
+#include "can.h"
+#include "stm32f4xx_hal_can.h"
+#include "alg_pid.h"
+#include "stdint.h"
+/**
+ * @brief 取绝对值
+ * @param x 目标数据
+ * @return 取绝对值后的数据
+ */
 int ABS(int x)
 {
 	if(x<0)
@@ -11,12 +27,9 @@ int ABS(int x)
 }
 
 /**
- * @file M3508.c
  * @brief M3508接受反馈报文函数
  * @param StdId 电机ID
  * @param rx_data CAN通道收到的数据
- * @author HWX
- * @date 2024/10/20
  */
 void Get_M2006_Motor_Message(uint32_t StdId,uint8_t rx_data[8])
 {
@@ -36,12 +49,9 @@ void Get_M2006_Motor_Message(uint32_t StdId,uint8_t rx_data[8])
 }
 
 /**
- * @file dvc_dji_m2006.h.c
- * @brief dvc_dji_m2006.h发送电流报文控制函数
+ * @brief 发送电流报文控制函数
  * @param hcan CAN通道
- * @param dvc_dji_m2006.h_Chassis 底盘电机
- * @author HWX
- * @date 2024/10/20
+ * @param M2006_Rammer 拨弹盘电机
  */
 void Set_M2006_Motor_Voltage(CAN_HandleTypeDef* hcan,Moto_M2006_t M2006_Rammer)
 {
@@ -59,7 +69,10 @@ void Set_M2006_Motor_Voltage(CAN_HandleTypeDef* hcan,Moto_M2006_t M2006_Rammer)
     HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
 }
 
-
+/**
+ * @brief 获取2006旋转累计角度
+ * @param p 已经旋转的角度
+ */
 void Get_Total_Angle(Moto_M2006_t *p)
 {
     int res1=0, res2=0, delta=0;

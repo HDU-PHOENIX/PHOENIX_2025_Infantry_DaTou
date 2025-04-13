@@ -1,20 +1,29 @@
+/**
+ * @file dvc_minipc.c
+ * @brief 小电脑通信相关函数
+ * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @date 2025-4-13
+ * @version 1.0
+ * @copyright HDU-PHOENIX (c) 2025
+ */
+
 #include "dvc_minipc.h"
+
+#include "main.h"
+#include "usb_device.h"
+#include "dvc_dji_gm6020.h"
+#include "usbd_cdc_if.h"
+#include "cmsis_os.h"
+#include "Gimbal.h"
 
 uint8_t Rx_data[32],Tx_data[32];
 uint32_t len;
-
-extern Computer_Rx_Message_t Computer_Rx_Message;
-extern Computer_Tx_Message_t Computer_Tx_Message;
-extern float IMU_angle[3];
 uint16_t Task_Time=0;
 float Task_Pitch=0.0f,Task_Yaw=0.0f;
 uint8_t Message_Count=1;
 
 /**
- * @file Computer.c
  * @brief 小电脑通信初始化
- * @author HWX
- * @date 2024/11/2
  */
 void Computer_Init(void)
 {
@@ -26,10 +35,7 @@ void Computer_Init(void)
 
 
 /**
- * @file Computer.c
  * @brief 小电脑通信初发送处理
- * @author HWX
- * @date 2024/11/2
  */
 void Computer_Tx(void)
 {

@@ -1,14 +1,23 @@
+/**
+ * @file dvc_dji_m3508.c
+ * @brief dji_m3508电机控制函数
+ * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @date 2025-4-13
+ * @version 1.0
+ * @copyright HDU-PHOENIX (c) 2025
+ */
 #include "dvc_dji_m3508.h"
 
-extern Moto_M3508_t M3508_Chassis[4],M3508_Shoot[2];
-
+#include "main.h"
+#include "can.h"
+#include "stm32f4xx.h"
+#include "alg_pid.h"
+#include "stdint.h"
+#include "stm32f4xx_hal_can.h"
 /**
- * @file M3508.c
  * @brief 底盘M3508接受反馈报文函数
  * @param StdId 电机ID
  * @param rx_data CAN通道收到的数据
- * @author HWX
- * @date 2024/10/20
  */
 void Get_M3508_Chassis_Message(uint32_t StdId,uint8_t rx_data[8])
 {
@@ -50,12 +59,9 @@ void Get_M3508_Chassis_Message(uint32_t StdId,uint8_t rx_data[8])
 }
 
 /**
- * @file M3508.c
  * @brief 底盘M3508发送电流报文控制函数
  * @param hcan CAN通道
  * @param M3508_Chassis 底盘电机
- * @author HWX
- * @date 2024/10/20
  */
 void Set_M3508_Chassis_Voltage(CAN_HandleTypeDef* hcan,Moto_M3508_t M3508_Chassis[4])
 {
@@ -83,12 +89,9 @@ void Set_M3508_Chassis_Voltage(CAN_HandleTypeDef* hcan,Moto_M3508_t M3508_Chassi
 }
 
 /**
- * @file M3508.c
  * @brief 射击M3508接受反馈报文函数
  * @param StdId 电机ID
  * @param rx_data CAN通道收到的数据
- * @author HWX
- * @date 2024/10/20
  */
 void Get_M3508_Shoot_Message(uint32_t StdId,uint8_t rx_data[8])
 {
@@ -115,12 +118,9 @@ void Get_M3508_Shoot_Message(uint32_t StdId,uint8_t rx_data[8])
 
 
 /**
- * @file M3508.c
  * @brief 射击M3508发送电流报文控制函数
  * @param hcan CAN通道
  * @param M3508_Shoot 射击电机
- * @author HWX
- * @date 2024/10/20
  */
 void Set_M3508_Shoot_Voltage(CAN_HandleTypeDef* hcan,Moto_M3508_t M3508_Shoot[2])
 {
