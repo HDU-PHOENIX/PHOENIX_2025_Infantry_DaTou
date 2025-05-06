@@ -3,23 +3,23 @@
 
 typedef enum
 {
-	Car_Stop     = 0x00,//Õû³µÍ£Ö¹
-	Car_Remote   = 0x01,//Ò£¿ØÆ÷¿ØÖÆ
-	Car_Keyboard = 0x02//¼üÅÌ¿ØÖÆ
+	Car_Stop     = 0x00,//æ•´è½¦åœæ­¢
+	Car_Remote   = 0x01,//é¥æ§å™¨æ§åˆ¶
+	Car_Keyboard = 0x02//é”®ç›˜æ§åˆ¶
 }Car_State_t;
 
 typedef enum
 {
-    FOLLOW 	   = 0x00,	//ÇĞ»»µ½µ×ÅÌ×î´óËÙ¶ÈÎ»ÖÃ£¨ÉÏÆÂ£¬ÌÓÅÜµÈ£©
-    GYROSCOPE  = 0x01,  //Ğ¡ÍÓÂİÄ£Ê½
-    NORMAL     = 0x02,  //µ×ÅÌ²»¸úËæÔÆÌ¨ĞĞ×ß
+    FOLLOW 	   = 0x00,	//åˆ‡æ¢åˆ°åº•ç›˜æœ€å¤§é€Ÿåº¦ä½ç½®ï¼ˆä¸Šå¡ï¼Œé€ƒè·‘ç­‰ï¼‰
+    GYROSCOPE  = 0x01,  //å°é™€èºæ¨¡å¼
+    NORMAL     = 0x02,  //åº•ç›˜ä¸è·Ÿéšäº‘å°è¡Œèµ°
 }Car_Action_t;
 
 typedef enum
 {
-	Shoot_Single = 0x00, //·ûÉä»÷
-	Shoot_Sustain = 0x01, //Á¬·¢Éä»÷
-	Shoot_Plugins = 0x02, //×ÔÃéÄ£Ê½
+	Shoot_Single = 0x00, //ç¬¦å°„å‡»
+	Shoot_Sustain = 0x01, //è¿å‘å°„å‡»
+	Shoot_Plugins = 0x02, //è‡ªç„æ¨¡å¼
 }Car_Shoot_t;
 
 typedef struct

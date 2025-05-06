@@ -25,8 +25,8 @@ extern SuperCap_Switch_t SuperCap_Switch;
 #define    KEY_PRESSED_OFFSET_V        ((uint16_t)0x01<<14)
 #define    KEY_PRESSED_OFFSET_B        ((uint16_t)0x01<<15)
 
-/* ¼ì²â¼üÅÌ°´¼ü×´Ì¬ 
-   Èô¶ÔÓ¦°´¼ü±»°´ÏÂ£¬ÔòÂß¼­±í´ïÊ½µÄÖµÎª1£¬·ñÔòÎª0 */
+/* æ£€æµ‹é”®ç›˜æŒ‰é”®çŠ¶æ€ 
+   è‹¥å¯¹åº”æŒ‰é”®è¢«æŒ‰ä¸‹ï¼Œåˆ™é€»è¾‘è¡¨è¾¾å¼çš„å€¼ä¸º1ï¼Œå¦åˆ™ä¸º0 */
     #define    IF_KEY_PRESSED         (  RC.key.all  )
     #define    IF_KEY_PRESSED_W       ( (RC.key.all & KEY_PRESSED_OFFSET_W)    != 0 )
 	#define    IF_KEY_PRESSED_S       ( (RC.key.all & KEY_PRESSED_OFFSET_S)    != 0 )
@@ -46,17 +46,17 @@ extern SuperCap_Switch_t SuperCap_Switch;
 	#define    IF_KEY_PRESSED_SHIFT   ( (RC.key.all & KEY_PRESSED_OFFSET_SHIFT) != 0 )
 typedef struct
 {
-	//Ò¡¸Ë
+	//æ‘‡æ†
 	int16_t ch0;
 	int16_t ch1;
 	int16_t ch2;
 	int16_t ch3;
 
-	//ÈýÎ»¿ª¹Ø
+	//ä¸‰ä½å¼€å…³
 	int8_t s1;
 	int8_t s2;
 
-	//Êó±ê
+	//é¼ æ ‡
     struct
     {
         int16_t x;
@@ -65,7 +65,7 @@ typedef struct
         uint8_t press_l;
         uint8_t press_r;
     } mouse;
-	//°´¼ü£¨Bit0 -- W ¼üBit1 -- S ¼üBit2 -- A ¼üBit3 -- D ¼üBit4 -- Q ¼üBit5 -- E ¼üBit6 -- Shift ¼üBit7 -- Ctrl ¼ü£©
+	//æŒ‰é”®ï¼ˆBit0 -- W é”®Bit1 -- S é”®Bit2 -- A é”®Bit3 -- D é”®Bit4 -- Q é”®Bit5 -- E é”®Bit6 -- Shift é”®Bit7 -- Ctrl é”®ï¼‰
     struct
     {
         uint16_t all;

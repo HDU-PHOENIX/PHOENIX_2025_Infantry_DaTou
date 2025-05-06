@@ -1,6 +1,6 @@
 /**
  * @file dri_can.c
- * @brief CANÍ¨ÐÅ½Ó¿Úº¯Êý
+ * @brief CAN
  * @author He WenXuan(hewenxuan040923@gmail.com)
  * @date 2025-4-13
  * @version 1.0
@@ -18,7 +18,11 @@
 #include "dvc_supercap.h"
 
 /**
- * @brief ¹ýÂËÆ÷³õÊ¼»¯£¨ÕâÀïÏÔÂëºÍÑÚÂë¶¼ÊÇ0x0000£©
+ * @file BSP_Can.c
+ * @brief åˆå§‹åŒ–ç­›é€‰å™¨ï¼ˆè¿™é‡Œæ˜¾ç å’ŒæŽ©ç éƒ½æ˜¯0x0000ï¼‰
+ * @author HWX
+ * @date 2024/10/20
+
  */
 void CAN_Filter_Init(void)
 {
@@ -45,62 +49,58 @@ void CAN_Filter_Init(void)
     can2_filter_st.FilterScale = CAN_FILTERSCALE_32BIT;
     can2_filter_st.FilterBank = 14;
     can2_filter_st.SlaveStartFilterBank = 14;
-
-    if (HAL_CAN_ConfigFilter(&hcan1, &can1_filter_st) != HAL_OK)// ÅäÖÃ CAN1 ¹ýÂËÆ÷
+	//ä½¿èƒ½CANé€šé“
+    if (HAL_CAN_ConfigFilter(&hcan1, &can1_filter_st) != HAL_OK)// é…ç½® CAN1 è¿‡æ»¤å™¨
     {
-        Error_Handler();  // ´¦Àí´íÎó
+        Error_Handler();  // å¤„ç†é”™è¯¯
     }
-    if (HAL_CAN_Start(&hcan1) != HAL_OK)// Æô¶¯ CAN1
+    if (HAL_CAN_Start(&hcan1) != HAL_OK)// å¯åŠ¨ CAN1
     {
         Error_Handler();
     }
-    if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)// Ê¹ÄÜ CAN1 ½ÓÊÕ FIFO0 ÏûÏ¢ÖÐ¶Ï
+    if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)// ä½¿èƒ½ CAN1 æŽ¥æ”¶ FIFO0 æ¶ˆæ¯ä¸­æ–­
     {
         Error_Handler();
     }
     HAL_Delay(10);
-    if (HAL_CAN_ConfigFilter(&hcan2, &can2_filter_st) != HAL_OK)    // ÅäÖÃ CAN2 ¹ýÂËÆ÷
+    if (HAL_CAN_ConfigFilter(&hcan2, &can2_filter_st) != HAL_OK)    // é…ç½® CAN2 è¿‡æ»¤å™¨
     {
         Error_Handler();
     }
-    if (HAL_CAN_Start(&hcan2) != HAL_OK)// Æô¶¯ CAN2
+    if (HAL_CAN_Start(&hcan2) != HAL_OK)// å¯åŠ¨ CAN2
     {
         Error_Handler();
     }
-    if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO1_MSG_PENDING) != HAL_OK)// Ê¹ÄÜ CAN2 ½ÓÊÕ FIFO1 ÏûÏ¢ÖÐ¶Ï
+    if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO1_MSG_PENDING) != HAL_OK)// ä½¿èƒ½ CAN2 æŽ¥æ”¶ FIFO1 æ¶ˆæ¯ä¸­æ–­
     {
         Error_Handler();
     }}
 
 /**
- * @brief CAN½ÓÊÜÖÐ¶Ïº¯Êý
- * @param hcan CANÍ¨µÀ
- * @note FIFO0½ö½ÓÊÕCAN1µÄÏûÏ¢
+ * @file BSP_Can.c
+ * @brief CANæŽ¥å—ä¸­æ–­å‡½æ•°
+ * @param hcan CANé€šé“
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
     CAN_RxHeaderTypeDef rx_header;
     uint8_t rx_data[8];
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data);
-	if(hcan->Instance == CAN1)
-    {
-      if(rx_header.StdId == 0x207)
-      {
-          Get_GM6020_Motor_Message(rx_header.StdId,rx_data);
-      }else if(rx_header.StdId >= 0x201 && rx_header.StdId <= 0x204)
-      {
-          Get_M3508_Chassis_Message(rx_header.StdId,rx_data);
-      }else if(rx_header.StdId == 0x0C2)
-	  {
-		  SuperCap_Rx(rx_data);
-	  }
+	if(hcan->Instance == CAN1){
+    if(rx_header.StdId == 0x207){
+        Get_GM6020_Motor_Message(rx_header.StdId,rx_data);
+    }else if(rx_header.StdId >= 0x201 && rx_header.StdId <= 0x204){
+        Get_M3508_Chassis_Message(rx_header.StdId,rx_data);
+    }else if(rx_header.StdId == 0x0C2){
+        SuperCap_Rx(rx_data);
+	}
     }
 }
 
 /**
- * @brief CAN½ÓÊÜÖÐ¶Ïº¯Êý
- * @param hcan CANÍ¨µÀ
- * @note FIFO1½ö½ÓÊÕCAN2µÄÏûÏ¢
+ * @file BSP_Can.c
+ * @brief CANæŽ¥å—ä¸­æ–­å‡½æ•°
+ * @param hcan CANé€šé“
  */
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
@@ -109,7 +109,7 @@ void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO1, &rx_header, rx_data);
     if(hcan->Instance == CAN2)
     {
-	    if(rx_header.StdId == 0x201)
+        if(rx_header.StdId == 0x201)
 			{
 				Get_M2006_Motor_Message(rx_header.StdId,rx_data);
 			}else if(rx_header.StdId == 0x203 || rx_header.StdId == 0x204)

@@ -304,7 +304,7 @@
 #endif /* HAL_CAN_LEGACY_MODULE_ENABLED */
 
 #ifdef HAL_CRC_MODULE_ENABLED
-  #include "stm32f4xx_hal_dri_crc.h"
+  #include "stm32f4xx_hal_crc.h"
 #endif /* HAL_CRC_MODULE_ENABLED */
 
 #ifdef HAL_CRYP_MODULE_ENABLED

@@ -15,30 +15,30 @@ extern SuperCap_Rx_Message_t SuperCap_Rx_Message;
 float Angle;
 float err;
 
-/********************½âËã²¿·Ö********************/
+/********************è§£ç®—éƒ¨åˆ†********************/
 void Chassis_Solution(void);
 void Chassis_Motor_Solution(void);
 float Find_Angle(void);
 void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_speed);
 float Find_Min_Angle(void);
 
-/********************ÊäÈë¿ØÖÆ²¿·Ö********************/
+/********************è¾“å…¥æŽ§åˆ¶éƒ¨åˆ†********************/
 void Chassis_Remote_Control(void);
 void  Chassis_KeyBoard_Control(void);
 
-/********************PID²¿·Ö********************/
+/********************PIDéƒ¨åˆ†********************/
 void Chassis_PID_Init_All(void);
 void Chassis_PID_Clean_All(void);
 void Chassis_fPidCalc(void);
 
-/********************Êä³ö¿ØÖÆ²¿·Ö********************/
+/********************è¾“å‡ºæŽ§åˆ¶éƒ¨åˆ†********************/
 void Chassis_Move(void);
 void Chassis_Stop(void);
 
 
 /**
  * @file Chassis.c
- * @brief °ÑÔÆÌ¨×ø±êÏµ½âËãµ½µ×ÅÌµÄ×ø±êÏµ
+ * @brief æŠŠäº‘å°åæ ‡ç³»è§£ç®—åˆ°åº•ç›˜çš„åæ ‡ç³»
  * @author HWX
  * @date 2024/10/20
  */
@@ -54,15 +54,15 @@ void Chassis_Solution(void)
 	}else{
         Chassis_Speed=Temp2_Chassis_Speed;
 	}
-	if(Car_Mode.Action == FOLLOW)//¸úËæÄ£Ê½vw²»ÏÞ¹¦ÂÊ
+	if(Car_Mode.Action == FOLLOW)//è·Ÿéšæ¨¡å¼vwä¸é™åŠŸçŽ‡
     {
-        Temp2_Chassis_Speed.vw = Temp1_Chassis_Speed.vw;
+        Chassis_Speed.vw = Temp2_Chassis_Speed.vw;
     }
 }
 
 /**
  * @file Chassis.c
- * @brief °Ñµ×ÅÌÔË¶¯½âËãµ½µç»úÔË¶¯
+ * @brief æŠŠåº•ç›˜è¿åŠ¨è§£ç®—åˆ°ç”µæœºè¿åŠ¨
  * @author HWX
  * @date 2024/10/20
  */
@@ -78,7 +78,7 @@ void Chassis_Motor_Solution(void)
 
 /**
  * @file Chassis.c
- * @brief µ×ÅÌ¿ªÊ¼ÔË¶¯
+ * @brief åº•ç›˜å¼€å§‹è¿åŠ¨
  * @author HWX
  * @date 2024/10/20
  */
@@ -96,7 +96,7 @@ void Chassis_Move(void)
 
 /**
  * @file Chassis.c
- * @brief Í¨¹ýÇå¿ÕPIDÊ¹Êä³öÎª0
+ * @brief é€šè¿‡æ¸…ç©ºPIDä½¿è¾“å‡ºä¸º0
  * @author HWX
  * @date 2024/10/20
  */
@@ -108,10 +108,8 @@ void Chassis_Stop(void)
 
 /**
  * @file Chassis.c
- * @brief ÕÒ³öµ×ÅÌºÍÔÆÌ¨+xÖáµÄ½Ç¶È²î
- * @retval ½Ç¶È²î£¨-PI~PI£©
- * @author HWX
- * @date 2024/10/20
+ * @brief æ‰¾å‡ºåº•ç›˜å’Œäº‘å°+xè½´çš„è§’åº¦å·®
+ * @retval è§’åº¦å·®ï¼ˆ-PI~PIï¼‰
  */
 float Find_Angle(void)
 {
@@ -159,7 +157,7 @@ float Find_Min_Angle(void)
 
 /**
  * @file Chassis.c
- * @brief Ò£¿ØÆ÷¿ØÖÆµ×ÅÌ
+ * @brief é¥æŽ§å™¨æŽ§åˆ¶åº•ç›˜
  * @author HWX
  * @date 2024/10/20
  */
@@ -189,7 +187,7 @@ void Chassis_Remote_Control(void)
 
 /**
  * @file Chassis.c
- * @brief ¼ÆËãµç»úPID
+ * @brief è®¡ç®—ç”µæœºPID
  * @author HWX
  * @date 2024/10/20
  */
@@ -203,22 +201,22 @@ void Chassis_fPidCalc(void)
 
 /**
  * @file Chassis.c
- * @brief µ×ÅÌµç»úPID³õÊ¼»¯
+ * @brief åº•ç›˜ç”µæœºPIDåˆå§‹åŒ–
  * @author HWX
  * @date 2024/10/20
  */
 void Chassis_PID_Init_All(void)
 {
     vPidInit(&Follow_PID,5,0,200,0,0,0,0,0,0,0,0,16308);
-    vPidInit(&(M3508_Chassis[0].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
-    vPidInit(&(M3508_Chassis[1].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
-    vPidInit(&(M3508_Chassis[2].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
-    vPidInit(&(M3508_Chassis[3].PID),10,1,0,0,0,0,0,0,0,0,2000,8192);
+    vPidInit(&(M3508_Chassis[0].PID),10,0.8,0,0,100,0,0,0,1000,0,1800,8192);
+    vPidInit(&(M3508_Chassis[1].PID),10,0.8,0,0,100,0,0,0,1000,0,1800,8192);
+    vPidInit(&(M3508_Chassis[2].PID),10,0.8,0,0,100,0,0,0,1000,0,1800,8192);
+    vPidInit(&(M3508_Chassis[3].PID),10,0.8,0,0,100,0,0,0,1000,0,1800,8192);
 }
 
 /**
  * @file Chassis.c
- * @brief µ×ÅÌµç»úPIDÇå¿Õ
+ * @brief åº•ç›˜ç”µæœºPIDæ¸…ç©º
  * @author HWX
  * @date 2024/10/20
  */
@@ -233,7 +231,7 @@ void Chassis_PID_Clean_All(void)
 
 /**
  * @file Chassis.c
- * @brief ¼üÅÌ¿ØÖÆµ×ÅÌ
+ * @brief é”®ç›˜æŽ§åˆ¶åº•ç›˜
  * @author HWX
  * @date 2025/2/10
  */
@@ -293,12 +291,12 @@ void  Chassis_KeyBoard_Control(void)
 
 
 /**
- * @brief ¼üÅÌ¿ØÖÆµ×ÅÌ
- * @param target_speed Ä¿±êÉè¶¨ËÙ¶È
- * @param XiePo_speed µ±Ç°Éè¶¨ËÙ¶È
+ * @brief é”®ç›˜æŽ§åˆ¶åº•ç›˜
+ * @param target_speed ç›®æ ‡è®¾å®šé€Ÿåº¦
+ * @param XiePo_speed å½“å‰è®¾å®šé€Ÿåº¦
  * @date 2025/2/10
- * @note ÕâÀïÓÃÁËÁ½¸öÐ±ÆÂº¯Êý£¬Ò»¸öÊ¼ÖÕÖ¸ÏòÄ¿±êËÙ¶È£¬Ò»¸öÊ¼ÖÕÖ¸Ïò0£¬¼´Ò»¸ö¼ÓËÙÐ±ÆÂÒ»¸ö¼õËÙÐ±ÆÂ£¬Í¨¹ý¶¯Ì¬¿ØÖÆ¼õËÙÐ±ÆÂ²½³¤¿ØÖÆ¹¦ÂÊ£¬
- *       Í¨¹ý¿ØÖÆ¼ÓËÙÐ±ÆÂ²½³¤£¨fen²¿·Ö£©ÊµÏÖ¶¨¹¦ÂÊÏÂÐ¡ÍÓÂÝËÙ¶ÈºÍÒÆ¶¯µÄ¹¦ÂÊ·ÖÅä
+ * @note è¿™é‡Œç”¨äº†ä¸¤ä¸ªæ–œå¡å‡½æ•°ï¼Œä¸€ä¸ªå§‹ç»ˆæŒ‡å‘ç›®æ ‡é€Ÿåº¦ï¼Œä¸€ä¸ªå§‹ç»ˆæŒ‡å‘0ï¼Œå³ä¸€ä¸ªåŠ é€Ÿæ–œå¡ä¸€ä¸ªå‡é€Ÿæ–œå¡ï¼Œé€šè¿‡åŠ¨æ€æŽ§åˆ¶å‡é€Ÿæ–œå¡æ­¥é•¿æŽ§åˆ¶åŠŸçŽ‡ï¼Œ
+ *       é€šè¿‡æŽ§åˆ¶åŠ é€Ÿæ–œå¡æ­¥é•¿ï¼ˆfenéƒ¨åˆ†ï¼‰å®žçŽ°å®šåŠŸçŽ‡ä¸‹å°é™€èžºé€Ÿåº¦å’Œç§»åŠ¨çš„åŠŸçŽ‡åˆ†é…
  */
 Chassis_Step step_l, step_s;
 float  Speed_V1_Fabs, Speed_V_Dif, Speed_W_Fabs,Speed_W_Dif , Speed_V2_Fabs;
@@ -310,21 +308,21 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
     Speed_W_Fabs = fabs(XiePo_speed->vw);
     Speed_W_Dif = fabs(target_speed->vw - XiePo_speed->vw);
 
-    if(SuperCap_Switch == SuperCap_Work && SuperCap_Mode == SuperCap_Off)//³¬µç¿ªÆôÇÒ²»³äµç
+    if(SuperCap_Switch == SuperCap_Work && SuperCap_Mode == SuperCap_Off)//è¶…ç”µå¼€å¯ä¸”ä¸å……ç”µ
         step_l.t = 0.005f * powf(SuperCap_Rx_Message.Now_power/(Chassis_Power_Limit-5),2);
     else
         step_l.t = 0.005f * powf((60-Chassis_Power_Buffer)/(60-Chassis_Power_Set),2);
 	
     if (Speed_W_Fabs > 0.006f) {
-        step_l.w = (0 - XiePo_speed->vw) / Speed_W_Fabs * step_l.t;
+        step_l.w = (0 - XiePo_speed->vw) / Speed_W_Fabs * step_l.t * 3;
     }
     else {
         step_l.w = 0;
     }
 	
     if (Speed_V1_Fabs > 0.006f) {
-        step_l.x = (0.0f - XiePo_speed->vx) / Speed_V1_Fabs * step_l.t * 1.2f;
-        step_l.y = (0.0f - XiePo_speed->vy) / Speed_V1_Fabs * step_l.t * 1.2f;
+        step_l.x = (0.0f - XiePo_speed->vx) / Speed_V1_Fabs * step_l.t ;
+        step_l.y = (0.0f - XiePo_speed->vy) / Speed_V1_Fabs * step_l.t ;
     }
     else {
         step_l.x = 0;
@@ -337,7 +335,7 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
     float fen;
     if ((Speed_V2_Fabs>0.01f)&&(Speed_V1_Fabs<Speed_V2_Fabs)) 
 	{
-        fen = 1 * (Speed_V1_Fabs / Speed_V2_Fabs);
+        fen = 0.5f * (Speed_V1_Fabs / Speed_V2_Fabs);
     }
     else {
         fen = 1;
@@ -345,14 +343,14 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
 	
 	if (Speed_W_Dif > 0.006f)
 	{
-        step_s.w = (target_speed->vw - XiePo_speed->vw) / Speed_W_Dif * step_s.t * fen;
+        step_s.w = (target_speed->vw - XiePo_speed->vw) / Speed_W_Dif * step_s.t * fen * 3;
     }
     else {
         step_s.w = 0;
     }
     if (Speed_V_Dif > 0.006f) {
-        step_s.x = (target_speed->vx - XiePo_speed->vx) / Speed_V_Dif * step_s.t * 1.2f;
-        step_s.y = (target_speed->vy - XiePo_speed->vy) / Speed_V_Dif * step_s.t * 1.2f;
+        step_s.x = (target_speed->vx - XiePo_speed->vx) / Speed_V_Dif * step_s.t ;
+        step_s.y = (target_speed->vy - XiePo_speed->vy) / Speed_V_Dif * step_s.t ;
     }
     else {
         step_s.x = 0;
@@ -361,10 +359,7 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
     XiePo_speed->vx = XiePo_speed->vx + step_l.x + step_s.x;
     XiePo_speed->vy = XiePo_speed->vy + step_l.y + step_s.y;
     XiePo_speed->vw = XiePo_speed->vw + step_l.w + step_s.w;
-	if(target_speed->vw == 0)
-	{
-		XiePo_speed->vw = 0;
-	}
+
 	float bx,by;
 	if(Speed_V1_Fabs > 0.002f && Speed_W_Fabs > 0.002f){
         bx = XiePo_speed->vw / 1000 * XiePo_speed->vy;
@@ -374,5 +369,16 @@ void Chassis_Speed_XiePo(Chassis_Speed_t* target_speed, Chassis_Speed_t* XiePo_s
         by = 0;
     }
     XiePo_speed->vx = XiePo_speed->vx + bx;
-    XiePo_speed->vy = XiePo_speed->vy + by;
+	XiePo_speed->vy = XiePo_speed->vy + by;
+	
+	if(target_speed->vx == 0.006f){
+		XiePo_speed->vx = 0;
+	}   	
+	if(target_speed->vy == 0.006f){
+		XiePo_speed->vy = 0;
+	}  
+	if(target_speed->vw == 0.006f){
+		XiePo_speed->vw = 0;
+	}   
+
 }

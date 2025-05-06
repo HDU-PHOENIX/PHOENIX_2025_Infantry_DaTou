@@ -5,14 +5,14 @@ extern Moto_GM6020_t GM6020_Yaw,GM6020_Pitch;
 
 typedef struct
 {
-    uint16_t can_id;//µç»úID
-    int16_t  set_voltage;//Éè¶¨µÄµçÑ¹Öµ
-    uint16_t rotor_angle;//µç»ú½Ç¶È
-    int16_t  rotor_speed;//µç»úËÙ¶È
-    int16_t  torque_current;//µç»úÅ¤¾Ø
-    uint8_t  temp;//ÎÂ¶È
-    float Set_Speed;//Éè¶¨ËÙ¶È
-    float Set_Angle;//Éè¶¨½Ç¶È
+    uint16_t can_id;//ç”µæœºID
+    int16_t  set_voltage;//è®¾å®šçš„ç”µåŽ‹å€¼
+    uint16_t rotor_angle;//ç”µæœºè§’åº¦
+    int16_t  rotor_speed;//ç”µæœºé€Ÿåº¦
+    int16_t  torque_current;//ç”µæœºæ‰­çŸ©
+    uint8_t  temp;//æ¸©åº¦
+    float Set_Speed;//è®¾å®šé€Ÿåº¦
+    float Set_Angle;//è®¾å®šè§’åº¦
     PID_struct_t Speed_PID;    
     PID_struct_t Angle_PID;
 }Moto_GM6020_t;

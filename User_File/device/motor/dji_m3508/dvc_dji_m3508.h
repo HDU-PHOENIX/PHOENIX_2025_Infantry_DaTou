@@ -5,14 +5,14 @@ extern Moto_M3508_t M3508_Chassis[4],M3508_Shoot[2];
 
 typedef struct
 {
-    uint16_t can_id;//电机ID
-    uint16_t rotor_angle;//电机角度
-    int16_t  rotor_speed;//电机速度
-    int16_t  torque_current;//电机扭矩
-    uint8_t  temp;//温度
-    int16_t Set_Speed;//设定速度
-    uint16_t Set_Angle;//设定角度
-    PID_struct_t PID;//PID各种参数
+    uint16_t can_id;//鐢垫満ID
+    uint16_t rotor_angle;//鐢垫満瑙掑害
+    int16_t  rotor_speed;//鐢垫満閫熷害
+    int16_t  torque_current;//鐢垫満鎵煩
+    uint8_t  temp;//娓╁害
+    int16_t Set_Speed;//璁惧畾閫熷害
+    uint16_t Set_Angle;//璁惧畾瑙掑害
+    PID_struct_t PID;//PID鍚勭鍙傛暟
 }Moto_M3508_t;
 
 void Get_M3508_Chassis_Message(uint32_t StdId,uint8_t rx_data[8]);

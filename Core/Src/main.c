@@ -147,7 +147,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
     CAN_Filter_Init();//can1,can2过滤器配置及初始化
 	HAL_UART_Receive_DMA(&huart3,RC_Data,sizeof(RC_Data));//开启uart3 DMA接收遥控器消息
-    __HAL_UART_ENABLE_IT(&huart6, UART_IT_IDLE);//使能uart6中断,用于裁判系统读取
+  __HAL_UART_ENABLE_IT(&huart6, UART_IT_IDLE);//使能uart6中断,用于裁判系统读取
 	HAL_UART_Receive_DMA(&huart6,judge_rx_buff,2000);//打开DMA接收，数据存入rx_buffer_judge数组中
 	Car_Init();//初始化车辆模式
 	MX_USB_DEVICE_Init();//开启虚拟串口，接收小电脑数据

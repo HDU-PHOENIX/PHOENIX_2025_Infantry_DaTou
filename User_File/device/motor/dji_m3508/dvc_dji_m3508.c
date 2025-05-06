@@ -15,63 +15,81 @@
 #include "stdint.h"
 #include "stm32f4xx_hal_can.h"
 /**
+<<<<<<< HEAD
  * @brief µ×ÅÌM3508½ÓÊÜ·´À¡±¨ÎÄº¯Êı
  * @param StdId µç»úID
  * @param rx_data CANÍ¨µÀÊÕµ½µÄÊı¾İ
+=======
+ * @file M3508.c
+ * @brief åº•ç›˜M3508æ¥å—åé¦ˆæŠ¥æ–‡å‡½æ•°
+ * @param StdId ç”µæœºID
+ * @param rx_data CANé€šé“æ”¶åˆ°çš„æ•°æ®
+ * @author HWX
+ * @date 2024/10/20
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void Get_M3508_Chassis_Message(uint32_t StdId,uint8_t rx_data[8])
 {
-    switch(StdId)//½ÓÊÕÖ¸¶¨µç»ú·´À¡µÄĞÅÏ¢
+    switch(StdId)//æ¥æ”¶æŒ‡å®šç”µæœºåé¦ˆçš„ä¿¡æ¯
     {
-        case 0x201://·´À¡±¨ÎÄ±êÊ¶·û
+        case 0x201://åé¦ˆæŠ¥æ–‡æ ‡è¯†ç¬¦
         {
-            M3508_Chassis[0].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//½ÓÊÕ»úĞµ½Ç¶È£¨16bit£©
-            M3508_Chassis[0].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//½ÓÊÕ×ªËÙ£¨16bit£©
-            M3508_Chassis[0].torque_current = ((rx_data[4] << 8) | rx_data[5]);//½ÓÊÕÊµ¼Ê×ª¾Ø
-            M3508_Chassis[0].temp           =   rx_data[6];//½ÓÊÕµç»úÎÂ¶È£¨8bit£©
+            M3508_Chassis[0].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//æ¥æ”¶æœºæ¢°è§’åº¦ï¼ˆ16bitï¼‰
+            M3508_Chassis[0].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//æ¥æ”¶è½¬é€Ÿï¼ˆ16bitï¼‰
+            M3508_Chassis[0].torque_current = ((rx_data[4] << 8) | rx_data[5]);//æ¥æ”¶å®é™…è½¬çŸ©
+            M3508_Chassis[0].temp           =   rx_data[6];//æ¥æ”¶ç”µæœºæ¸©åº¦ï¼ˆ8bitï¼‰
             break;
         }
-        case 0x202://·´À¡±¨ÎÄ±êÊ¶·û
+        case 0x202://åé¦ˆæŠ¥æ–‡æ ‡è¯†ç¬¦
         {
-            M3508_Chassis[1].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//½ÓÊÕ»úĞµ½Ç¶È£¨16bit£©
-            M3508_Chassis[1].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//½ÓÊÕ×ªËÙ£¨16bit£©
-            M3508_Chassis[1].torque_current = ((rx_data[4] << 8) | rx_data[5]);//½ÓÊÕÊµ¼Ê×ª¾Ø
-            M3508_Chassis[1].temp           =   rx_data[6];//½ÓÊÕµç»úÎÂ¶È£¨8bit£©
+            M3508_Chassis[1].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//æ¥æ”¶æœºæ¢°è§’åº¦ï¼ˆ16bitï¼‰
+            M3508_Chassis[1].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//æ¥æ”¶è½¬é€Ÿï¼ˆ16bitï¼‰
+            M3508_Chassis[1].torque_current = ((rx_data[4] << 8) | rx_data[5]);//æ¥æ”¶å®é™…è½¬çŸ©
+            M3508_Chassis[1].temp           =   rx_data[6];//æ¥æ”¶ç”µæœºæ¸©åº¦ï¼ˆ8bitï¼‰
             break;
         }
-        case 0x203://·´À¡±¨ÎÄ±êÊ¶·û
+        case 0x203://åé¦ˆæŠ¥æ–‡æ ‡è¯†ç¬¦
         {
-            M3508_Chassis[2].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//½ÓÊÕ»úĞµ½Ç¶È£¨16bit£©
-            M3508_Chassis[2].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//½ÓÊÕ×ªËÙ£¨16bit£©
-            M3508_Chassis[2].torque_current = ((rx_data[4] << 8) | rx_data[5]);//½ÓÊÕÊµ¼Ê×ª¾Ø
-            M3508_Chassis[2].temp           =   rx_data[6];//½ÓÊÕµç»úÎÂ¶È£¨8bit£©
+            M3508_Chassis[2].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//æ¥æ”¶æœºæ¢°è§’åº¦ï¼ˆ16bitï¼‰
+            M3508_Chassis[2].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//æ¥æ”¶è½¬é€Ÿï¼ˆ16bitï¼‰
+            M3508_Chassis[2].torque_current = ((rx_data[4] << 8) | rx_data[5]);//æ¥æ”¶å®é™…è½¬çŸ©
+            M3508_Chassis[2].temp           =   rx_data[6];//æ¥æ”¶ç”µæœºæ¸©åº¦ï¼ˆ8bitï¼‰
             break;
         } 
-        case 0x204://·´À¡±¨ÎÄ±êÊ¶·û
+        case 0x204://åé¦ˆæŠ¥æ–‡æ ‡è¯†ç¬¦
         {
-            M3508_Chassis[3].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//½ÓÊÕ»úĞµ½Ç¶È£¨16bit£©
-            M3508_Chassis[3].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//½ÓÊÕ×ªËÙ£¨16bit£©
-            M3508_Chassis[3].torque_current = ((rx_data[4] << 8) | rx_data[5]);//½ÓÊÕÊµ¼Ê×ª¾Ø
-            M3508_Chassis[3].temp           =   rx_data[6];//½ÓÊÕµç»úÎÂ¶È£¨8bit£©
+            M3508_Chassis[3].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//æ¥æ”¶æœºæ¢°è§’åº¦ï¼ˆ16bitï¼‰
+            M3508_Chassis[3].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//æ¥æ”¶è½¬é€Ÿï¼ˆ16bitï¼‰
+            M3508_Chassis[3].torque_current = ((rx_data[4] << 8) | rx_data[5]);//æ¥æ”¶å®é™…è½¬çŸ©
+            M3508_Chassis[3].temp           =   rx_data[6];//æ¥æ”¶ç”µæœºæ¸©åº¦ï¼ˆ8bitï¼‰
             break;
         }
     }
 }
 
 /**
+<<<<<<< HEAD
  * @brief µ×ÅÌM3508·¢ËÍµçÁ÷±¨ÎÄ¿ØÖÆº¯Êı
  * @param hcan CANÍ¨µÀ
  * @param M3508_Chassis µ×ÅÌµç»ú
+=======
+ * @file M3508.c
+ * @brief åº•ç›˜M3508å‘é€ç”µæµæŠ¥æ–‡æ§åˆ¶å‡½æ•°
+ * @param hcan CANé€šé“
+ * @param M3508_Chassis åº•ç›˜ç”µæœº
+ * @author HWX
+ * @date 2024/10/20
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void Set_M3508_Chassis_Voltage(CAN_HandleTypeDef* hcan,Moto_M3508_t M3508_Chassis[4])
 {
     CAN_TxHeaderTypeDef tx_header;
     uint8_t             tx_data[8] = {0};
     
-    tx_header.StdId = 0x200;//±êÊ¶·û£¨¼ûÊÖ²áP6£©
-    tx_header.IDE   = CAN_ID_STD;//±ê×¼ID
-    tx_header.RTR   = CAN_RTR_DATA;//Êı¾İÖ¡
-    tx_header.DLC   = 8;//×Ö½Ú³¤¶È
+    tx_header.StdId = 0x200;//æ ‡è¯†ç¬¦ï¼ˆè§æ‰‹å†ŒP6ï¼‰
+    tx_header.IDE   = CAN_ID_STD;//æ ‡å‡†ID
+    tx_header.RTR   = CAN_RTR_DATA;//æ•°æ®å¸§
+    tx_header.DLC   = 8;//å­—èŠ‚é•¿åº¦
 
     tx_data[0] = ((int16_t)M3508_Chassis[0].PID.output>>8)&0xff;
     tx_data[1] = ((int16_t)M3508_Chassis[0].PID.output)&0xff;
@@ -89,28 +107,37 @@ void Set_M3508_Chassis_Voltage(CAN_HandleTypeDef* hcan,Moto_M3508_t M3508_Chassi
 }
 
 /**
+<<<<<<< HEAD
  * @brief Éä»÷M3508½ÓÊÜ·´À¡±¨ÎÄº¯Êı
  * @param StdId µç»úID
  * @param rx_data CANÍ¨µÀÊÕµ½µÄÊı¾İ
+=======
+ * @file M3508.c
+ * @brief å°„å‡»M3508æ¥å—åé¦ˆæŠ¥æ–‡å‡½æ•°
+ * @param StdId ç”µæœºID
+ * @param rx_data CANé€šé“æ”¶åˆ°çš„æ•°æ®
+ * @author HWX
+ * @date 2024/10/20
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void Get_M3508_Shoot_Message(uint32_t StdId,uint8_t rx_data[8])
 {
-    switch(StdId)//½ÓÊÕÖ¸¶¨µç»ú·´À¡µÄĞÅÏ¢
+    switch(StdId)//æ¥æ”¶æŒ‡å®šç”µæœºåé¦ˆçš„ä¿¡æ¯
     {
-        case 0x204://·´À¡±¨ÎÄ±êÊ¶·û
+        case 0x204://åé¦ˆæŠ¥æ–‡æ ‡è¯†ç¬¦
         {
-            M3508_Shoot[0].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//½ÓÊÕ»úĞµ½Ç¶È£¨16bit£©
-            M3508_Shoot[0].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//½ÓÊÕ×ªËÙ£¨16bit£©
-            M3508_Shoot[0].torque_current = ((rx_data[4] << 8) | rx_data[5]);//½ÓÊÕÊµ¼Ê×ª¾Ø
-            M3508_Shoot[0].temp           =   rx_data[6];//½ÓÊÕµç»úÎÂ¶È£¨8bit£©
+            M3508_Shoot[0].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//æ¥æ”¶æœºæ¢°è§’åº¦ï¼ˆ16bitï¼‰
+            M3508_Shoot[0].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//æ¥æ”¶è½¬é€Ÿï¼ˆ16bitï¼‰
+            M3508_Shoot[0].torque_current = ((rx_data[4] << 8) | rx_data[5]);//æ¥æ”¶å®é™…è½¬çŸ©
+            M3508_Shoot[0].temp           =   rx_data[6];//æ¥æ”¶ç”µæœºæ¸©åº¦ï¼ˆ8bitï¼‰
             break;
         }
-        case 0x203://·´À¡±¨ÎÄ±êÊ¶·û
+        case 0x203://åé¦ˆæŠ¥æ–‡æ ‡è¯†ç¬¦
         {
-            M3508_Shoot[1].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//½ÓÊÕ»úĞµ½Ç¶È£¨16bit£©
-            M3508_Shoot[1].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//½ÓÊÕ×ªËÙ£¨16bit£©
-            M3508_Shoot[1].torque_current = ((rx_data[4] << 8) | rx_data[5]);//½ÓÊÕÊµ¼Ê×ª¾Ø
-            M3508_Shoot[1].temp           =   rx_data[6];//½ÓÊÕµç»úÎÂ¶È£¨8bit£©
+            M3508_Shoot[1].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);//æ¥æ”¶æœºæ¢°è§’åº¦ï¼ˆ16bitï¼‰
+            M3508_Shoot[1].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);//æ¥æ”¶è½¬é€Ÿï¼ˆ16bitï¼‰
+            M3508_Shoot[1].torque_current = ((rx_data[4] << 8) | rx_data[5]);//æ¥æ”¶å®é™…è½¬çŸ©
+            M3508_Shoot[1].temp           =   rx_data[6];//æ¥æ”¶ç”µæœºæ¸©åº¦ï¼ˆ8bitï¼‰
             break;
         }
     }
@@ -118,19 +145,28 @@ void Get_M3508_Shoot_Message(uint32_t StdId,uint8_t rx_data[8])
 
 
 /**
+<<<<<<< HEAD
  * @brief Éä»÷M3508·¢ËÍµçÁ÷±¨ÎÄ¿ØÖÆº¯Êı
  * @param hcan CANÍ¨µÀ
  * @param M3508_Shoot Éä»÷µç»ú
+=======
+ * @file M3508.c
+ * @brief å°„å‡»M3508å‘é€ç”µæµæŠ¥æ–‡æ§åˆ¶å‡½æ•°
+ * @param hcan CANé€šé“
+ * @param M3508_Shoot å°„å‡»ç”µæœº
+ * @author HWX
+ * @date 2024/10/20
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void Set_M3508_Shoot_Voltage(CAN_HandleTypeDef* hcan,Moto_M3508_t M3508_Shoot[2])
 {
     CAN_TxHeaderTypeDef tx_header;
     uint8_t             tx_data[8] = {0};
     
-    tx_header.StdId = 0x200;//±êÊ¶·û£¨¼ûÊÖ²áP6£©
-    tx_header.IDE   = CAN_ID_STD;//±ê×¼ID
-    tx_header.RTR   = CAN_RTR_DATA;//Êı¾İÖ¡
-    tx_header.DLC   = 8;//×Ö½Ú³¤¶È
+    tx_header.StdId = 0x200;//æ ‡è¯†ç¬¦ï¼ˆè§æ‰‹å†ŒP6ï¼‰
+    tx_header.IDE   = CAN_ID_STD;//æ ‡å‡†ID
+    tx_header.RTR   = CAN_RTR_DATA;//æ•°æ®å¸§
+    tx_header.DLC   = 8;//å­—èŠ‚é•¿åº¦
 
     tx_data[6] = ((int16_t)M3508_Shoot[0].PID.output>>8)&0xff;
     tx_data[7] = ((int16_t)M3508_Shoot[0].PID.output)&0xff;

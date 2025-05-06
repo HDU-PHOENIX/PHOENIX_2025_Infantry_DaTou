@@ -1,34 +1,44 @@
 #ifndef __COMPUTER_H__
 #define __COMPUTER_H__
 
+
 extern Computer_Rx_Message_t Computer_Rx_Message;
 extern Computer_Tx_Message_t Computer_Tx_Message;
 extern float IMU_angle[3];
+
+#include "main.h"
+#include "usb_device.h"
+#include "usbd_cdc_if.h"
+#include "dvc_dji_gm6020.h"
+
+#include "cmsis_os.h"
+#include "Gimbal.h"
+
 
 #pragma pack(1)
 
 typedef struct
 {
-char start;                     //0 Ö¡Í· 's¡¯
-char type;                      //1 ÏûÏ¢ÀàĞÍ 0xA0
-char find_bool;                 //2 ÊÇ·ñÕÒµ½µĞ·½
-float yaw;                      //3-6 Æ«º½½Ç
-float pitch;                    //7-10 ¸©Ñö½Ç
-uint8_t buff[20];               //11-30 Ô¤Áô¿ÕÎ»
-char end;                       //31 Ö¡Î² 'e¡¯
+char start;                     //0 å¸§å¤´ 'sâ€™
+char type;                      //1 æ¶ˆæ¯ç±»å‹ 0xA0
+char find_bool;                 //2 æ˜¯å¦æ‰¾åˆ°æ•Œæ–¹
+float yaw;                      //3-6 åèˆªè§’
+float pitch;                    //7-10 ä¿¯ä»°è§’
+uint8_t buff[20];               //11-30 é¢„ç•™ç©ºä½
+char end;                       //31 å¸§å°¾ 'eâ€™
 }Computer_Rx_Message_t;
 
 typedef struct
 {
-char start;                     //0 Ö¡Í· 's¡¯
-char type;                      //1 ÏûÏ¢ÀàĞÍ 0xB0
-float yaw;                      //2-5 Æ«º½½Ç
-float pitch;                    //6-9 ¸©Ñö½Ç
-uint8_t enemy_team_color;       //10 µĞ·½ÑÕÉ« 0ºì£¬1À¶
-uint8_t mode;                   //11 Ä£Ê½ 0×ÔÃé 1´ò·û
-uint8_t rune_flag;              //12 ·ûÄ£Ê½ 0²»¿É¼¤»î£¬1Ğ¡·û£¬2´ó·û
-uint8_t buff[18];               //......  13-30 Ô¤Áô¿ÕÎ»
-char end;                       //31 Ö¡Î² 'e¡¯
+char start;                     //0 å¸§å¤´ 'sâ€™
+char type;                      //1 æ¶ˆæ¯ç±»å‹ 0xB0
+float yaw;                      //2-5 åèˆªè§’
+float pitch;                    //6-9 ä¿¯ä»°è§’
+uint8_t enemy_team_color;       //10 æ•Œæ–¹é¢œè‰² 0çº¢ï¼Œ1è“
+uint8_t mode;                   //11 æ¨¡å¼ 0è‡ªç„ 1æ‰“ç¬¦
+uint8_t rune_flag;              //12 ç¬¦æ¨¡å¼ 0ä¸å¯æ¿€æ´»ï¼Œ1å°ç¬¦ï¼Œ2å¤§ç¬¦
+uint8_t buff[18];               //......  13-30 é¢„ç•™ç©ºä½
+char end;                       //31 å¸§å°¾ 'eâ€™
 }Computer_Tx_Message_t;
 
 #pragma pack()

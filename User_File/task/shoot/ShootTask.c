@@ -12,7 +12,7 @@ void ShootTask(void const * argument)
 	M3508_Shoot[1].Set_Speed = 0;
     while(1)
     { 
-        currentTime = xTaskGetTickCount();//当前系统时间
+        currentTime = xTaskGetTickCount();//褰撳墠绯荤粺鏃堕棿
         Shoot_Reload_Choose();
         Speed17mm_Control();
         switch (Car_Mode.State)
@@ -31,6 +31,6 @@ void ShootTask(void const * argument)
         default:
             break;
         }
-        vTaskDelayUntil(&currentTime,2);//绝对延时
+        vTaskDelayUntil(&currentTime,2);//缁濆寤舵椂
     }
 }

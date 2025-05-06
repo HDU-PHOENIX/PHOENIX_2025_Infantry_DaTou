@@ -4,9 +4,9 @@
   * @brief      use bmi088 to calculate the euler angle. no use ist8310, so only
   *             enable data ready pin to save cpu time.enalbe bmi088 data ready
   *             enable spi DMA to save the time spi transmit
-  *             Ö÷ÒªÀûÓÃÍÓÂİÒÇbmi088£¬´ÅÁ¦¼Æist8310£¬Íê³É×ËÌ¬½âËã£¬µÃ³öÅ·À­½Ç£¬
-  *             Ìá¹©Í¨¹ıbmi088µÄdata ready ÖĞ¶ÏÍê³ÉÍâ²¿´¥·¢£¬¼õÉÙÊı¾İµÈ´ıÑÓ³Ù
-  *             Í¨¹ıDMAµÄSPI´«Êä½ÚÔ¼CPUÊ±¼ä.
+  *             ä¸»è¦åˆ©ç”¨é™€èºä»ªbmi088ï¼Œç£åŠ›è®¡ist8310ï¼Œå®Œæˆå§¿æ€è§£ç®—ï¼Œå¾—å‡ºæ¬§æ‹‰è§’ï¼Œ
+  *             æä¾›é€šè¿‡bmi088çš„data ready ä¸­æ–­å®Œæˆå¤–éƒ¨è§¦å‘ï¼Œå‡å°‘æ•°æ®ç­‰å¾…å»¶è¿Ÿ
+  *             é€šè¿‡DMAçš„SPIä¼ è¾“èŠ‚çº¦CPUæ—¶é—´.
   * @note
   * @history
   *  Version    Date            Author          Modification
@@ -42,21 +42,21 @@
 #define BMI088_GYRO_RX_BUF_DATA_OFFSET  1
 #define BMI088_ACCEL_RX_BUF_DATA_OFFSET 2
 
-//ist83100Ô­Ê¼Êı¾İÔÚ»º³åÇøbufµÄÎ»ÖÃ
+//ist83100åŸå§‹æ•°æ®åœ¨ç¼“å†²åŒºbufçš„ä½ç½®
 #define IST8310_RX_BUF_DATA_OFFSET 16
 
 
-#define TEMPERATURE_PID_KP 1600.0f //ÎÂ¶È¿ØÖÆPIDµÄkp
-#define TEMPERATURE_PID_KI 0.2f    //ÎÂ¶È¿ØÖÆPIDµÄki
-#define TEMPERATURE_PID_KD 0.0f    //ÎÂ¶È¿ØÖÆPIDµÄkd
+#define TEMPERATURE_PID_KP 1600.0f //æ¸©åº¦æ§åˆ¶PIDçš„kp
+#define TEMPERATURE_PID_KI 0.2f    //æ¸©åº¦æ§åˆ¶PIDçš„ki
+#define TEMPERATURE_PID_KD 0.0f    //æ¸©åº¦æ§åˆ¶PIDçš„kd
 
-#define TEMPERATURE_PID_MAX_OUT   4500.0f //ÎÂ¶È¿ØÖÆPIDµÄmax_out
-#define TEMPERATURE_PID_MAX_IOUT 4400.0f  //ÎÂ¶È¿ØÖÆPIDµÄmax_iout
+#define TEMPERATURE_PID_MAX_OUT   4500.0f //æ¸©åº¦æ§åˆ¶PIDçš„max_out
+#define TEMPERATURE_PID_MAX_IOUT 4400.0f  //æ¸©åº¦æ§åˆ¶PIDçš„max_iout
 
-#define MPU6500_TEMP_PWM_MAX 5000 //mpu6500¿ØÖÆÎÂ¶ÈµÄÉèÖÃTIMµÄÖØÔØÖµ£¬¼´¸øPWM×î´óÎª MPU6500_TEMP_PWM_MAX - 1
+#define MPU6500_TEMP_PWM_MAX 5000 //mpu6500æ§åˆ¶æ¸©åº¦çš„è®¾ç½®TIMçš„é‡è½½å€¼ï¼Œå³ç»™PWMæœ€å¤§ä¸º MPU6500_TEMP_PWM_MAX - 1
 
 
-#define INS_TASK_INIT_TIME 7 //ÈÎÎñ¿ªÊ¼³õÆÚ delay Ò»¶ÎÊ±¼ä
+#define INS_TASK_INIT_TIME 7 //ä»»åŠ¡å¼€å§‹åˆæœŸ delay ä¸€æ®µæ—¶é—´
 
 #define INS_YAW_ADDRESS_OFFSET    0
 #define INS_PITCH_ADDRESS_OFFSET  1
@@ -72,17 +72,17 @@
 
 #define INS_MAG_X_ADDRESS_OFFSET 0
 #define INS_MAG_Y_ADDRESS_OFFSET 1
-#define INS_MAG_Z_ADDRESS_OFFSET 2¡¢
+#define INS_MAG_Z_ADDRESS_OFFSET 2ã€
 
 #define gyro_set_cali(cali_scale, cali_offset)              INS_set_cali_gyro((cali_scale), (cali_offset))
  typedef struct
 {
-	float quat_[4];            //ËÄÔªÊı
-	float ol_angle[3];         //Å·À­½Çrad
-	float omg_rad[3];          //½ÇËÙ¶Èrad/s
+	float quat_[4];            //å››å…ƒæ•°
+	float ol_angle[3];         //æ¬§æ‹‰è§’rad
+	float omg_rad[3];          //è§’é€Ÿåº¦rad/s
 	float accel[3];            //p yoll z
-	float temp;                //ÎÂ¶È
-	float angle[3];				//½Ç¶ÈÖÆ¡ã
+	float temp;                //æ¸©åº¦
+	float angle[3];				//è§’åº¦åˆ¶Â°
 }imu_chass;
 
 typedef struct
@@ -116,7 +116,7 @@ extern float imu_vision[3];
   * @retval         none
   */
 /**
-  * @brief          imuÈÎÎñ, ³õÊ¼»¯ bmi088, ist8310, ¼ÆËãÅ·À­½Ç
+  * @brief          imuä»»åŠ¡, åˆå§‹åŒ– bmi088, ist8310, è®¡ç®—æ¬§æ‹‰è§’
   * @param[in]      pvParameters: NULL
   * @retval         none
   */
@@ -130,10 +130,10 @@ void ChassisFun(void const * argument) ;
   * @retval         none
   */
 /**
-  * @brief          Ğ£×¼ÍÓÂİÒÇ
-  * @param[out]     ÍÓÂİÒÇµÄ±ÈÀıÒò×Ó£¬1.0fÎªÄ¬ÈÏÖµ£¬²»ĞŞ¸Ä
-  * @param[out]     ÍÓÂİÒÇµÄÁãÆ¯£¬²É¼¯ÍÓÂİÒÇµÄ¾²Ö¹µÄÊä³ö×÷Îªoffset
-  * @param[out]     ÍÓÂİÒÇµÄÊ±¿Ì£¬Ã¿´ÎÔÚgyro_offsetµ÷ÓÃ»á¼Ó1,
+  * @brief          æ ¡å‡†é™€èºä»ª
+  * @param[out]     é™€èºä»ªçš„æ¯”ä¾‹å› å­ï¼Œ1.0fä¸ºé»˜è®¤å€¼ï¼Œä¸ä¿®æ”¹
+  * @param[out]     é™€èºä»ªçš„é›¶æ¼‚ï¼Œé‡‡é›†é™€èºä»ªçš„é™æ­¢çš„è¾“å‡ºä½œä¸ºoffset
+  * @param[out]     é™€èºä»ªçš„æ—¶åˆ»ï¼Œæ¯æ¬¡åœ¨gyro_offsetè°ƒç”¨ä¼šåŠ 1,
   * @retval         none
   */
 extern void INS_cali_gyro(float cali_scale[3], float cali_offset[3], uint16_t *time_count);
@@ -145,9 +145,9 @@ extern void INS_cali_gyro(float cali_scale[3], float cali_offset[3], uint16_t *t
   * @retval         none
   */
 /**
-  * @brief          Ğ£×¼ÍÓÂİÒÇÉèÖÃ£¬½«´Óflash»òÕßÆäËûµØ·½´«ÈëĞ£×¼Öµ
-  * @param[in]      ÍÓÂİÒÇµÄ±ÈÀıÒò×Ó£¬1.0fÎªÄ¬ÈÏÖµ£¬²»ĞŞ¸Ä
-  * @param[in]      ÍÓÂİÒÇµÄÁãÆ¯
+  * @brief          æ ¡å‡†é™€èºä»ªè®¾ç½®ï¼Œå°†ä»flashæˆ–è€…å…¶ä»–åœ°æ–¹ä¼ å…¥æ ¡å‡†å€¼
+  * @param[in]      é™€èºä»ªçš„æ¯”ä¾‹å› å­ï¼Œ1.0fä¸ºé»˜è®¤å€¼ï¼Œä¸ä¿®æ”¹
+  * @param[in]      é™€èºä»ªçš„é›¶æ¼‚
   * @retval         none
   */
 extern void INS_set_cali_gyro(float cali_scale[3], float cali_offset[3]);
@@ -158,9 +158,9 @@ extern void INS_set_cali_gyro(float cali_scale[3], float cali_offset[3]);
   * @retval         the point of INS_quat
   */
 /**
-  * @brief          »ñÈ¡ËÄÔªÊı
+  * @brief          è·å–å››å…ƒæ•°
   * @param[in]      none
-  * @retval         INS_quatµÄÖ¸Õë
+  * @retval         INS_quatçš„æŒ‡é’ˆ
   */
 extern const float *get_INS_quat_point(void);
 
@@ -171,9 +171,9 @@ extern const float *get_INS_quat_point(void);
   * @retval         the point of INS_angle
   */
 /**
-  * @brief          »ñÈ¡Å·À­½Ç, 0:yaw, 1:pitch, 2:roll µ¥Î» rad
+  * @brief          è·å–æ¬§æ‹‰è§’, 0:yaw, 1:pitch, 2:roll å•ä½ rad
   * @param[in]      none
-  * @retval         INS_angleµÄÖ¸Õë
+  * @retval         INS_angleçš„æŒ‡é’ˆ
   */
 extern const float *get_INS_angle_point(void);
 
@@ -184,9 +184,9 @@ extern const float *get_INS_angle_point(void);
   * @retval         the point of INS_gyro
   */
 /**
-  * @brief          »ñÈ¡½ÇËÙ¶È,0:xÖá, 1:yÖá, 2:rollÖá µ¥Î» rad/s
+  * @brief          è·å–è§’é€Ÿåº¦,0:xè½´, 1:yè½´, 2:rollè½´ å•ä½ rad/s
   * @param[in]      none
-  * @retval         INS_gyroµÄÖ¸Õë
+  * @retval         INS_gyroçš„æŒ‡é’ˆ
   */
 extern const float *get_gyro_data_point(void);
 
@@ -197,9 +197,9 @@ extern const float *get_gyro_data_point(void);
   * @retval         the point of INS_gyro
   */
 /**
-  * @brief          »ñÈ¡¼ÓËÙ¶È,0:xÖá, 1:yÖá, 2:rollÖá µ¥Î» m/s2
+  * @brief          è·å–åŠ é€Ÿåº¦,0:xè½´, 1:yè½´, 2:rollè½´ å•ä½ m/s2
   * @param[in]      none
-  * @retval         INS_gyroµÄÖ¸Õë
+  * @retval         INS_gyroçš„æŒ‡é’ˆ
   */
 extern const float *get_accel_data_point(void);
 
@@ -209,9 +209,9 @@ extern const float *get_accel_data_point(void);
   * @retval         the point of INS_mag
   */
 /**
-  * @brief          »ñÈ¡¼ÓËÙ¶È,0:xÖá, 1:yÖá, 2:rollÖá µ¥Î» ut
+  * @brief          è·å–åŠ é€Ÿåº¦,0:xè½´, 1:yè½´, 2:rollè½´ å•ä½ ut
   * @param[in]      none
-  * @retval         INS_magµÄÖ¸Õë
+  * @retval         INS_magçš„æŒ‡é’ˆ
   */
 extern const float *get_mag_data_point(void);
 

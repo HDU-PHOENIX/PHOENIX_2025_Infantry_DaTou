@@ -16,44 +16,51 @@
 #include "dvc_supercap.h"
 
 
-/* »ñÈ¡Ò£¿ØÆ÷Ò¡¸ËÆ«ÒÆÁ¿
-	¸ù¾İÒ£¿ØÆ÷ÎÄµµ£º
+/* è·å–é¥æ§å™¨æ‘‡æ†åç§»é‡
+	æ ¹æ®é¥æ§å™¨æ–‡æ¡£ï¼š
 
-×óÒ¡¸Ë£º    ÓÒÒ¡¸Ë£º
-×óÓÒÎªch2   ×óÓÒÎªch0
-ÉÏÏÂÎªch3   ÉÏÏÂÎªch1
+å·¦æ‘‡æ†ï¼š    å³æ‘‡æ†ï¼š
+å·¦å³ä¸ºch2   å·¦å³ä¸ºch0
+ä¸Šä¸‹ä¸ºch3   ä¸Šä¸‹ä¸ºch1
 
-                        ÉÏ   660
-×ó    ÖĞ       ÓÒ
--660   0      660       ÖĞ   0
+                        ä¸Š   660
+å·¦    ä¸­       å³
+-660   0      660       ä¸­   0
 
-                        ÏÂ  -660  */
+                        ä¸‹  -660  */
 
 /**
+<<<<<<< HEAD
  * @brief ´¦ÀíÒ£¿ØÆ÷Êı¾İ
+=======
+ * @file Remote.c
+ * @brief å¤„ç†é¥æ§å™¨æ•°æ®
+ * @author HWX
+ * @date 2024/10/20
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void RC_Processing_Data(void)
 {
 
-	//Ò¡¸Ë
+	//æ‘‡æ†
 	RC.ch0 = (((int16_t)RC_Data[0] | ((int16_t)RC_Data[1] << 8)) & 0x07FF)-1024;
 	RC.ch1 = ((((int16_t)RC_Data[1] >> 3) | ((int16_t)RC_Data[2] << 5)) & 0x07FF)-1024;
 	RC.ch2 = ((((int16_t)RC_Data[2] >> 6) | ((int16_t)RC_Data[3] << 2) |((int16_t)RC_Data[4] << 10)) & 0x07FF)-1024;
 	RC.ch3 = ((((int16_t)RC_Data[4] >> 1) | ((int16_t)RC_Data[5]<<7)) & 0x07FF)-1024;
-	//ÈıÎ»¿ª¹Ø
+	//ä¸‰ä½å¼€å…³
 	RC.s1 = ((RC_Data[5] >> 4) & 0x000C) >> 2;
 	RC.s2 = ((RC_Data[5] >> 4) & 0x0003);
-	//Êó±ê
+	//é¼ æ ‡
 	RC.mouse.x = ((int16_t)RC_Data[6]) | ((int16_t)RC_Data[7] << 8);
 	RC.mouse.y = ((int16_t)RC_Data[8]) | ((int16_t)RC_Data[9] << 8);
 	RC.mouse.z = ((int16_t)RC_Data[10]) | ((int16_t)RC_Data[11] << 8); 
 	RC.mouse.press_l = RC_Data[12];
 	RC.mouse.press_r = RC_Data[13];
-	//¼üÅÌ
+	//é”®ç›˜
 	RC.key.all = ((int16_t)RC_Data[14]) | ((int16_t)RC_Data[15] << 8);
 	//wheel
 	RC.wheel = ((int16_t)RC_Data[16] | (int16_t)RC_Data[17] << 8) - 1024;
-	//½ÓÊÕµ½´íÎóµÄÏûÏ¢£¬È«²¿ÏûÏ¢ÖÃ0
+	//æ¥æ”¶åˆ°é”™è¯¯çš„æ¶ˆæ¯ï¼Œå…¨éƒ¨æ¶ˆæ¯ç½®0
 	if ((abs(RC.ch1) > 660)||(abs(RC.ch2) > 660)||(abs(RC.ch3) > 660)||(abs(RC.ch0 > 660)))
 	{
 			memset(&RC,0,sizeof(RC));
@@ -71,7 +78,14 @@ void Car_Init(void)
 
 
 /**
+<<<<<<< HEAD
  * @brief Ñ¡ÔñÒ£¿ØÄ£Ê½
+=======
+ * @file Remote.c
+ * @brief é€‰æ‹©é¥æ§æ¨¡å¼
+ * @author HWX
+ * @date 2024/10/20
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 static Car_Action_t Last_Action=NORMAL;
 bool F_judge=false;
@@ -154,12 +168,12 @@ void Control_Mode_Choose(void)
 	}
 	if(Car_Mode.State == Car_Keyboard)
 	{
-//°´×¡SHIFT¿ªĞ¡ÍÓÂİ
+//æŒ‰ä½SHIFTå¼€å°é™€èº
 		if(IF_KEY_PRESSED_SHIFT == 1)
 			Car_Mode.Action = GYROSCOPE;
 		if(IF_KEY_PRESSED_SHIFT == 0)
 			Car_Mode.Action = Last_Action;
-//µã»÷F½øÍË¸úËæ
+//ç‚¹å‡»Fè¿›é€€è·Ÿéš
 		if(IF_KEY_PRESSED_F == 1 && F_judge == true)
 		{
 			if(Car_Mode.Action == FOLLOW)
@@ -176,7 +190,7 @@ void Control_Mode_Choose(void)
 		}
 		if(IF_KEY_PRESSED_F == 0)
             F_judge = true;
-//°´×¡ÓÒ¼ü¿ªÆô×Ôß÷		
+//æŒ‰ä½å³é”®å¼€å¯è‡ªå–µ		
 		if(RC.mouse.press_r == 1)
 			Car_Mode.Shoot = Shoot_Plugins;
 		else if(RC.mouse.press_r == 0 && Car_Mode.Shoot != Shoot_Single)

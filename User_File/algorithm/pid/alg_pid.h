@@ -20,7 +20,7 @@ typedef struct
   uint8_t d_first;//微分先行
   float target[2];//设定值
   float now[2];//实际值
-  float integral;//累加值
+  float integral;//积分值
   float err[2];//误差
   float p_out;//比例输出
   float i_out;//积分输出

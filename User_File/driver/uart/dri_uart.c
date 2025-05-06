@@ -10,8 +10,8 @@
 #include <string.h>
 
 #define TX_BUFFER_SIZE 256
-uint8_t txBuffer[TX_BUFFER_SIZE];  // ·¢ËÍ»º³åÇø
-volatile uint16_t txLength = 0;    // µ±Ç°»º³åÇøÊı¾İ³¤¶È
+uint8_t txBuffer[TX_BUFFER_SIZE];  // å‘é€ç¼“å†²åŒº
+volatile uint16_t txLength = 0;    // å½“å‰ç¼“å†²åŒºæ•°æ®é•¿åº¦
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
@@ -42,8 +42,6 @@ int fputc(int ch, FILE *f)
  * @brief Í¨¹ı´®¿Ú·¢ËÍÊı¾İ£¬ÉÏÎ»»úÒÔvofa½øĞĞÊı¾İ´¦Àí 
  */
 void VOFA_Tx(void) {
-    printf("%f,%f,%f\r\n",
-           GM6020_Yaw.Angle_PID.p_out,
-	       GM6020_Yaw.Angle_PID.d_out,
-	       GM6020_Yaw.Angle_PID.f_out);
+    printf("%d\r\n",
+           GM6020_Yaw.rotor_angle);
 }

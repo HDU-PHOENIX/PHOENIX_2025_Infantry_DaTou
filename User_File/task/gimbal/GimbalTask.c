@@ -7,8 +7,8 @@ void GimbalTask(void const * argument)
     portTickType currentTime;
     while(1)
     {
-        currentTime = xTaskGetTickCount();//当前系统时间
-//        Computer_Rx();//读取自瞄数据
+        currentTime = xTaskGetTickCount();//褰撳墠绯荤粺鏃堕棿
+//        Computer_Rx();//璇诲彇鑷瀯鏁版嵁
         switch (Car_Mode.State)
         {
 
@@ -26,6 +26,6 @@ void GimbalTask(void const * argument)
         default:
             break;
         }
-        vTaskDelayUntil(&currentTime,1);//绝对延时
+        vTaskDelayUntil(&currentTime,1);//缁濆寤舵椂
     }
 }

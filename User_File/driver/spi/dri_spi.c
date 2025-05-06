@@ -14,7 +14,7 @@ void SPI1_DMA_init(uint32_t tx_buf, uint32_t rx_buf, uint16_t num)
 
 
     //disable DMA
-    //Ê§Ğ§DMA
+    //å¤±æ•ˆDMA
     __HAL_DMA_DISABLE(&hdma_spi1_rx);
     
     while(hdma_spi1_rx.Instance->CR & DMA_SxCR_EN)
@@ -26,17 +26,17 @@ void SPI1_DMA_init(uint32_t tx_buf, uint32_t rx_buf, uint16_t num)
 
     hdma_spi1_rx.Instance->PAR = (uint32_t) & (SPI1->DR);
     //memory buffer 1
-    //ÄÚ´æ»º³åÇø1
+    //å†…å­˜ç¼“å†²åŒº1
     hdma_spi1_rx.Instance->M0AR = (uint32_t)(rx_buf);
     //data length
-    //Êı¾İ³¤¶È
+    //æ•°æ®é•¿åº¦
     __HAL_DMA_SET_COUNTER(&hdma_spi1_rx, num);
 
     __HAL_DMA_ENABLE_IT(&hdma_spi1_rx, DMA_IT_TC);
 
 
     //disable DMA
-    //Ê§Ğ§DMA
+    //å¤±æ•ˆDMA
     __HAL_DMA_DISABLE(&hdma_spi1_tx);
     
     while(hdma_spi1_tx.Instance->CR & DMA_SxCR_EN)
@@ -49,10 +49,10 @@ void SPI1_DMA_init(uint32_t tx_buf, uint32_t rx_buf, uint16_t num)
 
     hdma_spi1_tx.Instance->PAR = (uint32_t) & (SPI1->DR);
     //memory buffer 1
-    //ÄÚ´æ»º³åÇø1
+    //å†…å­˜ç¼“å†²åŒº1
     hdma_spi1_tx.Instance->M0AR = (uint32_t)(tx_buf);
     //data length
-    //Êı¾İ³¤¶È
+    //æ•°æ®é•¿åº¦
     __HAL_DMA_SET_COUNTER(&hdma_spi1_tx, num);
 
 
@@ -61,7 +61,7 @@ void SPI1_DMA_init(uint32_t tx_buf, uint32_t rx_buf, uint16_t num)
 void SPI1_DMA_enable(uint32_t tx_buf, uint32_t rx_buf, uint16_t ndtr)
 {
     //disable DMA
-    //Ê§Ğ§DMA
+    //å¤±æ•ˆDMA
     __HAL_DMA_DISABLE(&hdma_spi1_rx);
     __HAL_DMA_DISABLE(&hdma_spi1_tx);
     while(hdma_spi1_rx.Instance->CR & DMA_SxCR_EN)
@@ -73,7 +73,7 @@ void SPI1_DMA_enable(uint32_t tx_buf, uint32_t rx_buf, uint16_t ndtr)
         __HAL_DMA_DISABLE(&hdma_spi1_tx);
     }
     //clear flag
-    //Çå³ı±êÖ¾Î»
+    //æ¸…é™¤æ ‡å¿—ä½
     __HAL_DMA_CLEAR_FLAG (hspi1.hdmarx, __HAL_DMA_GET_TC_FLAG_INDEX(hspi1.hdmarx));
     __HAL_DMA_CLEAR_FLAG (hspi1.hdmarx, __HAL_DMA_GET_HT_FLAG_INDEX(hspi1.hdmarx));
     __HAL_DMA_CLEAR_FLAG (hspi1.hdmarx, __HAL_DMA_GET_TE_FLAG_INDEX(hspi1.hdmarx));
@@ -86,15 +86,15 @@ void SPI1_DMA_enable(uint32_t tx_buf, uint32_t rx_buf, uint16_t ndtr)
     __HAL_DMA_CLEAR_FLAG (hspi1.hdmatx, __HAL_DMA_GET_DME_FLAG_INDEX(hspi1.hdmatx));
     __HAL_DMA_CLEAR_FLAG (hspi1.hdmatx, __HAL_DMA_GET_FE_FLAG_INDEX(hspi1.hdmatx));
     //set memory address
-    //ÉèÖÃÊı¾İµØÖ·
+    //è®¾ç½®æ•°æ®åœ°å€
     hdma_spi1_rx.Instance->M0AR = rx_buf;
     hdma_spi1_tx.Instance->M0AR = tx_buf;
     //set data length
-    //ÉèÖÃÊı¾İ³¤¶È
+    //è®¾ç½®æ•°æ®é•¿åº¦
     __HAL_DMA_SET_COUNTER(&hdma_spi1_rx, ndtr);
     __HAL_DMA_SET_COUNTER(&hdma_spi1_tx, ndtr);
     //enable DMA
-    //Ê¹ÄÜDMA
+    //ä½¿èƒ½DMA
     __HAL_DMA_ENABLE(&hdma_spi1_rx);
     __HAL_DMA_ENABLE(&hdma_spi1_tx);
 }

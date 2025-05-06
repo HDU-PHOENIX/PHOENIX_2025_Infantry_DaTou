@@ -9,6 +9,7 @@
  */
 #include "dvc_supercap.h"
 
+<<<<<<< HEAD
 #include "main.h"
 #include "can.h"
 #include "dvc_judge.h"
@@ -18,6 +19,23 @@
 
 /**
  * @brief ³¬µç³õÊ¼»¯º¯Êı
+=======
+/*
+ä¸åŒçš„è¶…ç”µæœ‰ä¸åŒçš„åè®®ï¼Œæˆ‘å†™çš„è¿™ä¸ªä»…ä¾›å‚è€ƒ
+*/
+
+extern SuperCap_Tx_Message_t SuperCap_Tx_Message;
+extern SuperCap_Rx_Message_t SuperCap_Rx_Message;
+extern RC_t RC;
+extern SuperCap_Mode_t SuperCap_Mode;
+extern SuperCap_Switch_t SuperCap_Switch;
+extern Car_Mode_t Car_Mode;
+
+/**
+ * @brief è¶…ç”µåˆå§‹åŒ–å‡½æ•°
+ * @author HWX
+ * @date 2025/3/1
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void SuperCap_Init(void)
 {
@@ -26,17 +44,23 @@ void SuperCap_Init(void)
 }
 
 /**
+<<<<<<< HEAD
  * @brief ³¬µçÊı¾İ´¦Àí²¢·¢ËÍº¯Êı
+=======
+ * @brief è¶…ç”µæ•°æ®å¤„ç†å¹¶å‘é€å‡½æ•°
+ * @author HWX
+ * @date 2025/3/1
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void SuperCap_Tx(void)
 {
 	CAN_TxHeaderTypeDef tx_header;
     uint8_t             tx_data[8] = {0};
     
-    tx_header.StdId = 0x0C1;//±êÊ¶·û
-    tx_header.IDE   = CAN_ID_STD;//±ê×¼ID
-    tx_header.RTR   = CAN_RTR_DATA;//Êı¾İÖ¡
-    tx_header.DLC   = 8;//×Ö½Ú³¤¶È
+    tx_header.StdId = 0x0C1;//æ ‡è¯†ç¬¦
+    tx_header.IDE   = CAN_ID_STD;//æ ‡å‡†ID
+    tx_header.RTR   = CAN_RTR_DATA;//æ•°æ®å¸§
+    tx_header.DLC   = 8;//å­—èŠ‚é•¿åº¦
 
     if(SuperCap_Switch == SuperCap_Stop)
         SuperCap_Tx_Message.Switch=0;
@@ -49,8 +73,15 @@ void SuperCap_Tx(void)
 }
 
 /**
+<<<<<<< HEAD
  * @brief ³¬µç½ÓÊÕÊı¾İ´¦Àí
  * @param rx_data ½ÓÊÕµ½µÄÔ­Ê¼Êı¾İ
+=======
+ * @brief è¶…ç”µæ¥æ”¶æ•°æ®å¤„ç†
+ * @param rx_data æ¥æ”¶åˆ°çš„åŸå§‹æ•°æ®
+ * @author HWX
+ * @date 2025/3/1
+>>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void SuperCap_Rx(uint8_t rx_data[8])
 {
@@ -59,12 +90,12 @@ void SuperCap_Rx(uint8_t rx_data[8])
 }
 
 /**
- * @brief ¼üÊó¿ª¹Ø³¬µç
+ * @brief é”®é¼ å¼€å…³è¶…ç”µ
  */
 bool E_judge=false;
 void SuperCap_KeyBoard_Control(void)
 {
-    if(IF_KEY_PRESSED_E == 1 && E_judge == true)//µã»÷E¿ªÆô³¬µç
+    if(IF_KEY_PRESSED_E == 1 && E_judge == true)//ç‚¹å‡»Eå¼€å¯è¶…ç”µ
     {
         if(SuperCap_Mode == SuperCap_On)
             SuperCap_Mode = SuperCap_Off;
@@ -79,7 +110,7 @@ void SuperCap_KeyBoard_Control(void)
 }
 
 /**
- * @brief ¼üÊóÆô¶¯³¬µç
+ * @brief é”®é¼ å¯åŠ¨è¶…ç”µ
  */
 bool C_judge = false;
 void SuperCap_Switch_Control(void)
@@ -87,7 +118,7 @@ void SuperCap_Switch_Control(void)
     if(SuperCap_Rx_Message.Stored_Energy <= 5)
         SuperCap_Mode = SuperCap_Off;
 
-    if(IF_KEY_PRESSED_C == 1 && C_judge == true)//µã»÷CÆô¶¯³¬µç
+    if(IF_KEY_PRESSED_C == 1 && C_judge == true)//ç‚¹å‡»Cå¯åŠ¨è¶…ç”µ
     {
         if(SuperCap_Switch == SuperCap_Stop)
             SuperCap_Switch = SuperCap_Work;

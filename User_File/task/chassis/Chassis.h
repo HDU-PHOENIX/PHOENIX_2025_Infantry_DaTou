@@ -13,12 +13,12 @@
 #include "dvc_supercap.h"
 
 
-#define Gimbal_Yaw_ZERO 3260//ÔÆÌ¨Õı·½ÏòºÍµ×ÅÌÕı·½ÏòÖØºÏÊ±ºòµÄ±àÂëÖµ
-#define Gimbal_Yaw_HALF 7356 //ÔÆÌ¨Õı·½ÏòºÍµ×ÅÌ¸º·½ÏòÖØºÏÊ±ºòµÄ±àÂëÖµ
+#define Gimbal_Yaw_ZERO 2288//äº‘å°æ­£æ–¹å‘å’Œåº•ç›˜æ­£æ–¹å‘é‡åˆæ—¶å€™çš„ç¼–ç å€¼
+#define Gimbal_Yaw_HALF 6384 //äº‘å°æ­£æ–¹å‘å’Œåº•ç›˜è´Ÿæ–¹å‘é‡åˆæ—¶å€™çš„ç¼–ç å€¼
 
-#define Transmission_Ratio 19.0f //µç»ú¼õËÙ±È
-#define Wheel_Radius 0.07656f //ÂÖ×Ó°ë¾¶m
-#define Chassis_Radius 0.290f //µ×ÅÌ°ë¾¶m
+#define Transmission_Ratio 19.0f //ç”µæœºå‡é€Ÿæ¯”
+#define Wheel_Radius 0.07656f //è½®å­åŠå¾„m
+#define Chassis_Radius 0.290f //åº•ç›˜åŠå¾„m
 
 #define Chassis_Power_Set 30
 

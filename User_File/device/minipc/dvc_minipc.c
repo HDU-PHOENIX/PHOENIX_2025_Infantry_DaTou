@@ -1,6 +1,6 @@
 /**
  * @file dvc_minipc.c
- * @brief Ğ¡µçÄÔÍ¨ĞÅÏà¹Øº¯Êı
+ * @brief Ğ¡ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½
  * @author He WenXuan(hewenxuan040923@gmail.com)
  * @date 2025-4-13
  * @version 1.0
@@ -23,19 +23,25 @@ float Task_Pitch=0.0f,Task_Yaw=0.0f;
 uint8_t Message_Count=1;
 
 /**
- * @brief Ğ¡µçÄÔÍ¨ĞÅ³õÊ¼»¯
+ * @file Computer.c
+ * @brief å°ç”µè„‘é€šä¿¡åˆå§‹åŒ–
+ * @author HWX
+ * @date 2024/11/2
  */
 void Computer_Init(void)
 {
     Computer_Tx_Message.start = 's';
-    Computer_Tx_Message.type = 0xB0;//µ÷ÊÔÓÃ
-    Computer_Tx_Message.enemy_team_color = 0;//µ÷ÊÔÓÃ
+    Computer_Tx_Message.type = 0xB0;//è°ƒè¯•ç”¨
+    Computer_Tx_Message.enemy_team_color = 0;//è°ƒè¯•ç”¨
     Computer_Tx_Message.end = 'e';
 }
 
 
 /**
- * @brief Ğ¡µçÄÔÍ¨ĞÅ³õ·¢ËÍ´¦Àí
+ * @file Computer.c
+ * @brief å°ç”µè„‘é€šä¿¡åˆå‘é€å¤„ç†
+ * @author HWX
+ * @date 2024/11/2
  */
 void Computer_Tx(void)
 {

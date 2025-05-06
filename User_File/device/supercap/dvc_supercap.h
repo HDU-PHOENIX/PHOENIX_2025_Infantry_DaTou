@@ -17,15 +17,15 @@ extern Car_Mode_t Car_Mode;
 #define    SUPERPOWER_SWITCH_OFFSET_OVPSRC    ((uint16_t)0x01<<6)
 #define    SUPERPOWER_SWITCH_OFFSET_UVPSRC    ((uint16_t)0x01<<7)
 
-//¼ì²â³¬µç×´Ì¬
-#define    IF_SUPERPOWER_SWITCH_OFFSET_ISON      ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_ISON) != 0)   //³¬µçÊÇ·ñ¿ªÆô
-#define    IF_SUPERPOWER_SWITCH_OFFSET_ALIVE     ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_ALIVE) != 0)  //³¬µçÊÇ·ñ´æ»î
-#define    IF_SUPERPOWER_SWITCH_OFFSET_EMPTY     ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_EMPTY) != 0)  //³¬µçÃ»µç
-#define    IF_SUPERPOWER_SWITCH_OFFSET_FULL      ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_FULL) != 0)   //³¬µçÂúµç
-#define    IF_SUPERPOWER_SWITCH_OFFSET_OVPBUS    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_OVPBUS) != 0) //³¬µçÒì³£×´Ì¬0
-#define    IF_SUPERPOWER_SWITCH_OFFSET_UVPBUS    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_UVPBUS) != 0) //³¬µçÒì³£×´Ì¬1
-#define    IF_SUPERPOWER_SWITCH_OFFSET_OVPSRC    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_OVPSRC) != 0) //³¬µçÒì³£×´Ì¬2
-#define    IF_SUPERPOWER_SWITCH_OFFSET_UVPSRC    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_UVPSRC) != 0) //³¬µçÒì³£×´Ì¬3
+//æ£€æµ‹è¶…ç”µçŠ¶æ€
+#define    IF_SUPERPOWER_SWITCH_OFFSET_ISON      ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_ISON) != 0)   //è¶…ç”µæ˜¯å¦å¼€å¯
+#define    IF_SUPERPOWER_SWITCH_OFFSET_ALIVE     ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_ALIVE) != 0)  //è¶…ç”µæ˜¯å¦å­˜æ´»
+#define    IF_SUPERPOWER_SWITCH_OFFSET_EMPTY     ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_EMPTY) != 0)  //è¶…ç”µæ²¡ç”µ
+#define    IF_SUPERPOWER_SWITCH_OFFSET_FULL      ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_FULL) != 0)   //è¶…ç”µæ»¡ç”µ
+#define    IF_SUPERPOWER_SWITCH_OFFSET_OVPBUS    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_OVPBUS) != 0) //è¶…ç”µå¼‚å¸¸çŠ¶æ€0
+#define    IF_SUPERPOWER_SWITCH_OFFSET_UVPBUS    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_UVPBUS) != 0) //è¶…ç”µå¼‚å¸¸çŠ¶æ€1
+#define    IF_SUPERPOWER_SWITCH_OFFSET_OVPSRC    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_OVPSRC) != 0) //è¶…ç”µå¼‚å¸¸çŠ¶æ€2
+#define    IF_SUPERPOWER_SWITCH_OFFSET_UVPSRC    ( (SuperCap_Rx_Message.Switch & SUPERPOWER_SWITCH_OFFSET_UVPSRC) != 0) //è¶…ç”µå¼‚å¸¸çŠ¶æ€3
 
 #define SuperCap_Power_Limit 80
 
@@ -33,30 +33,30 @@ extern Car_Mode_t Car_Mode;
 
 typedef struct
 {
-    uint8_t Switch;	       //0   ÊÇ·ñ¿ªÆô³¬µç¡¯0¡¯¹Ø±Õ¡®1¡¯¿ªÆô
-    float Limited_Power;   //1-4 µ±Ç°µ×ÅÌ¹¦ÂÊÉÏÏÞ
-	                       //5-7 Ô¤Áô¿ÕÎ»
+    uint8_t Switch;	       //0   æ˜¯å¦å¼€å¯è¶…ç”µâ€™0â€™å…³é—­â€˜1â€™å¼€å¯
+    float Limited_Power;   //1-4 å½“å‰åº•ç›˜åŠŸçŽ‡ä¸Šé™
+	                       //5-7 é¢„ç•™ç©ºä½
 }SuperCap_Tx_Message_t;
 
 typedef struct
 {
-    char Switch;	       //0   ×´Ì¬
-    char Stored_Energy;    //1   µ±Ç°³¬µçÊ£ÓàµçÁ¿
-    char Temperature;      //2   µçÈÝÎÂ¶È
-	short Now_power;       //3-4 ÕæÊµµ×ÅÌ¹¦ÂÊ
-	                       //5-7 Ô¤Áô¿ÕÎ»
+    char Switch;	       //0   çŠ¶æ€
+    char Stored_Energy;    //1   å½“å‰è¶…ç”µå‰©ä½™ç”µé‡
+    char Temperature;      //2   ç”µå®¹æ¸©åº¦
+	short Now_power;       //3-4 çœŸå®žåº•ç›˜åŠŸçŽ‡
+	                       //5-7 é¢„ç•™ç©ºä½
 }SuperCap_Rx_Message_t;
 
 typedef enum
 {
-    SuperCap_On   = 0x00,//³¬µç»á·Åµç
-    SuperCap_Off  = 0x01,//³¬µç²»·Åµç
+    SuperCap_On   = 0x00,//è¶…ç”µä¼šæ”¾ç”µ
+    SuperCap_Off  = 0x01,//è¶…ç”µä¸æ”¾ç”µ
 }SuperCap_Mode_t;
 
 typedef enum
 {
-	SuperCap_Stop = 0x00,//²»³äµçÒ²²»·Åµç
-    SuperCap_Work = 0x01,//¿ªÊ¼¹¤×÷
+	SuperCap_Stop = 0x00,//ä¸å……ç”µä¹Ÿä¸æ”¾ç”µ
+    SuperCap_Work = 0x01,//å¼€å§‹å·¥ä½œ
 }SuperCap_Switch_t;
 
 #pragma pack()

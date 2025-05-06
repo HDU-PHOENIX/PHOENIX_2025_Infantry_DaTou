@@ -6,24 +6,24 @@
 #include "task.h"
 #include "cmsis_os.h"
 /*
-·â×°¹ı²î£¬²»½¨ÒéÊ¹ÓÃ£¬µÈÀÏÑ§³¤ÑĞ¾¿ĞÂµÄ·½°¸
+å°è£…è¿‡å·®ï¼Œä¸å»ºè®®ä½¿ç”¨ï¼Œç­‰ç ”ç©¶æ–°çš„æ–¹æ¡ˆ
 */
 judge_show_data_t show_data = {0};
 uint8_t Tx_buff[5][50] = {0};
 uint8_t Tx_buff_seven[5][200] = {0};
 
-//»æÍ¼¶ÎÏÔÊ¾Êı¾İ
+//ç»˜å›¾æ®µæ˜¾ç¤ºæ•°æ®
 void draw_a_cricle(uint8_t (*txbuff)[50], uint8_t i, int x, int y, uint8_t Operate_type, UART_HandleTypeDef UART)
 {
     uint32_t length = 0;
-    //°´ÒªÇóÌûì´Ö¡Í·
+    //æŒ‰è¦æ±‚å¸–é½‘å¸§å¤´
     length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_single.grapic_data_struct) + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
     show_data.frame_header.SOF = Judge_Data_SOF;
     show_data.frame_header.Data_Length = sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_single.grapic_data_struct);
     show_data.frame_header.Seq = 0;
     memcpy(txbuff + i, &show_data.frame_header, LEN_HEADER);
     Append_CRC8_Check_Sum(*(txbuff + i), LEN_HEADER);
-    //·¢ËÍÊ±µÍ°ËÎ»ÔÚÇ°
+    //å‘é€æ—¶ä½å…«ä½åœ¨å‰
     show_data.cmd_id = 0x0301;
     memcpy(txbuff[i] + CMD_ID, &show_data.cmd_id, LEN_CMDID);
     show_data.student_interactive_header.data_cmd_id = client_custom_graphic_single_id;
@@ -33,14 +33,14 @@ void draw_a_cricle(uint8_t (*txbuff)[50], uint8_t i, int x, int y, uint8_t Opera
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[0] = 'r';
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[1] = 'o';
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[2] = 'd';
-    show_data.operate_data.show_single.grapic_data_struct.operate_type = Operate_type;//Í¼ĞÎ²Ù×÷
+    show_data.operate_data.show_single.grapic_data_struct.operate_type = Operate_type;//å›¾å½¢æ“ä½œ
     show_data.operate_data.show_single.grapic_data_struct.graphic_type = circle;
-    show_data.operate_data.show_single.grapic_data_struct.layer = i;//Í¼²ã
+    show_data.operate_data.show_single.grapic_data_struct.layer = i;//å›¾å±‚
     show_data.operate_data.show_single.grapic_data_struct.color = 1;
-    show_data.operate_data.show_single.grapic_data_struct.width = 5;//ÏßÌõ¿í¶È
+    show_data.operate_data.show_single.grapic_data_struct.width = 5;//çº¿æ¡å®½åº¦
     show_data.operate_data.show_single.grapic_data_struct.start_x = x;
     show_data.operate_data.show_single.grapic_data_struct.start_y =	y;
-    show_data.operate_data.show_single.grapic_data_struct.radius = 30;//°ë¾¶
+    show_data.operate_data.show_single.grapic_data_struct.radius = 30;//åŠå¾„
 
     memcpy(txbuff[i] + STU_DATA, &show_data.operate_data.show_single.grapic_data_struct, LEN_SINGLE_GRAPH);
     Append_CRC16_Check_Sum(*(txbuff + i), length);
@@ -51,14 +51,14 @@ void draw_CHASSIS_GYROSCOPE(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDe
 {
 	
     uint32_t length = 0;
-    //°´ÒªÇóÌûì´Ö¡Í·
+    //æŒ‰è¦æ±‚å¸–é½‘å¸§å¤´
     length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_seven.grapic_data_struct) + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
     show_data.frame_header.SOF = Judge_Data_SOF;
     show_data.frame_header.Data_Length = sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_seven.grapic_data_struct);
     show_data.frame_header.Seq = 0;
     memcpy(txbuff + i, &show_data.frame_header, LEN_HEADER);
     Append_CRC8_Check_Sum(*(txbuff + i), LEN_HEADER);
-    //·¢ËÍÊ±µÍ°ËÎ»ÔÚÇ°
+    //å‘é€æ—¶ä½å…«ä½åœ¨å‰
     show_data.cmd_id = 0x0301;
     memcpy(txbuff[i] + 3, &show_data.cmd_id, LEN_CMDID);
     show_data.student_interactive_header.data_cmd_id = client_custom_graphic_seven_id;
@@ -70,18 +70,18 @@ void draw_CHASSIS_GYROSCOPE(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDe
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[0] = *(Data[j]+7);
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[1] = *(Data[j]+8);
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[2] = j;
-        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//Í¼ĞÎ²Ù×÷
-        show_data.operate_data.show_seven.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//Í¼ĞÎÀàĞÍ
-        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//Í¼²ã
-        show_data.operate_data.show_seven.grapic_data_struct[j].color = *(Data[j]+3);//1;//ÑÕÉ«
-        show_data.operate_data.show_seven.grapic_data_struct[j].start_angle = *(Data[j]+4);//ÆğÊ¼½Ç¶È
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_angle = *(Data[j]+5);//ÖÕÖ¹½Ç¶È
-        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//ÏßÌõ¿í¶È
-        show_data.operate_data.show_seven.grapic_data_struct[j].start_x = *(Data[j]+7);//ÆğÊ¼x
-        show_data.operate_data.show_seven.grapic_data_struct[j].start_y =	*(Data[j]+8);//ÆğÊ¼y
-        show_data.operate_data.show_seven.grapic_data_struct[j].radius = *(Data[j]+9);//°ë¾¶
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_x = *(Data[j]+10);//ÖÕÖ¹x
-        show_data.operate_data.show_seven.grapic_data_struct[j].end_y = *(Data[j]+11);//ÖÕÖ¹y
+        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//å›¾å½¢æ“ä½œ
+        show_data.operate_data.show_seven.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//å›¾å½¢ç±»å‹
+        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//å›¾å±‚
+        show_data.operate_data.show_seven.grapic_data_struct[j].color = *(Data[j]+3);//1;//é¢œè‰²
+        show_data.operate_data.show_seven.grapic_data_struct[j].start_angle = *(Data[j]+4);//èµ·å§‹è§’åº¦
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_angle = *(Data[j]+5);//ç»ˆæ­¢è§’åº¦
+        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//çº¿æ¡å®½åº¦
+        show_data.operate_data.show_seven.grapic_data_struct[j].start_x = *(Data[j]+7);//èµ·å§‹x
+        show_data.operate_data.show_seven.grapic_data_struct[j].start_y =	*(Data[j]+8);//èµ·å§‹y
+        show_data.operate_data.show_seven.grapic_data_struct[j].radius = *(Data[j]+9);//åŠå¾„
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_x = *(Data[j]+10);//ç»ˆæ­¢x
+        show_data.operate_data.show_seven.grapic_data_struct[j].end_y = *(Data[j]+11);//ç»ˆæ­¢y
     }
 
     //show_single
@@ -93,14 +93,14 @@ void draw_CHASSIS_GYROSCOPE(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDe
 void Delete_All(uint8_t (*txbuff)[50],uint8_t i, UART_HandleTypeDef UART)
 {
     uint32_t length = 0;
-    //°´ÒªÇóÌûì´Ö¡Í·
+    //æŒ‰è¦æ±‚å¸–é½‘å¸§å¤´
     length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_single.grapic_data_struct) + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
     show_data.frame_header.SOF = Judge_Data_SOF;
     show_data.frame_header.Data_Length = sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_single.grapic_data_struct);
     show_data.frame_header.Seq = 0;
     memcpy(txbuff + i, &show_data.frame_header, LEN_HEADER);
     Append_CRC8_Check_Sum(*(txbuff + i), LEN_HEADER);
-    //·¢ËÍÊ±µÍ°ËÎ»ÔÚÇ°
+    //å‘é€æ—¶ä½å…«ä½åœ¨å‰
     show_data.cmd_id = 0x0301;
     memcpy(txbuff[i] + CMD_ID, &show_data.cmd_id, LEN_CMDID);
     show_data.student_interactive_header.data_cmd_id = client_custom_graphic_delete_id;
@@ -120,14 +120,14 @@ void Delete_All(uint8_t (*txbuff)[50],uint8_t i, UART_HandleTypeDef UART)
 void draw_a_line(uint8_t (*txbuff)[50], uint8_t i, int Start_x, int Start_y, int End_x, int End_y, uint8_t Operate_type, int color,UART_HandleTypeDef UART)
 {
     uint32_t length = 0;
-    //°´ÒªÇóÌûì´Ö¡Í·
+    //æŒ‰è¦æ±‚å¸–é½‘å¸§å¤´
     length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_single.grapic_data_struct) + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
     show_data.frame_header.SOF = Judge_Data_SOF;
     show_data.frame_header.Data_Length = sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_single.grapic_data_struct);
     show_data.frame_header.Seq = 0;
     memcpy(txbuff + i, &show_data.frame_header, LEN_HEADER);
     Append_CRC8_Check_Sum(*(txbuff + i), LEN_HEADER);
-    //·¢ËÍÊ±µÍ°ËÎ»ÔÚÇ°
+    //å‘é€æ—¶ä½å…«ä½åœ¨å‰
     show_data.cmd_id = 0x0301;
     memcpy(txbuff[i] + CMD_ID, &show_data.cmd_id, LEN_CMDID);
     show_data.student_interactive_header.data_cmd_id = client_custom_graphic_single_id;
@@ -137,14 +137,14 @@ void draw_a_line(uint8_t (*txbuff)[50], uint8_t i, int Start_x, int Start_y, int
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[0] = 'r';
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[1] = 'o';
     show_data.operate_data.show_single.grapic_data_struct.graphic_name[2] = 'd';
-    show_data.operate_data.show_single.grapic_data_struct.operate_type = Operate_type;//Í¼ĞÎ²Ù×÷
-    show_data.operate_data.show_single.grapic_data_struct.graphic_type = straight_line;//Í¼ĞÎÀàĞÍ
-    show_data.operate_data.show_single.grapic_data_struct.layer = i;//Í¼²ã
-    show_data.operate_data.show_single.grapic_data_struct.color = color;//ÑÕÉ«
-    show_data.operate_data.show_single.grapic_data_struct.width = 2;//ÏßÌõ¿í¶È
+    show_data.operate_data.show_single.grapic_data_struct.operate_type = Operate_type;//å›¾å½¢æ“ä½œ
+    show_data.operate_data.show_single.grapic_data_struct.graphic_type = straight_line;//å›¾å½¢ç±»å‹
+    show_data.operate_data.show_single.grapic_data_struct.layer = i;//å›¾å±‚
+    show_data.operate_data.show_single.grapic_data_struct.color = color;//é¢œè‰²
+    show_data.operate_data.show_single.grapic_data_struct.width = 2;//çº¿æ¡å®½åº¦
     show_data.operate_data.show_single.grapic_data_struct.start_x = Start_x;
     show_data.operate_data.show_single.grapic_data_struct.start_y =	Start_y;
-    show_data.operate_data.show_single.grapic_data_struct.end_x = End_x;//10;//°E?
+    show_data.operate_data.show_single.grapic_data_struct.end_x = End_x;//10;//çšE?
     show_data.operate_data.show_single.grapic_data_struct.end_y = End_y;//10;//
 
     memcpy(txbuff[i] + STU_DATA, &show_data.operate_data.show_single.grapic_data_struct, LEN_SINGLE_GRAPH);
@@ -154,12 +154,12 @@ void draw_a_line(uint8_t (*txbuff)[50], uint8_t i, int Start_x, int Start_y, int
 }
 
 
-//×Ö ×ÖÊı 
+//å­— å­—æ•° 
 void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t start_y, operate_type operate, uint8_t j,UART_HandleTypeDef UART,uint8_t color)
 {
 	uint32_t length = 0;
 	uint8_t txbuff[200] = {0};
-		//°´ÒªÇóÌîĞ´Ö¡Í·
+		//æŒ‰è¦æ±‚å¡«å†™å¸§å¤´
 	length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_single.grapic_data_struct) + 30 + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
 	show_data.frame_header.SOF = Judge_Data_SOF;
 	show_data.frame_header.Data_Length = sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_char);
@@ -170,8 +170,8 @@ void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t
 	show_data.cmd_id = 0x0301;
 	memcpy(txbuff + CMD_ID,&show_data.cmd_id,LEN_CMDID);
 	show_data.student_interactive_header.data_cmd_id = client_custom_character_id;
-    show_data.student_interactive_header.sender_ID = Judge_Self_ID;//µ±Ç°»úÆ÷ÈËid;
-    show_data.student_interactive_header.receiver_ID = choose_client(Judge_Self_ID);//¸Ã»úÆ÷ÈË¶ÔÓ¦µÄ¿Í»§¶Ëid
+    show_data.student_interactive_header.sender_ID = Judge_Self_ID;//å½“å‰æœºå™¨äººid;
+    show_data.student_interactive_header.receiver_ID = choose_client(Judge_Self_ID);//è¯¥æœºå™¨äººå¯¹åº”çš„å®¢æˆ·ç«¯id
 	memcpy(txbuff + STU_HEADER,&show_data.student_interactive_header,LEN_STU_HEAD);
 	show_data.operate_data.show_char.grapic_data_struct.graphic_name[0] = 's';
 	show_data.operate_data.show_char.grapic_data_struct.graphic_name[1] = '1';
@@ -180,8 +180,8 @@ void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t
 	show_data.operate_data.show_char.grapic_data_struct.graphic_type = string;
 	show_data.operate_data.show_char.grapic_data_struct.layer = layer;
 	show_data.operate_data.show_char.grapic_data_struct.color = color;
-	show_data.operate_data.show_char.grapic_data_struct.start_angle = 30;	//×ÖÌå´óĞ¡
-	show_data.operate_data.show_char.grapic_data_struct.end_angle = len;	//×ÖÌå³¤¶È
+	show_data.operate_data.show_char.grapic_data_struct.start_angle = 30;	//å­—ä½“å¤§å°
+	show_data.operate_data.show_char.grapic_data_struct.end_angle = len;	//å­—ä½“é•¿åº¦
 	show_data.operate_data.show_char.grapic_data_struct.width = 3;
 	show_data.operate_data.show_char.grapic_data_struct.start_x = start_x;
 	show_data.operate_data.show_char.grapic_data_struct.start_y = start_y;
@@ -199,14 +199,14 @@ void show_str(uint8_t str[],uint8_t len,uint8_t layer, uint16_t start_x,uint16_t
 void draw_seven_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, uint32_t (*Data)[12])
 {
     uint32_t length = 0;
-    //°´ÒªÇóÌûì´Ö¡Í·
+    //æŒ‰è¦æ±‚å¸–é½‘å¸§å¤´
     length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_seven.grapic_data_struct) + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
     show_data.frame_header.SOF = Judge_Data_SOF;
     show_data.frame_header.Data_Length = sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_seven.grapic_data_struct);
     show_data.frame_header.Seq = 0;
     memcpy(txbuff + i, &show_data.frame_header, LEN_HEADER);
     Append_CRC8_Check_Sum(*(txbuff + i), LEN_HEADER);
-    //·¢ËÍÊ±µÍ°ËÎ»ÔÚÇ°
+    //å‘é€æ—¶ä½å…«ä½åœ¨å‰
     show_data.cmd_id = 0x0301;
     memcpy(txbuff[i] + CMD_ID, &show_data.cmd_id, LEN_CMDID);
     show_data.student_interactive_header.data_cmd_id = client_custom_graphic_seven_id;
@@ -218,13 +218,13 @@ void draw_seven_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART,
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[0] = *(Data[j]+2);
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[1] = i;
         show_data.operate_data.show_seven.grapic_data_struct[j].graphic_name[2] = j;
-        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//Í¼ĞÎ²Ù×÷
-        show_data.operate_data.show_seven.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//Í¼ĞÎÀàĞÍ
-        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//Í¼²ã
-        show_data.operate_data.show_seven.grapic_data_struct[j].color = *(Data[j]+3);//1;//ÑÕÉ«
+        show_data.operate_data.show_seven.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//å›¾å½¢æ“ä½œ
+        show_data.operate_data.show_seven.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//å›¾å½¢ç±»å‹
+        show_data.operate_data.show_seven.grapic_data_struct[j].layer = *(Data[j]+2);//5;//å›¾å±‚
+        show_data.operate_data.show_seven.grapic_data_struct[j].color = *(Data[j]+3);//1;//é¢œè‰²
         show_data.operate_data.show_seven.grapic_data_struct[j].start_angle = *(Data[j]+4);//10;//
         show_data.operate_data.show_seven.grapic_data_struct[j].end_angle = *(Data[j]+5);//10;//
-        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//ÏßÌõ¿í¶È
+        show_data.operate_data.show_seven.grapic_data_struct[j].width = *(Data[j]+6);//10;//çº¿æ¡å®½åº¦
         show_data.operate_data.show_seven.grapic_data_struct[j].start_x = *(Data[j]+7);//x;
         show_data.operate_data.show_seven.grapic_data_struct[j].start_y =	*(Data[j]+8);//y;
         show_data.operate_data.show_seven.grapic_data_struct[j].radius = *(Data[j]+9);
@@ -243,14 +243,14 @@ void draw_seven_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART,
 void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, uint32_t (*Data)[12])
 {
     uint32_t length = 0;
-    //°´ÒªÇóÌûì´Ö¡Í·
+    //æŒ‰è¦æ±‚å¸–é½‘å¸§å¤´
     length = sizeof(show_data.frame_header) + sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_five.grapic_data_struct) + sizeof(show_data.cmd_id) + sizeof(show_data.frame_tail);
     show_data.frame_header.SOF = Judge_Data_SOF;
     show_data.frame_header.Data_Length = sizeof(show_data.student_interactive_header) + sizeof(show_data.operate_data.show_five.grapic_data_struct);
     show_data.frame_header.Seq = 0;
     memcpy(txbuff + i, &show_data.frame_header, LEN_HEADER);
     Append_CRC8_Check_Sum(*(txbuff + i), LEN_HEADER);
-    //·¢ËÍÊ±µÍ°ËÎ»ÔÚÇ°
+    //å‘é€æ—¶ä½å…«ä½åœ¨å‰
     show_data.cmd_id = 0x0301;
     memcpy(txbuff[i] + CMD_ID, &show_data.cmd_id, LEN_CMDID);
     show_data.student_interactive_header.data_cmd_id = client_custom_graphic_five_id;
@@ -262,18 +262,18 @@ void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, 
         show_data.operate_data.show_five.grapic_data_struct[j].graphic_name[0] = '0';
         show_data.operate_data.show_five.grapic_data_struct[j].graphic_name[1] = '0';
         show_data.operate_data.show_five.grapic_data_struct[j].graphic_name[2] = j;
-        show_data.operate_data.show_five.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//Í¼ĞÎ²Ù×÷
-        show_data.operate_data.show_five.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//Í¼ĞÎÀàĞÍ
-        show_data.operate_data.show_five.grapic_data_struct[j].layer = *(Data[j]+2);//5;//Í¼²ã
-        show_data.operate_data.show_five.grapic_data_struct[j].color = *(Data[j]+3);//1;//ÑÕÉ«
-        show_data.operate_data.show_five.grapic_data_struct[j].start_angle = *(Data[j]+4);//ÆğÊ¼½Ç¶È
-        show_data.operate_data.show_five.grapic_data_struct[j].end_angle = *(Data[j]+5);//ÖÕµã½Ç¶È
-        show_data.operate_data.show_five.grapic_data_struct[j].width = *(Data[j]+6);//10;//ÏßÌõ¿í¶È
-        show_data.operate_data.show_five.grapic_data_struct[j].start_x = *(Data[j]+7);//Æğµãx
-        show_data.operate_data.show_five.grapic_data_struct[j].start_y = *(Data[j]+8);//Æğµãy
-        show_data.operate_data.show_five.grapic_data_struct[j].radius = *(Data[j]+9);//°ë¾¶
-        show_data.operate_data.show_five.grapic_data_struct[j].end_x = *(Data[j]+10);//ÖÕµãx
-        show_data.operate_data.show_five.grapic_data_struct[j].end_y = *(Data[j]+11);//ÖÕµãy
+        show_data.operate_data.show_five.grapic_data_struct[j].operate_type = *(Data[j]+0);//Operate_type;//å›¾å½¢æ“ä½œ
+        show_data.operate_data.show_five.grapic_data_struct[j].graphic_type = *(Data[j]+1);//;//å›¾å½¢ç±»å‹
+        show_data.operate_data.show_five.grapic_data_struct[j].layer = *(Data[j]+2);//5;//å›¾å±‚
+        show_data.operate_data.show_five.grapic_data_struct[j].color = *(Data[j]+3);//1;//é¢œè‰²
+        show_data.operate_data.show_five.grapic_data_struct[j].start_angle = *(Data[j]+4);//èµ·å§‹è§’åº¦
+        show_data.operate_data.show_five.grapic_data_struct[j].end_angle = *(Data[j]+5);//ç»ˆç‚¹è§’åº¦
+        show_data.operate_data.show_five.grapic_data_struct[j].width = *(Data[j]+6);//10;//çº¿æ¡å®½åº¦
+        show_data.operate_data.show_five.grapic_data_struct[j].start_x = *(Data[j]+7);//èµ·ç‚¹x
+        show_data.operate_data.show_five.grapic_data_struct[j].start_y = *(Data[j]+8);//èµ·ç‚¹y
+        show_data.operate_data.show_five.grapic_data_struct[j].radius = *(Data[j]+9);//åŠå¾„
+        show_data.operate_data.show_five.grapic_data_struct[j].end_x = *(Data[j]+10);//ç»ˆç‚¹x
+        show_data.operate_data.show_five.grapic_data_struct[j].end_y = *(Data[j]+11);//ç»ˆç‚¹y
     }
 
     //show_single
@@ -291,17 +291,17 @@ void draw_five_line(uint8_t (*txbuff)[200], uint8_t i, UART_HandleTypeDef UART, 
 
 
 uint32_t pose[5][12]  = {
-	{add,straight_line,6,green,0,0,3,1600,780,0,1600,830},//³¯Ç°µÄÏß
-	{add,arc,6,green,30,330,3,1600,780,5,30,30},//´óÔ²»¡1600,780,5,30,30
-	{add,arc,6,pink,330,30,3,1600,780,0,30,30},//µ×ÅÌÇ°ÃæµÄÔ²»¡
+	{add,straight_line,6,green,0,0,3,1600,780,0,1600,830},//æœå‰çš„çº¿
+	{add,arc,6,green,30,330,3,1600,780,5,30,30},//å¤§åœ†å¼§1600,780,5,30,30
+	{add,arc,6,pink,330,30,3,1600,780,0,30,30},//åº•ç›˜å‰é¢çš„åœ†å¼§
 	
 	{add,straight_line,6,green,0,0,3,530,0,0,765,290},
 	{add,straight_line,6,green,0,0,3,1445,0,0,1200,290},
     };
 uint32_t Pose_Modify[5][12]  = {
-	{modify,straight_line,6,green,0,0,3,1600,780,0,1600,830},//³¯Ç°µÄÏß
-	{modify,arc,6,green,30,330,3,1600,780,5,30,30},//´óÔ²»¡1600,780,5,30,30
-	{modify,arc,6,pink,330,30,3,1600,780,0,30,30},//µ×ÅÌÇ°ÃæµÄÔ²»¡
+	{modify,straight_line,6,green,0,0,3,1600,780,0,1600,830},//æœå‰çš„çº¿
+	{modify,arc,6,green,30,330,3,1600,780,5,30,30},//å¤§åœ†å¼§1600,780,5,30,30
+	{modify,arc,6,pink,330,30,3,1600,780,0,30,30},//åº•ç›˜å‰é¢çš„åœ†å¼§
 	
  	{modify,straight_line,6,green,0,0,3,530,0,0,765,290},
 	{modify,straight_line,6,green,0,0,3,1445,0,0,1200,290},
@@ -309,22 +309,22 @@ uint32_t Pose_Modify[5][12]  = {
 
 uint32_t zhunxin[7][12]={
 ////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y	//
-	//×ÔÃé¿ò
+	//è‡ªç„æ¡†
 	{add,straight_line,4,white,0,0,3,699,321,0,699,749},// |
-	{add,straight_line,4,white,0,0,3,699,321,0,1216,321},// ¡ª
-	{add,straight_line,4,white,0,0,3,699,749,0,1216,749},// ¡ª
+	{add,straight_line,4,white,0,0,3,699,321,0,1216,321},// â€”
+	{add,straight_line,4,white,0,0,3,699,749,0,1216,749},// â€”
 	{add,straight_line,4,white,0,0,3,1216,321,0,1216,749},// |
-	//Éä»÷ÂäµãÏß
+	//å°„å‡»è½ç‚¹çº¿
 	{add,straight_line,4,white,0,0,2,935,450,0,980,450},//3m
 	{add,straight_line,4,qing,0,0,2,935,448,0,980,448},//5m
 	{add,straight_line,4,white,0,0,2,935,420,0,980,420},//8m
 };
 uint32_t zhunxin2[7][12]={
 ////operate_type graphic_type layer color start_angle end_angle width start_x start_y radius end_x end_y	//
-//×ÔÃé¿ò	
+//è‡ªç„æ¡†	
 	{modify,straight_line,4,white,0,0,3,699,321,0,699,749},// |
-	{modify,straight_line,4,white,0,0,3,699,321,0,1216,321},// ¡ª
-	{modify,straight_line,4,white,0,0,3,699,749,0,1216,749},// ¡ª
+	{modify,straight_line,4,white,0,0,3,699,321,0,1216,321},// â€”
+	{modify,straight_line,4,white,0,0,3,699,749,0,1216,749},// â€”
 	{modify,straight_line,4,white,0,0,3,1216,321,0,1216,749},// |
 	
 	{modify,straight_line,4,white,0,0,2,935,450,0,980,450},//3m

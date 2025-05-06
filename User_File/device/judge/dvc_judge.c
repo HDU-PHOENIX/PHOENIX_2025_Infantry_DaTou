@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
   * @file    judge.c
-  * @brief   ½âÎö²ÃÅĞÏµÍ³·¢À´µÄÊı¾İ£¬ÒÔ»ñµÃ»úÆ÷ÈËµ±Ç°µÄ×´Ì¬Êı¾İ¡£
+  * @brief   è§£æè£åˆ¤ç³»ç»Ÿå‘æ¥çš„æ•°æ®ï¼Œä»¥è·å¾—æœºå™¨äººå½“å‰çš„çŠ¶æ€æ•°æ®ã€‚
   *
   ******************************************************************************
   * @attention
   *
-  * 2021.3 ÒÑ¾­Íê³ÉÁËºÍtuxin.cµÄÊÊÅä¡£
+  * 2021.3 å·²ç»å®Œæˆäº†å’Œtuxin.cçš„é€‚é…ã€‚
   *
   *
   *
@@ -23,16 +23,16 @@ frame_t judge_frame_tx;
 uint8_t receive_student_data[113] = {0};
 extern uint8_t judge_rx_buff[JUDGE_MAX_LENGTH];
 
-judge_show_data_t    Show_data = {0};//¿Í»§¶ËĞÅÏ¢
-send_to_teammate     CommuData;//¶ÓÓÑÍ¨ĞÅĞÅÏ¢
+judge_show_data_t    Show_data = {0};//å®¢æˆ·ç«¯ä¿¡æ¯
+send_to_teammate     CommuData;//é˜Ÿå‹é€šä¿¡ä¿¡æ¯
 robot_type_t robot_type;
 
-bool Judge_Data_TF = false;//²ÃÅĞÊı¾İÊÇ·ñ¿ÉÓÃ£¬¸¨Öúº¯Êıµ÷ÓÃ
-uint8_t Judge_Self_ID;//µ±Ç°»úÆ÷ÈËµÄID
-uint16_t Judge_SelfClient_ID;//·¢ËÍÕß»úÆ÷ÈË¶ÔÓ¦µÄ¿Í»§¶ËID
-/**************²ÃÅĞÏµÍ³Êı¾İ¸¨Öú****************/
-uint16_t ShootNum=0;//Í³¼Æ·¢µ¯Á¿,0x0003´¥·¢Ò»´ÎÔòÈÏÎª·¢ÉäÁËÒ»¿Å
-bool Hurt_Data_Update = false;//×°¼×°åÉËº¦Êı¾İÊÇ·ñ¸üĞÂ,Ã¿ÊÜÒ»´ÎÉËº¦ÖÃTRUE,È»ºóÁ¢¼´ÖÃFALSE,¸øµ×ÅÌÉÁ±ÜÓÃ
+bool Judge_Data_TF = false;//è£åˆ¤æ•°æ®æ˜¯å¦å¯ç”¨ï¼Œè¾…åŠ©å‡½æ•°è°ƒç”¨
+uint8_t Judge_Self_ID;//å½“å‰æœºå™¨äººçš„ID
+uint16_t Judge_SelfClient_ID;//å‘é€è€…æœºå™¨äººå¯¹åº”çš„å®¢æˆ·ç«¯ID
+/**************è£åˆ¤ç³»ç»Ÿæ•°æ®è¾…åŠ©****************/
+uint16_t ShootNum=0;//ç»Ÿè®¡å‘å¼¹é‡,0x0003è§¦å‘ä¸€æ¬¡åˆ™è®¤ä¸ºå‘å°„äº†ä¸€é¢—
+bool Hurt_Data_Update = false;//è£…ç”²æ¿ä¼¤å®³æ•°æ®æ˜¯å¦æ›´æ–°,æ¯å—ä¸€æ¬¡ä¼¤å®³ç½®TRUE,ç„¶åç«‹å³ç½®FALSE,ç»™åº•ç›˜é—ªé¿ç”¨
 uint16_t Hurt_num = 0;
 #define BLUE  0
 #define RED   1
@@ -85,33 +85,33 @@ uint16_t choose_client(uint8_t robot_id)
     return client_id;
 }
 
-//´Ó²ÃÅĞÏµÍ³¶ÁÈ¡Êı¾İ
+//ä»è£åˆ¤ç³»ç»Ÿè¯»å–æ•°æ®
 bool Judge_Read_Data(uint8_t *ReadFromUsart)
 {
-    bool retval_tf = false;//Êı¾İÕıÈ·Óë·ñ±êÖ¾,Ã¿´Îµ÷ÓÃ¶ÁÈ¡²ÃÅĞÏµÍ³Êı¾İº¯Êı¶¼ÏÈÄ¬ÈÏÎª´íÎó
+    bool retval_tf = false;//æ•°æ®æ­£ç¡®ä¸å¦æ ‡å¿—,æ¯æ¬¡è°ƒç”¨è¯»å–è£åˆ¤ç³»ç»Ÿæ•°æ®å‡½æ•°éƒ½å…ˆé»˜è®¤ä¸ºé”™è¯¯
 
-    //ÎŞÊı¾İ°ü£¬Ôò²»×÷ÈÎºÎ´¦Àí
+    //æ— æ•°æ®åŒ…ï¼Œåˆ™ä¸ä½œä»»ä½•å¤„ç†
     if (ReadFromUsart == NULL)
     {
         return -1;
     }
-    //½«Ö¡Í·ĞÅÏ¢¿½±´
+    //å°†å¸§å¤´ä¿¡æ¯æ‹·è´
     memcpy(&judge_frame_rx.frame_header, ReadFromUsart, LEN_HEADER);
 
     judge_frame_rx.frame_header.Data_Length = (ReadFromUsart[DATA_LENGTH + 1] << 8 ) | ReadFromUsart[DATA_LENGTH];
-    //Ê×ÏÈÅĞ¶ÏÖ¡Í·
+    //é¦–å…ˆåˆ¤æ–­å¸§å¤´
     if(judge_frame_rx.frame_header.SOF == Judge_Data_SOF)
     {
-        //ÅĞ¶ÏÖ¡Í·CRCĞ£ÑéÊÇ·ñÕıÈ·  
+        //åˆ¤æ–­å¸§å¤´CRCæ ¡éªŒæ˜¯å¦æ­£ç¡®  
         if(Verify_CRC8_Check_Sum(ReadFromUsart, LEN_HEADER) == true)
         {
-            //ÅĞ¶ÏÕû°üCRCĞ£ÑéÊÇ·ñÕıÈ·
+            //åˆ¤æ–­æ•´åŒ…CRCæ ¡éªŒæ˜¯å¦æ­£ç¡®
             if(Verify_CRC16_Check_Sum(ReadFromUsart, LEN_HEADER + LEN_CMDID + judge_frame_rx.frame_header.Data_Length + LEN_TAIL) == true)
             {
-                retval_tf = true;//¶¼Ğ£Ñé¹ıÁËÔòËµÃ÷Êı¾İ¿ÉÓÃ
+                retval_tf = true;//éƒ½æ ¡éªŒè¿‡äº†åˆ™è¯´æ˜æ•°æ®å¯ç”¨
 
                 judge_frame_rx.cmd_id = (uint16_t)ReadFromUsart[6] << 8 | ReadFromUsart[5];
-                //½âÎöÊı¾İÃüÁîÂë,½«Êı¾İ¿½±´µ½ÏàÓ¦½á¹¹ÌåÖĞ(×¢Òâ¿½±´Êı¾İµÄ³¤¶È)
+                //è§£ææ•°æ®å‘½ä»¤ç ,å°†æ•°æ®æ‹·è´åˆ°ç›¸åº”ç»“æ„ä½“ä¸­(æ³¨æ„æ‹·è´æ•°æ®çš„é•¿åº¦)
                 switch(judge_frame_rx.cmd_id)
                 {
                 case game_status_t:
@@ -179,9 +179,9 @@ bool Judge_Read_Data(uint8_t *ReadFromUsart)
 
                 case robot_hurt_t:
                     memcpy(&judge_frame_rx.data.robot_hurt, ReadFromUsart + DATA, len_robot_hurt);
-                    if(judge_frame_rx.data.robot_hurt.HP_deduction_reason == 0)//×°¼×ÉËº¦¿ÛÑª
+                    if(judge_frame_rx.data.robot_hurt.HP_deduction_reason == 0)//è£…ç”²ä¼¤å®³æ‰£è¡€
                     {
-                        Hurt_Data_Update = true;	//×°¼×Êı¾İÃ¿¸üĞÂÒ»´ÎÔòÅĞ¶¨ÎªÊÜµ½Ò»´ÎÉËº¦
+                        Hurt_Data_Update = true;	//è£…ç”²æ•°æ®æ¯æ›´æ–°ä¸€æ¬¡åˆ™åˆ¤å®šä¸ºå—åˆ°ä¸€æ¬¡ä¼¤å®³
                         Hurt_num++;
                     }
                     else
@@ -192,7 +192,7 @@ bool Judge_Read_Data(uint8_t *ReadFromUsart)
 
                 case shoot_data_t:
                     memcpy(&judge_frame_rx.data.shoot_data, ReadFromUsart + DATA, len_shoot_data);
-//                    JUDGE_ShootNumCount();//·¢µ¯Á¿Í³¼Æ
+//                    JUDGE_ShootNumCount();//å‘å¼¹é‡ç»Ÿè®¡
                     break;
 
                 case bullet_remaining_t:
@@ -230,23 +230,23 @@ bool Judge_Read_Data(uint8_t *ReadFromUsart)
                 }
             }
         }
-        //Ê×µØÖ·¼ÓÖ¡³¤¶È,Ö¸ÏòCRC16ÏÂÒ»×Ö½Ú,ÓÃÀ´ÅĞ¶ÏÊÇ·ñÎª0xA5,ÓÃÀ´ÅĞ¶ÏÒ»¸öÊı¾İ°üÊÇ·ñÓĞ¶àÖ¡Êı¾İ
+        //é¦–åœ°å€åŠ å¸§é•¿åº¦,æŒ‡å‘CRC16ä¸‹ä¸€å­—èŠ‚,ç”¨æ¥åˆ¤æ–­æ˜¯å¦ä¸º0xA5,ç”¨æ¥åˆ¤æ–­ä¸€ä¸ªæ•°æ®åŒ…æ˜¯å¦æœ‰å¤šå¸§æ•°æ®
         if(*(ReadFromUsart + sizeof(frame_header_t) + LEN_CMDID + judge_frame_rx.frame_header.Data_Length + LEN_TAIL) == 0xA5)
         {
-            //Èç¹ûÒ»¸öÊı¾İ°ü³öÏÖÁË¶àÖ¡Êı¾İ,ÔòÔÙ´Î¶ÁÈ¡
+            //å¦‚æœä¸€ä¸ªæ•°æ®åŒ…å‡ºç°äº†å¤šå¸§æ•°æ®,åˆ™å†æ¬¡è¯»å–
             Judge_Read_Data(ReadFromUsart + sizeof(frame_header_t) + LEN_CMDID + judge_frame_rx.frame_header.Data_Length + LEN_TAIL);
         }
     }
     if (retval_tf == true)
     {
-        Judge_Data_TF = true;//¸¨Öúº¯ÊıÓÃ
+        Judge_Data_TF = true;//è¾…åŠ©å‡½æ•°ç”¨
     }
-    else		//Ö»ÒªCRC16Ğ£Ñé²»Í¨¹ı¾ÍÎªFALSE
+    else		//åªè¦CRC16æ ¡éªŒä¸é€šè¿‡å°±ä¸ºFALSE
     {
-        Judge_Data_TF = false;//¸¨Öúº¯ÊıÓÃ
+        Judge_Data_TF = false;//è¾…åŠ©å‡½æ•°ç”¨
     }
 
-    return retval_tf;//¶ÔÊı¾İÕıÎó×ö´¦Àí
+    return retval_tf;//å¯¹æ•°æ®æ­£è¯¯åšå¤„ç†
 
 }
 
@@ -255,24 +255,24 @@ unsigned char CliendTxBuffer[send_max_len];
 void JUDGE_Show_Data(void)
 {
     //	static uint8_t datalength,i;
-    //	uint8_t judge_led = 0xff;//³õÊ¼»¯ledÎªÈ«ÂÌ
+    //	uint8_t judge_led = 0xff;//åˆå§‹åŒ–ledä¸ºå…¨ç»¿
     //	static uint8_t auto_led_time = 0;
     //	static uint8_t buff_led_time = 0;
 
-    determine_ID();//ÅĞ¶Ï·¢ËÍÕßIDºÍÆä¶ÔÓ¦µÄ¿Í»§¶ËID
+    determine_ID();//åˆ¤æ–­å‘é€è€…IDå’Œå…¶å¯¹åº”çš„å®¢æˆ·ç«¯ID
 
     Show_data.frame_header.SOF = 0xA5;
     Show_data.frame_header.Data_Length = sizeof(ext_student_interactive_header_data_t) + sizeof(operate_data_t);
     Show_data.frame_header.Seq = 0;
-    memcpy(CliendTxBuffer, &Show_data.frame_header, sizeof(frame_header_t));//Ğ´ÈëÖ¡Í·Êı¾İ
-    Append_CRC8_Check_Sum(CliendTxBuffer, sizeof(frame_header_t));//Ğ´ÈëÖ¡Í·CRC8Ğ£ÑéÂë
+    memcpy(CliendTxBuffer, &Show_data.frame_header, sizeof(frame_header_t));//å†™å…¥å¸§å¤´æ•°æ®
+    Append_CRC8_Check_Sum(CliendTxBuffer, sizeof(frame_header_t));//å†™å…¥å¸§å¤´CRC8æ ¡éªŒç 
 
     Show_data.cmd_id = 0x0301;
 
-    Show_data.student_interactive_header.data_cmd_id = 0xD180;//·¢ËÍ¸ø¿Í»§¶ËµÄcmd£¬¹Ù·½¹Ì¶¨
-    //IDÒÑ¾­ÊÇ×Ô¶¯¶ÁÈ¡ÁË
-    Show_data.student_interactive_header.sender_ID 	 = Judge_Self_ID;//·¢ËÍÕßµÄID
-    Show_data.student_interactive_header.receiver_ID = Judge_SelfClient_ID;//·¢ËÍÕßµÄID£¬Ö»ÄÜÎª·¢ËÍÕß»úÆ÷ÈË¶ÔÓ¦µÄ¿Í»§¶Ë
+    Show_data.student_interactive_header.data_cmd_id = 0xD180;//å‘é€ç»™å®¢æˆ·ç«¯çš„cmdï¼Œå®˜æ–¹å›ºå®š
+    //IDå·²ç»æ˜¯è‡ªåŠ¨è¯»å–äº†
+    Show_data.student_interactive_header.sender_ID 	 = Judge_Self_ID;//å‘é€è€…çš„ID
+    Show_data.student_interactive_header.receiver_ID = Judge_SelfClient_ID;//å‘é€è€…çš„IDï¼Œåªèƒ½ä¸ºå‘é€è€…æœºå™¨äººå¯¹åº”çš„å®¢æˆ·ç«¯
 }
 
 #define Teammate_max_len     200
@@ -284,7 +284,7 @@ void Send_to_Teammate(void)
 {
     //	static uint8_t datalength,i;
 
-    Send_Color = is_red_or_blue();//ÅĞ¶Ï·¢ËÍ¸øÉÚ±øµÄÑÕÉ«£¬17À¶£¬7ºì?
+    Send_Color = is_red_or_blue();//åˆ¤æ–­å‘é€ç»™å“¨å…µçš„é¢œè‰²ï¼Œ17è“ï¼Œ7çº¢?
 
     memset(TeammateTxBuffer,0,200);
 
@@ -296,11 +296,11 @@ void Send_to_Teammate(void)
 
     CommuData.cmd_id = 0x0301;
 
-    CommuData.student_interactive_header_data.sender_ID = Judge_Self_ID;//·¢ËÍÕßµÄID
+    CommuData.student_interactive_header_data.sender_ID = Judge_Self_ID;//å‘é€è€…çš„ID
 
     if( First_Time_Send_Commu == true )
     {
-        CommuData.student_interactive_header_data.data_cmd_id = 0x0292;//ÔÚ0x0200-0x02ffÖ®¼äÑ¡?
+        CommuData.student_interactive_header_data.data_cmd_id = 0x0292;//åœ¨0x0200-0x02ffä¹‹é—´é€‰?
         CommuData.student_interactive_data[0] = 0x01;
         CommuData.student_interactive_data[1] = 0x03;
         CommuData.student_interactive_data[2] = 0x03;
@@ -320,23 +320,23 @@ void Send_to_Teammate(void)
         //		{
         //			First_Time_Send_Commu = false;
         //		}
-        if(Send_Color == BLUE)//×Ô¼ºÊÇÀ¶£¬·¢ËÍ¸øÀ¶ÉÚ±ø
+        if(Send_Color == BLUE)//è‡ªå·±æ˜¯è“ï¼Œå‘é€ç»™è“å“¨å…µ
         {
-            CommuData.student_interactive_header_data.receiver_ID = 107;//½ÓÊÜÕßID
+            CommuData.student_interactive_header_data.receiver_ID = 107;//æ¥å—è€…ID
         }
-        else if(Send_Color == RED)//×Ô¼ºÊÇºì£¬·¢ËÍ¸øºìÉÚ±ø
+        else if(Send_Color == RED)//è‡ªå·±æ˜¯çº¢ï¼Œå‘é€ç»™çº¢å“¨å…µ
         {
-            CommuData.student_interactive_header_data.receiver_ID = 7;//½ÓÊÜÕßID
+            CommuData.student_interactive_header_data.receiver_ID = 7;//æ¥å—è€…ID
         }
     }
     else
     {
         CommuData.student_interactive_header_data.data_cmd_id = 0x0255;
         send_time = 0;
-        CommuData.student_interactive_header_data.receiver_ID = 88;//Ëæ±ã¸ø¸öID£¬²»·¢ËÍ
+        CommuData.student_interactive_header_data.receiver_ID = 88;//éšä¾¿ç»™ä¸ªIDï¼Œä¸å‘é€
     }
 
-    CommuData.student_interactive_data[0] = 0;//·¢ËÍµÄÄÚÈİ£¬´óĞ¡²»Òª³¬¹ı±äÁ¿µÄ±äÁ¿ÀàĞÍ
+    CommuData.student_interactive_data[0] = 0;//å‘é€çš„å†…å®¹ï¼Œå¤§å°ä¸è¦è¶…è¿‡å˜é‡çš„å˜é‡ç±»å‹
 
     memcpy(TeammateTxBuffer + 5, (uint8_t *)&CommuData.cmd_id, (sizeof(CommuData.cmd_id) + CommuData.frame_header.Data_Length));
     Append_CRC16_Check_Sum(TeammateTxBuffer, sizeof(CommuData.cmd_id) + sizeof(CommuData.frame_header) + sizeof(CommuData.student_interactive_header_data) + 20 + sizeof(CommuData.frame_tail));
@@ -351,9 +351,9 @@ void Send_to_Teammate(void)
 
 
 bool Color;
-bool is_red_or_blue(void)//ÅĞ¶Ï×Ô¼ººìÀ¶·½
+bool is_red_or_blue(void)//åˆ¤æ–­è‡ªå·±çº¢è“æ–¹
 {
-    Judge_Self_ID = judge_frame_rx.data.game_robot_status.robot_id;//¶ÁÈ¡µ±Ç°»úÆ÷ÈËID
+    Judge_Self_ID = judge_frame_rx.data.game_robot_status.robot_id;//è¯»å–å½“å‰æœºå™¨äººID
 
     if(judge_frame_rx.data.game_robot_status.robot_id > 10)
     {
@@ -370,21 +370,21 @@ void determine_ID(void)
     Color = is_red_or_blue();
     if(Color == BLUE)
     {
-        Judge_SelfClient_ID = 0x0164 + (Judge_Self_ID - 100); //¼ÆËã¿Í»§¶Ëid
+        Judge_SelfClient_ID = 0x0164 + (Judge_Self_ID - 100); //è®¡ç®—å®¢æˆ·ç«¯id
     }
     else if(Color == RED)
     {
-        Judge_SelfClient_ID = 0x0100 + Judge_Self_ID;//¼ÆËã¿Í»§¶ËID
+        Judge_SelfClient_ID = 0x0100 + Judge_Self_ID;//è®¡ç®—å®¢æˆ·ç«¯ID
     }
 }
 
-/********************²ÃÅĞÊı¾İ¸¨ÖúÅĞ¶Ïº¯Êı***************************/
+/********************è£åˆ¤æ•°æ®è¾…åŠ©åˆ¤æ–­å‡½æ•°***************************/
 
 /**
-  * @brief  Êı¾İÊÇ·ñ¿ÉÓÃ
+  * @brief  æ•°æ®æ˜¯å¦å¯ç”¨
   * @param  void
-  * @retval  TRUE¿ÉÓÃ   FALSE²»¿ÉÓÃ
-  * @attention  ÔÚ²ÃÅĞ¶ÁÈ¡º¯ÊıÖĞÊµÊ±¸Ä±ä·µ»ØÖµ
+  * @retval  TRUEå¯ç”¨   FALSEä¸å¯ç”¨
+  * @attention  åœ¨è£åˆ¤è¯»å–å‡½æ•°ä¸­å®æ—¶æ”¹å˜è¿”å›å€¼
   */
 bool JUDGE_sGetDataState(void)
 {
@@ -393,7 +393,7 @@ bool JUDGE_sGetDataState(void)
 
 
 /**
-  * @brief  ±ÈÈü×´Ì¬
+  * @brief  æ¯”èµ›çŠ¶æ€
   * @param  void
   * @retval void
   * @attention
@@ -404,13 +404,13 @@ float JUDGE_fGetgame_progress(void)
 }
 
 /**
-  * @brief  ±ÈÈü×´Ì¬
+  * @brief  æ¯”èµ›çŠ¶æ€
   * @param  void
   * @retval void
   * @attention
   */
 /**
-  * @brief  ÅĞ¶Ï´óĞ¡·û
+  * @brief  åˆ¤æ–­å¤§å°ç¬¦
   * @param  void
   * @retval void
   * @attention
@@ -434,9 +434,9 @@ int JUDGE_Gethurt_reason(void)
 
 
 /**
-  * @brief  ¶ÁÈ¡Ë²Ê±¹¦ÂÊ
+  * @brief  è¯»å–ç¬æ—¶åŠŸç‡
   * @param  void
-  * @retval ÊµÊ±¹¦ÂÊÖµ
+  * @retval å®æ—¶åŠŸç‡å€¼
   * @attention
   */
 float JUDGE_fGetChassisPower(void)
@@ -445,9 +445,9 @@ float JUDGE_fGetChassisPower(void)
 }
 
 /**
-  * @brief  ¶ÁÈ¡µ×ÅÌ¹¦ÂÊÏŞÖÆ
+  * @brief  è¯»å–åº•ç›˜åŠŸç‡é™åˆ¶
   * @param  void
-  * @retval ÊµÊ±µ×ÅÌ¹¦ÂÊÏŞÖÆ
+  * @retval å®æ—¶åº•ç›˜åŠŸç‡é™åˆ¶
   * @attention
   */
 uint8_t JUDGE_usGetPowerLimit(void)
@@ -455,9 +455,9 @@ uint8_t JUDGE_usGetPowerLimit(void)
     return (judge_frame_rx.data.game_robot_status.chassis_power_limit);
 }
 /**
-  * @brief  ¶ÁÈ¡Ê£Óà½¹¶úÄÜÁ¿
+  * @brief  è¯»å–å‰©ä½™ç„¦è€³èƒ½é‡
   * @param  void
-  * @retval Ê£Óà»º³å½¹¶úÄÜÁ¿(×î´ó60)
+  * @retval å‰©ä½™ç¼“å†²ç„¦è€³èƒ½é‡(æœ€å¤§60)
   * @attention
   */
 uint16_t JUDGE_fGetRemainEnergy(void)
@@ -466,9 +466,9 @@ uint16_t JUDGE_fGetRemainEnergy(void)
 }
 
 /**
-  * @brief  ¶ÁÈ¡µ±Ç°µÈ¼¶
+  * @brief  è¯»å–å½“å‰ç­‰çº§
   * @param  void
-  * @retval µ±Ç°µÈ¼¶
+  * @retval å½“å‰ç­‰çº§
   * @attention
   */
 uint8_t JUDGE_ucGetRobotLevel(void)
@@ -477,9 +477,9 @@ uint8_t JUDGE_ucGetRobotLevel(void)
 }
 
 /**
-  * @brief  ¶ÁÈ¡Ç¹¿ÚÈÈÁ¿
+  * @brief  è¯»å–æªå£çƒ­é‡
   * @param  void
-  * @attention  ÊµÊ±ÈÈÁ¿
+  * @attention  å®æ—¶çƒ­é‡
   */
 uint16_t JUDGE_usGetRemoteHeat17(void)
 {
@@ -487,9 +487,9 @@ uint16_t JUDGE_usGetRemoteHeat17(void)
 }
 
 /**
-  * @brief  ¶ÁÈ¡ÉäËÙ
+  * @brief  è¯»å–å°„é€Ÿ
   * @param  void
-  * @attention  ÊµÊ±ÉäËÙ
+  * @attention  å®æ—¶å°„é€Ÿ
   */
 float JUDGE_usGetSpeedHeat17(void)
 {
@@ -499,10 +499,10 @@ float JUDGE_usGetSpeedHeat17(void)
 
 
 /**
-  * @brief  ¶ÁÈ¡·¢µ¯Á¿
+  * @brief  è¯»å–å‘å¼¹é‡
   * @param  void
-  * @retval ·¢µ¯Á¿
-  * @attention ²»ÊÊÓÃÓÚË«Ç¹¹Ü
+  * @retval å‘å¼¹é‡
+  * @attention ä¸é€‚ç”¨äºåŒæªç®¡
   */
 uint16_t JUDGE_usGetShootNum(void)
 {
@@ -510,7 +510,7 @@ uint16_t JUDGE_usGetShootNum(void)
 }
 
 /**
-  * @brief  ·¢µ¯Á¿ÇåÁã
+  * @brief  å‘å¼¹é‡æ¸…é›¶
   * @param  void
   * @retval void
   * @attention
@@ -521,9 +521,9 @@ void JUDGE_ShootNum_Clear(void)
 }
 
 /**
-  * @brief  ¶ÁÈ¡Ç¹¿ÚÈÈÁ¿
+  * @brief  è¯»å–æªå£çƒ­é‡
   * @param  void
-  * @retval µ±Ç°µÈ¼¶42mmÈÈÁ¿ÉÏÏŞ
+  * @retval å½“å‰ç­‰çº§42mmçƒ­é‡ä¸Šé™
   * @attention
   */
 uint16_t JUDGE_usGetHeatLimit(void)
@@ -531,9 +531,9 @@ uint16_t JUDGE_usGetHeatLimit(void)
     return judge_frame_rx.data.game_robot_status.shooter_barrel_heat_limit;
 }
 ///**
-//  * @brief  ¶ÁÈ¡Ç¹¿ÚÉäËÙÉÏÏŞ
+//  * @brief  è¯»å–æªå£å°„é€Ÿä¸Šé™
 //  * @param  void
-//  * @retval µ±Ç°µÈ¼¶42mmÉäËÙÉÏÏŞ
+//  * @retval å½“å‰ç­‰çº§42mmå°„é€Ÿä¸Šé™
 //  * @attention
 //  */
 //uint8_t JUDGE_usGetSpeedLimit(void)
@@ -541,36 +541,36 @@ uint16_t JUDGE_usGetHeatLimit(void)
 //    return judge_frame_rx.data.game_robot_status.shooter_id1_17mm_speed_limit;
 //}
 /**
-  * @brief  µ±Ç°µÈ¼¶¶ÔÓ¦µÄÇ¹¿ÚÃ¿ÃëÀäÈ´Öµ
+  * @brief  å½“å‰ç­‰çº§å¯¹åº”çš„æªå£æ¯ç§’å†·å´å€¼
   * @param  void
-  * @retval µ±Ç°µÈ¼¶42mmÀäÈ´ËÙ¶È
+  * @retval å½“å‰ç­‰çº§42mmå†·å´é€Ÿåº¦
   * @attention
   */
 uint16_t JUDGE_usGetShootCold(void)
 {
     return judge_frame_rx.data.game_robot_status.shooter_barrel_cooling_value;
 }
-//À×´ï±ê¼Ç
+//é›·è¾¾æ ‡è®°
 
-/****************µ×ÅÌ×Ô¶¯ÉÁ±ÜÅĞ¶ÏÓÃ*******************/
+/****************åº•ç›˜è‡ªåŠ¨é—ªé¿åˆ¤æ–­ç”¨*******************/
 /**
-  * @brief  ×°¼×°åÉËº¦Êı¾İÊÇ·ñ¸üĞÂ
+  * @brief  è£…ç”²æ¿ä¼¤å®³æ•°æ®æ˜¯å¦æ›´æ–°
   * @param  void
-  * @retval TRUEÒÑ¸üĞÂ   FALSEÃ»¸üĞÂ
+  * @retval TRUEå·²æ›´æ–°   FALSEæ²¡æ›´æ–°
   * @attention
   */
 //bool JUDGE_IfArmorHurt(void)
 //{
 //    static portTickType ulCurrent = 0;
 //    static uint32_t ulDelay = 0;
-//    static bool IfHurt = false;//Ä¬ÈÏ×°¼×°å´¦ÓÚÀëÏß×´Ì¬
+//    static bool IfHurt = false;//é»˜è®¤è£…ç”²æ¿å¤„äºç¦»çº¿çŠ¶æ€
 
 
 //    ulCurrent = xTaskGetTickCount();
 
-//    if (Hurt_Data_Update == true)//×°¼×°åÊı¾İ¸üĞÂ
+//    if (Hurt_Data_Update == true)//è£…ç”²æ¿æ•°æ®æ›´æ–°
 //    {
-//        Hurt_Data_Update = false;//±£Ö¤ÄÜÅĞ¶Ïµ½ÏÂ´Î×°¼×°åÉËº¦¸üĞÂ
+//        Hurt_Data_Update = false;//ä¿è¯èƒ½åˆ¤æ–­åˆ°ä¸‹æ¬¡è£…ç”²æ¿ä¼¤å®³æ›´æ–°
 //        ulDelay = ulCurrent + 200;//
 //        IfHurt = true;
 //    }
@@ -595,7 +595,7 @@ bool Judge_If_Death(void)
 }
 
 
-// 0 Î» »úÆ÷ÈË±àºÅ
-// 1 Î» »úÆ÷ÈËÎ»ÖÃ
+// 0 ä½ æœºå™¨äººç¼–å·
+// 1 ä½ æœºå™¨äººä½ç½®
 
 

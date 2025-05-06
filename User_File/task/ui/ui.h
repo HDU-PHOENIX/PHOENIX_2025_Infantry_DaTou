@@ -20,90 +20,90 @@ extern uint32_t zimiao[1][12];
 extern uint32_t zhunxin2[7][12];
 typedef enum
 {
-    add = 1,                         //Ôö¼Ó
-    modify = 2,						 //ĞŞ¸Ä
-    Delete = 3 						 //É¾³ı
+    add = 1,                         //å¢åŠ 
+    modify = 2,						 //ä¿®æ”¹
+    Delete = 3 						 //åˆ é™¤
 } operate_type;
 
 
 typedef enum
 {
-    straight_line = 0,				//Ö±Ïß
-    rectangle,						//¾ØĞÎ
-    circle,							//ÕûÔ²
-    oval,							//ÍÖÔ²
-    arc,							//Ô²»¡
-    floating,						//¸¡µãÊı
-    integer,						//ÕûÊı
-    string							//×Ö·û
+    straight_line = 0,				//ç›´çº¿
+    rectangle,						//çŸ©å½¢
+    circle,							//æ•´åœ†
+    oval,							//æ¤­åœ†
+    arc,							//åœ†å¼§
+    floating,						//æµ®ç‚¹æ•°
+    integer,						//æ•´æ•°
+    string							//å­—ç¬¦
 } graphic_type;
 
 typedef enum
 {
     red_blue = 0,				
-    yellow,						//»ÆÉ«
-    green,							//ÂÌÉ«
-    orange,							//³ÈÉ«
-    zihong,							//×ÏºE
-    pink,								//·ÛÉ«
-    qing,								//ÇàÉ«
-    black,							//ºÚÉ«
-    white								//°×É«
+    yellow,						//é»„è‰²
+    green,							//ç»¿è‰²
+    orange,							//æ©™è‰²
+    zihong,							//ç´«ç°›E
+    pink,								//ç²‰è‰²
+    qing,								//é’è‰²
+    black,							//é»‘è‰²
+    white								//ç™½è‰²
 } color_type;
 
-//¶ÔÓ¦¿Í»§¶ËÉ¾³ıÍ¼ĞÎ
+//å¯¹åº”å®¢æˆ·ç«¯åˆ é™¤å›¾å½¢
 typedef __packed struct
 {
-    uint8_t operate_type;			//Í¼ĞÎ²Ù×E
-    uint8_t layer;						//Í¼²ãÊı
+    uint8_t operate_type;			//å›¾å½¢æ“è®ˆE
+    uint8_t layer;						//å›¾å±‚æ•°
 } ext_client_custom_graphic_delete_t;
 
 
-//Í¼ĞÎÊı¾İ
+//å›¾å½¢æ•°æ®
 typedef __packed struct
 {
-    uint8_t graphic_name[3];		//Í¼ĞÎÃE
-    uint32_t operate_type: 3;		//Í¼ĞÎ²Ù×÷£¬
-    uint32_t graphic_type: 3;		//Í¼ĞÎÀàĞÍ
-    uint32_t layer: 4;						//Í¼²ãÊı
-    uint32_t color: 4;						//ÑÕÉ«
-    uint32_t start_angle: 9;			//ÆğÊ¼½Ç¶È
-    uint32_t end_angle: 9;				//ÖÕÖ¹½Ç¶È
-    uint32_t width: 10;					//ÏßÌõ¿í¶È
-    uint32_t start_x: 11;				//Æğµãx×ø±E
-    uint32_t start_y: 11;				//Æğµãy×ø±E
-    uint32_t radius: 10;					//×ÖÌå´óĞ¡»ò°ë¾¶
-    uint32_t end_x: 11;					//ÖÕµãx×ø±E
-    uint32_t end_y: 11;					//ÖÕµãy×ø±E
+    uint8_t graphic_name[3];		//å›¾å½¢è„•E
+    uint32_t operate_type: 3;		//å›¾å½¢æ“ä½œï¼Œ
+    uint32_t graphic_type: 3;		//å›¾å½¢ç±»å‹
+    uint32_t layer: 4;						//å›¾å±‚æ•°
+    uint32_t color: 4;						//é¢œè‰²
+    uint32_t start_angle: 9;			//èµ·å§‹è§’åº¦
+    uint32_t end_angle: 9;				//ç»ˆæ­¢è§’åº¦
+    uint32_t width: 10;					//çº¿æ¡å®½åº¦
+    uint32_t start_x: 11;				//èµ·ç‚¹xåçœ®E
+    uint32_t start_y: 11;				//èµ·ç‚¹yåçœ®E
+    uint32_t radius: 10;					//å­—ä½“å¤§å°æˆ–åŠå¾„
+    uint32_t end_x: 11;					//ç»ˆç‚¹xåçœ®E
+    uint32_t end_y: 11;					//ç»ˆç‚¹yåçœ®E
 } graphic_data_struct_t;
 
 
 
-//¿Í»§¶Ë»æÖÆÒ»¸öÍ¼ĞÎ Êı¾İµÄÄÚÈİ ID£º0x0101
+//å®¢æˆ·ç«¯ç»˜åˆ¶ä¸€ä¸ªå›¾å½¢ æ•°æ®çš„å†…å®¹ IDï¼š0x0101
 typedef __packed struct
 {
     graphic_data_struct_t grapic_data_struct;
 } ext_client_custom_graphic_single_t;
 
-//¿Í»§¶Ë»æÖÆÁ½¸öÍ¼ĞÎ	Êı¾İµÄÄÚÈİ ID£º0x0102
+//å®¢æˆ·ç«¯ç»˜åˆ¶ä¸¤ä¸ªå›¾å½¢	æ•°æ®çš„å†…å®¹ IDï¼š0x0102
 typedef __packed struct
 {
     graphic_data_struct_t grapic_data_struct[2];
 } ext_client_custom_graphic_double_t;
 
-//¿Í»§¶Ë»æÖÆÎå¸öÍ¼ĞÎ  Êı¾İµÄÄÚÈİ ID£º0x0103
+//å®¢æˆ·ç«¯ç»˜åˆ¶äº”ä¸ªå›¾å½¢  æ•°æ®çš„å†…å®¹ IDï¼š0x0103
 typedef __packed struct
 {
     graphic_data_struct_t grapic_data_struct[5];
 } ext_client_custom_graphic_five_t;
 
-//¿Í»§¶Ë»æÖÆÆß¸öÍ¼ĞÎ  Êı¾İµÄÄÚÈİ ID£º0x0104
+//å®¢æˆ·ç«¯ç»˜åˆ¶ä¸ƒä¸ªå›¾å½¢  æ•°æ®çš„å†…å®¹ IDï¼š0x0104
 typedef __packed struct
 {
     graphic_data_struct_t grapic_data_struct[7];
 } ext_client_custom_graphic_seven_t;
 
-//¿Í»§¶Ë»æÖÆ×Ö·E	Êı¾İµÄÄÚÈİ ID£º0x0110
+//å®¢æˆ·ç«¯ç»˜åˆ¶å­—ç©ªE	æ•°æ®çš„å†…å®¹ IDï¼š0x0110
 typedef __packed struct
 {
     graphic_data_struct_t grapic_data_struct;
@@ -112,21 +112,21 @@ typedef __packed struct
 
 typedef __packed struct
 {
-    ext_client_custom_graphic_delete_t client_custom_graphic_delete; 	//¿Í»§¶ËÍ¼ĞÎÉ¾³ı
-    ext_client_custom_graphic_single_t show_single;										//¿Í»§¶Ë»æÖÆÒ»¸öÍ¼ĞÎ
-    ext_client_custom_graphic_double_t show_double;										//¿Í»§¶Ë»æÖÆÁ½¸öÍ¼ĞÎ
-    ext_client_custom_graphic_five_t   show_five;											//¿Í»§¶Ë»æÖÆÎå¸öÍ¼ĞÎ
-    ext_client_custom_graphic_seven_t  show_seven;                    //¿Í»§¶Ë»æÖÆÆß¸öÍ¼ĞÎ
-    ext_client_custom_character_t      show_char;											//¿Í»§¶Ë»æÖÆ×Ö·E
+    ext_client_custom_graphic_delete_t client_custom_graphic_delete; 	//å®¢æˆ·ç«¯å›¾å½¢åˆ é™¤
+    ext_client_custom_graphic_single_t show_single;										//å®¢æˆ·ç«¯ç»˜åˆ¶ä¸€ä¸ªå›¾å½¢
+    ext_client_custom_graphic_double_t show_double;										//å®¢æˆ·ç«¯ç»˜åˆ¶ä¸¤ä¸ªå›¾å½¢
+    ext_client_custom_graphic_five_t   show_five;											//å®¢æˆ·ç«¯ç»˜åˆ¶äº”ä¸ªå›¾å½¢
+    ext_client_custom_graphic_seven_t  show_seven;                    //å®¢æˆ·ç«¯ç»˜åˆ¶ä¸ƒä¸ªå›¾å½¢
+    ext_client_custom_character_t      show_char;											//å®¢æˆ·ç«¯ç»˜åˆ¶å­—ç©ªE
 } operate_data_t;
 
 typedef struct
 {
-    frame_header_t frame_header;																	//Ö¡Í·
-    uint16_t cmd_id;																				//ÃüÁîÂë
-    ext_student_interactive_header_data_t student_interactive_header; 	                            //Êı¾İ¶ÎÍ·½á¹¹
-    operate_data_t operate_data;																	//²Ù×÷Êı¾İÀàĞÍ
-    uint16_t frame_tail;																			//Ö¡Î²£¨16Î»crcĞ£Ñé£©
+    frame_header_t frame_header;																	//å¸§å¤´
+    uint16_t cmd_id;																				//å‘½ä»¤ç 
+    ext_student_interactive_header_data_t student_interactive_header; 	                            //æ•°æ®æ®µå¤´ç»“æ„
+    operate_data_t operate_data;																	//æ“ä½œæ•°æ®ç±»å‹
+    uint16_t frame_tail;																			//å¸§å°¾ï¼ˆ16ä½crcæ ¡éªŒï¼‰
 } judge_show_data_t;
 
 typedef struct

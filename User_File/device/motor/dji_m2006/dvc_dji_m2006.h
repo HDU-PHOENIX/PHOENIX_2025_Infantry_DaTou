@@ -7,15 +7,15 @@ extern Moto_M2006_t M2006_Rammer;
 
 typedef struct
 {
-    uint16_t can_id;//电机ID
-    uint16_t rotor_angle;//电机角度
+    uint16_t can_id;//鐢垫満ID
+    uint16_t rotor_angle;//鐢垫満瑙掑害
     uint16_t last_angle;
     uint32_t total_angle;
-    int16_t  rotor_speed;//电机速度
-    int16_t  torque_current;//电机扭矩
-    int16_t Set_Speed;//设定速度
-    uint16_t Set_Angle;//设定角度
-    PID_struct_t Angle_PID;//PID各种参数
+    int16_t  rotor_speed;//鐢垫満閫熷害
+    int16_t  torque_current;//鐢垫満鎵煩
+    int16_t Set_Speed;//璁惧畾閫熷害
+    uint16_t Set_Angle;//璁惧畾瑙掑害
+    PID_struct_t Angle_PID;//PID鍚勭鍙傛暟
     PID_struct_t Speed_PID;
 }Moto_M2006_t;
 

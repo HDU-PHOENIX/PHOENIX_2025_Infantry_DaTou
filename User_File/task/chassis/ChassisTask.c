@@ -10,8 +10,8 @@ void ChassisTask(void const * argument)
 
     while (1)   
     { 
-        currentTime = xTaskGetTickCount();//当前系统时间
-        Control_Mode_Choose();//选择模式
+        currentTime = xTaskGetTickCount();//褰撳墠绯荤粺鏃堕棿
+        Control_Mode_Choose();//閫夋嫨妯″紡
         Chassis_Power_Limit=JUDGE_usGetPowerLimit();
         Chassis_Power_Buffer=JUDGE_fGetRemainEnergy();
         SuperCap_Switch_Control();
@@ -34,7 +34,7 @@ switch (Car_Mode.State)
         }
         SuperCap_Tx();
 //		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_11);
-        vTaskDelayUntil(&currentTime,1);//绝对延时
+        vTaskDelayUntil(&currentTime,1);//缁濆寤舵椂
     }
 
 }

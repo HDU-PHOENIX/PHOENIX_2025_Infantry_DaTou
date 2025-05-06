@@ -1,7 +1,7 @@
 /**
  * @file alg_pid.c
- * @brief PIDËã·¨
  * @author He WenXuan(hewenxuan040923@gmail.com)
+ * @brief PIDç®—æ³•
  * @date 2025-4-11
  * @version 1.0
  * @copyright HDU-PHOENIX (c) 2025
@@ -10,20 +10,20 @@
 #include "alg_pid.h"
 
 /**
- * @brief PIDÊı×é³õÊ¼»¯
- * @param PID PIDÊı×é
- * @param kp ±ÈÀıÏîÏµÊı
- * @param ki »ı·ÖÏîÏµÊı
- * @param kd Î¢·ÖÏîÏµÊı
- * @param kf Ç°À¡ÏîÏµÊı
- * @param dead_zone ËÀÇø
- * @param angle_max ¹ıÁã±£»¤£¨×î´ó½Ç¶È£©
- * @param i_variable_max ±äËÙ»ı·ÖÉÏÏŞ
- * @param i_variable_min ±äËÙ»ı·ÖÏÂÏŞ
- * @param d_first Î¢·ÖÏÈĞĞ£¨Îª1Æô¶¯£©
- * @param i_max »ı·ÖÏŞ·ù
- * @param out_max Êä³öÏŞ·ù
- * @note Èç¹ûÓĞ±äËÙ»ı·Ö»·½Úi_variable_maxĞèÒª±Èi_separatedĞ¡
+ * @brief PIDæ•°ç»„åˆå§‹åŒ–
+ * @param PID PIDæ•°ç»„
+ * @param kp æ¯”ä¾‹é¡¹ç³»æ•°
+ * @param ki ç§¯åˆ†é¡¹ç³»æ•°
+ * @param kd å¾®åˆ†é¡¹ç³»æ•°
+ * @param kf å‰é¦ˆé¡¹ç³»æ•°
+ * @param dead_zone æ­»åŒº
+ * @param angle_max è¿‡é›¶ä¿æŠ¤ï¼ˆæœ€å¤§è§’åº¦ï¼‰
+ * @param i_variable_max å˜é€Ÿç§¯åˆ†ä¸Šé™
+ * @param i_variable_min å˜é€Ÿç§¯åˆ†ä¸‹é™
+ * @param d_first å¾®åˆ†å…ˆè¡Œï¼ˆä¸º1å¯åŠ¨ï¼‰
+ * @param i_max ç§¯åˆ†é™å¹…
+ * @param out_max è¾“å‡ºé™å¹…
+ * @note å¦‚æœæœ‰å˜é€Ÿç§¯åˆ†ç¯èŠ‚i_variable_maxéœ€è¦æ¯”i_separatedå°
  */
 void vPidInit(PID_struct_t *PID,
             float kp,
@@ -54,8 +54,8 @@ void vPidInit(PID_struct_t *PID,
 }
 
 /**
- * @brief PID¹ıÁã±£»¤
- * @param pid PID½á¹¹Ìå
+ * @brief PIDè¿‡é›¶ä¿æŠ¤
+ * @param pid PIDç»“æ„ä½“
  */
 void vPidProtect(PID_struct_t *pid)
 {
@@ -71,36 +71,36 @@ void vPidProtect(PID_struct_t *pid)
 }
 
 /**
- * @brief PID¼ÆËãº¯Êı
- * @param PID PID½á¹¹Ìå
- * @param target Éè¶¨Öµ
- * @param now Êµ¼ÊÖµ
- * @return PID¼ÆËã½á¹û
+ * @brief PIDè®¡ç®—å‡½æ•°
+ * @param PID PIDç»“æ„ä½“
+ * @param target è®¾å®šå€¼
+ * @param now å®é™…å€¼
+ * @return PIDè®¡ç®—ç»“æœ
  */
 float fPidCalc(PID_struct_t *PID, float target, float now)
 {
-    //Ç°ÖÃ¹¤×÷
+    //å‰ç½®å·¥ä½œ
     PID->target[0] = target;
     PID->now[0] = now;
-    //¹ıÁã±£»¤
+    //è¿‡é›¶ä¿æŠ¤
     if(PID->angle_max != 0){
         vPidProtect(PID);
     }
-    //¼ÆËãÎó²î
+    //è®¡ç®—è¯¯å·®
     PID->err[0] = PID->target[0] - PID->now[0];
-    // ÅĞ¶ÏËÀÇø
+    // åˆ¤æ–­æ­»åŒº
     if (PID->err[0] < PID->dead_zone && PID->err[0] > -PID->dead_zone){
         PID->err[0] = 0.0f;
     }
-    //¼ÆËã±ÈÀıÏî
+    //è®¡ç®—æ¯”ä¾‹é¡¹
     PID->p_out = PID->kp * PID->err[0];
-    //¼ÆËã»ı·ÖÏî
+    //è®¡ç®—ç§¯åˆ†é¡¹
     float i_speed_ratio = 0;
     if(PID->i_variable_max == 0 && PID->i_variable_min == 0){
-        //·Ç±äËÙ»ı·Ö
+        //éå˜é€Ÿç§¯åˆ†
         i_speed_ratio = 1;
     }else{
-        //±äËÙ»ı·Ö
+        //å˜é€Ÿç§¯åˆ†
         if(PID->err[0] < PID->i_variable_min && PID->err[0] > -PID->i_variable_min)
             i_speed_ratio = 1;
         else if((PID->err[0] < PID->i_variable_max && PID->err[0] > PID->i_variable_min) || (PID->err[0] > -PID->i_variable_max && PID->err[0] < -PID->i_variable_min))
@@ -109,37 +109,37 @@ float fPidCalc(PID_struct_t *PID, float target, float now)
             i_speed_ratio = 0;
     }
     if(PID->i_separated == 0){
-        //Ã»ÓĞ»ı·Ö·ÖÀë
+        //æ²¡æœ‰ç§¯åˆ†åˆ†ç¦»
         PID->i_out += PID->ki * PID->err[0];
     }else{
-        //ÓĞ»ı·Ö·ÖÀë
+        //æœ‰ç§¯åˆ†åˆ†ç¦»
         if(PID->err[0] < -PID->i_separated || PID->err[0] > PID->i_separated){
-            //ÔÚ»ı·Ö·ÖÀëÇø¼äÀï
+            //åœ¨ç§¯åˆ†åˆ†ç¦»åŒºé—´é‡Œ
             PID->integral = 0;
             PID->i_out = 0;
         }else{
-            //²»ÔÚ»ı·Ö·ÖÀëÇø¼äÀï
+            //ä¸åœ¨ç§¯åˆ†åˆ†ç¦»åŒºé—´é‡Œ
             PID->integral += i_speed_ratio * PID->err[0];
             PID->i_out = PID->ki * PID->integral;
         }
     }
-    //»ı·ÖÏŞ·ù
+    //ç§¯åˆ†é™å¹…
     PID->i_out=fPidLimit(PID->i_out, -PID->i_max, PID->i_max);
-    //¼ÆËãÎ¢·ÖÏî
+    //è®¡ç®—å¾®åˆ†é¡¹
     if(PID->d_first == 0){
-        //Ã»ÓĞÎ¢·ÖÏÈĞĞ
+        //æ²¡æœ‰å¾®åˆ†å…ˆè¡Œ
         PID->d_out = PID->kd * (PID->err[0] - PID->err[1]);
     }else{
-        //Î¢·ÖÏÈĞĞ
+        //å¾®åˆ†å…ˆè¡Œ
         PID->d_out = -PID->kd * (PID->now[0] - PID->now[1]);
     }
-    //¼ÆËãÇ°À¡Ïî
+    //è®¡ç®—å‰é¦ˆé¡¹
     PID->f_out = PID->kf * (PID->target[0] - PID->target[1]);
-    //¼ÆËãÊä³ö
+    //è®¡ç®—è¾“å‡º
     PID->output = PID->p_out + PID->i_out + PID->d_out + PID->f_out;
-    //Êä³öÏŞ·ù
+    //è¾“å‡ºé™å¹…
     PID->output=fPidLimit(PID->output, -PID->out_max, PID->out_max);
-    //ÉÆºó²Ù×÷
+    //å–„åæ“ä½œ
     PID->err[1] = PID->err[0];
     PID->target[1] = PID->target[0];
     PID->now[1] = PID->now[0];
@@ -147,11 +147,11 @@ float fPidCalc(PID_struct_t *PID, float target, float now)
 }
 
 /**
- * @brief ÏŞÖÆÒ»¸öÕûÊı±äÁ¿ value ÔÚÖ¸¶¨µÄ×îĞ¡Öµ min ºÍ×î´óÖµ max Ö®¼ä
- * @param value ÊäÈëÖµ
- * @param min ×îĞ¡Öµ
- * @param max ×î´óÖµ
- * @return ¼ÆËã½á¹û
+ * @brief é™åˆ¶ä¸€ä¸ªæ•´æ•°å˜é‡ value åœ¨æŒ‡å®šçš„æœ€å°å€¼ min å’Œæœ€å¤§å€¼ max ä¹‹é—´
+ * @param value è¾“å…¥å€¼
+ * @param min æœ€å°å€¼
+ * @param max æœ€å¤§å€¼
+ * @return è®¡ç®—ç»“æœ
  */
 float fPidLimit(float value,float min,float max)
 {

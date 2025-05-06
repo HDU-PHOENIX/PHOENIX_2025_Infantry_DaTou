@@ -117,10 +117,10 @@ void UI_Task(void const * argument)
 		if(UI_PushUp_Counter%11 == 0)
 		{
 			uint8_t Shoot_Color;			
-			Speed_Str[14]=(int)(Temp2_Chassis_Speed.vw/10)%10+48;	    //µÚÒ»Î»
-			Speed_Str[15]=(int)(Temp2_Chassis_Speed.vw)%10+48;		    //µÚ¶şÎ»
-			Speed_Str[17]=(int)(Temp2_Chassis_Speed.vw*10)%10+48;		//µÚÈıÎ»
-            Speed_Str[18]=(int)(Temp2_Chassis_Speed.vw*100)%10+48;		//µÚËÄÎ»
+			Speed_Str[14]=(int)(Temp2_Chassis_Speed.vw/10)%10+48;	    //ç¬¬ä¸€ä½
+			Speed_Str[15]=(int)(Temp2_Chassis_Speed.vw)%10+48;		    //ç¬¬äºŒä½
+			Speed_Str[17]=(int)(Temp2_Chassis_Speed.vw*10)%10+48;		//ç¬¬ä¸‰ä½
+            Speed_Str[18]=(int)(Temp2_Chassis_Speed.vw*100)%10+48;		//ç¬¬å››ä½
 			
 			if(Shoot == false)
                 Shoot_Color = pink;
@@ -135,12 +135,12 @@ void UI_Task(void const * argument)
 }
 
 /**
-¼ÆËãÔÆÌ¨Óëµ×ÅÌ²î½ÇµÄUIÍ¼ĞÎÆğÊ¼½Ç¶ÈÓë½áÊø½Ç¶È
-´óÔ²»¡ºÍĞ¡Ô²»¡»¥²¹
+è®¡ç®—äº‘å°ä¸åº•ç›˜å·®è§’çš„UIå›¾å½¢èµ·å§‹è§’åº¦ä¸ç»“æŸè§’åº¦
+å¤§åœ†å¼§å’Œå°åœ†å¼§äº’è¡¥
 */
 void yaw_error_cal(void)
 {		
-	float substarct_angle;	//ÔÆÌ¨ºÍµ×ÅÌ±àÂëÆ÷²îÖµµÄ½Ç¶È 
+	float substarct_angle;	//äº‘å°å’Œåº•ç›˜ç¼–ç å™¨å·®å€¼çš„è§’åº¦ 
 	substarct_angle=(GM6020_Yaw.rotor_angle-Gimbal_Yaw_ZERO)*0.04394f;
 	float start_angle,end_angle;
 	start_angle = 30 + substarct_angle;

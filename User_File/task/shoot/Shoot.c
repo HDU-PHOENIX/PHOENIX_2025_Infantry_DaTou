@@ -7,23 +7,23 @@ extern Moto_M3508_t M3508_Shoot[2];
 extern Computer_Rx_Message_t Computer_Rx_Message;
 
 static uint8_t Single_Mode,Have_Shoot;
-int16_t M3508_Speed=6666;
+int16_t M3508_Speed=5000;//6666
 bool Shoot = false;
 float M2006_Speed = -2000;
 
-/********************»»µ¯²¿·Ö********************/
+/********************æ¢å¼¹éƒ¨åˆ†********************/
 void Shoot_Reload_Choose(void);
 
-/********************ÊäÈë¿ØÖÆ²¿·Ö********************/
+/********************è¾“å…¥æŽ§åˆ¶éƒ¨åˆ†********************/
 void Shoot_Remote_Control(void);
 void Shoot_KeyBoard_Control(void);
 
-/********************Êä³ö¿ØÖÆ²¿·Ö********************/
+/********************è¾“å‡ºæŽ§åˆ¶éƒ¨åˆ†********************/
 void Shoot_Stop(void);
 void Shoot_Move(void);
 void Speed17mm_Control(void);
 
-/********************PID²¿·Ö********************/
+/********************PIDéƒ¨åˆ†********************/
 void Shoot_PID_Init_ALL(void);
 void Shoot_PID_Clean_ALL(void);
 void Shoot_fPidCalc(void);
@@ -31,7 +31,7 @@ void Shoot_fPidCalc(void);
 
 /**
  * @file Shoot.c
- * @brief ÅÐ¶ÏÊÇ·ñÐèÒª»»µ°
+ * @brief åˆ¤æ–­æ˜¯å¦éœ€è¦æ¢è›‹
  * @author HWX
  * @date 2024/10/20
  */
@@ -49,7 +49,7 @@ void Shoot_Reload_Choose(void)
 		}
 		break;
 	case Car_Keyboard:
-//°´×¡R¿ª¹Øµ¯²Õ		
+//æŒ‰ä½Rå¼€å…³å¼¹èˆ±		
         if(IF_KEY_PRESSED_R == 1)
 			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,2500);
 		else if(IF_KEY_PRESSED_R == 0)
@@ -65,7 +65,7 @@ void Shoot_Reload_Choose(void)
 
 /**
  * @file Shoot.c
- * @brief Éä»÷¿ØÖÆ
+ * @brief å°„å‡»æŽ§åˆ¶
  * @author HWX
  * @date 2024/10/20
  */
@@ -80,7 +80,7 @@ void Shoot_Move(void)
 
 /**
  * @file Shoot.c
- * @brief Ò£¿ØÆ÷ÅÐ¶ÏÊÇ·ñÐèÒª¿ªÊ¼Éä»÷
+ * @brief é¥æŽ§å™¨åˆ¤æ–­æ˜¯å¦éœ€è¦å¼€å§‹å°„å‡»
  * @author HWX
  * @date 2024/10/20
  */
@@ -106,7 +106,7 @@ void Shoot_Remote_Control(void)
                 M2006_Rammer.Set_Speed = 0;
 			}
         break;
-    case Shoot_Single://µ¥·¢Ä£Ê½
+    case Shoot_Single://å•å‘æ¨¡å¼
         if(RC.wheel >= 300 && Single_Mode == 0 && RC.s1 == 2)
         {
             Have_Shoot = 1;
@@ -115,9 +115,9 @@ void Shoot_Remote_Control(void)
         {
             Single_Mode = 0;
         }
-        if(Have_Shoot == 1) //»¹Î´´òµ¯
+        if(Have_Shoot == 1) //è¿˜æœªæ‰“å¼¹
         {
-            if(ABS(M2006_Rammer.total_angle)< MOTOR_2006_CIRCLE_ANGLE /8.0f) //Î´×ª¹ýÒ»¸ö³ÝÎ»
+            if(ABS(M2006_Rammer.total_angle)< MOTOR_2006_CIRCLE_ANGLE /8.0f) //æœªè½¬è¿‡ä¸€ä¸ªé½¿ä½
             {
                 M2006_Rammer.Set_Speed = M2006_Speed;
             }
@@ -145,7 +145,7 @@ void Shoot_Remote_Control(void)
 
 /**
  * @file Shoot.c
- * @brief ¼ÆËãPID
+ * @brief è®¡ç®—PID
  * @author HWX
  * @date 2024/10/20
  */
@@ -158,7 +158,7 @@ void Shoot_fPidCalc(void)
 
 /**
  * @file Shoot.c
- * @brief ³õÊ¼»¯PID
+ * @brief åˆå§‹åŒ–PID
  * @author HWX
  * @date 2024/10/20                                                                                                                                                                                                                                                                                                                                                           
  */
@@ -171,7 +171,7 @@ void Shoot_PID_Init_ALL(void)
 
 /**
  * @file Shoot.c
- * @brief Çå¿ÕPID
+ * @brief æ¸…ç©ºPID
  * @author HWX
  * @date 2024/10/20
  */
@@ -185,7 +185,7 @@ void Shoot_PID_Clean_ALL(void)
 
 /**
  * @file Shoot.c
- * @brief Éä»÷¶Ïµç
+ * @brief å°„å‡»æ–­ç”µ
  * @author HWX
  * @date 2024/10/20
  */
@@ -197,7 +197,7 @@ void Shoot_Stop(void)
 }
 
 /**
- * @brief Í¨¹ý¼üÊó¿ØÖÆµ¯ËÙ
+ * @brief é€šè¿‡é”®é¼ æŽ§åˆ¶å¼¹é€Ÿ
  */
 float Speed17mm_Now;
 uint8_t Min_cnt = 0,Max_cnt = 0;
@@ -205,7 +205,7 @@ bool Z_judge = false,X_judge = false,G_judge = false;
 void Speed17mm_Control(void)
 {
     Speed17mm_Now = JUDGE_usGetSpeedHeat17();
-    if(IF_KEY_PRESSED_Z == 1)//µã»÷Z¼õµ¯ËÙ
+    if(IF_KEY_PRESSED_Z == 1)//ç‚¹å‡»Zå‡å¼¹é€Ÿ
     {
         if(Z_judge == true)
         {
@@ -213,12 +213,12 @@ void Speed17mm_Control(void)
             Z_judge = false;
 		}
     }
-	if(IF_KEY_PRESSED_Z == 0)//ËÉÊÖ¼ì²â
+	if(IF_KEY_PRESSED_Z == 0)//æ¾æ‰‹æ£€æµ‹
 	{
         Z_judge = true;
 	}
 	
-	if(IF_KEY_PRESSED_X == 1)//µã»÷X¼Óµ¯ËÙ
+	if(IF_KEY_PRESSED_X == 1)//ç‚¹å‡»XåŠ å¼¹é€Ÿ
     {
         if(X_judge == true)
         {
@@ -226,12 +226,12 @@ void Speed17mm_Control(void)
             X_judge = false;
         }
     }
-	if(IF_KEY_PRESSED_X == 0)//ËÉÊÖ¼ì²â
+	if(IF_KEY_PRESSED_X == 0)//æ¾æ‰‹æ£€æµ‹
 	{
         X_judge = true;
 	}
 	
-	if(IF_KEY_PRESSED_G == 1)//µã»÷G»Ø¸´µ½³õÊ¼Éè¶¨Öµ
+	if(IF_KEY_PRESSED_G == 1)//ç‚¹å‡»Gå›žå¤åˆ°åˆå§‹è®¾å®šå€¼
     {
         if(G_judge == true)
         {
@@ -239,20 +239,20 @@ void Speed17mm_Control(void)
             G_judge = false;
         }
     }
-	if(IF_KEY_PRESSED_G == 0)//ËÉÊÖ¼ì²â
+	if(IF_KEY_PRESSED_G == 0)//æ¾æ‰‹æ£€æµ‹
 	{
         G_judge = true;
 	}
 }
 
 /**
- * @brief ¼üÊó¿ØÖÆÊÇ·ñ·¢ÉäÒÔ¼°¿ªÆôÄ¦²ÁÂÖ
+ * @brief é”®é¼ æŽ§åˆ¶æ˜¯å¦å‘å°„ä»¥åŠå¼€å¯æ‘©æ“¦è½®
  */
 bool CTRL_judge = false;
 void Shoot_KeyBoard_Control(void)
 {
 
-    if(IF_KEY_PRESSED_CTRL == 1)//µã»÷ctrl¿ªÆôÄ¦²ÁÂÖ
+    if(IF_KEY_PRESSED_CTRL == 1)//ç‚¹å‡»ctrlå¼€å¯æ‘©æ“¦è½®
     {
         if(Shoot == false && CTRL_judge == true)
         {
@@ -265,7 +265,7 @@ void Shoot_KeyBoard_Control(void)
             CTRL_judge = false;
         }
     }
-		if(IF_KEY_PRESSED_CTRL == 0)//ËÉÊÖ¼ì²â
+		if(IF_KEY_PRESSED_CTRL == 0)//æ¾æ‰‹æ£€æµ‹
 		{
         CTRL_judge = true;
 		}
@@ -283,7 +283,7 @@ void Shoot_KeyBoard_Control(void)
     switch (Car_Mode.Shoot)
     {
     case Shoot_Plugins:
-        if(Shoot == true && RC.mouse.press_l == 1)//Ä¦²ÁÂÖ¿ªÆôÇÒ×ó¼ü°´ÏÂ
+        if(Shoot == true && RC.mouse.press_l == 1)//æ‘©æ“¦è½®å¼€å¯ä¸”å·¦é”®æŒ‰ä¸‹
 			{					
                 M2006_Rammer.Set_Speed = M2006_Speed;
 			}else 
@@ -301,9 +301,9 @@ void Shoot_KeyBoard_Control(void)
             Single_Mode = 0;
         }
 
-        if(Have_Shoot == 1) //»¹Î´´òµ¯
+        if(Have_Shoot == 1) //è¿˜æœªæ‰“å¼¹
         {
-            if(ABS(M2006_Rammer.total_angle)<MOTOR_2006_CIRCLE_ANGLE / 8.0f) //Î´×ª¹ýÒ»¸ö³ÝÎ»
+            if(ABS(M2006_Rammer.total_angle)<MOTOR_2006_CIRCLE_ANGLE / 8.0f) //æœªè½¬è¿‡ä¸€ä¸ªé½¿ä½
             {
                 M2006_Rammer.Set_Speed = M2006_Speed;
             }
