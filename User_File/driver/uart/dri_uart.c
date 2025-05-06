@@ -10,9 +10,8 @@
 #include <string.h>
 
 #define TX_BUFFER_SIZE 256
-uint8_t txBuffer[TX_BUFFER_SIZE];  // 发送缓冲区
-volatile uint16_t txLength = 0;    // 当前缓冲区数据长度
-
+uint8_t txBuffer[TX_BUFFER_SIZE];
+volatile uint16_t txLength = 0;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if(huart->Instance == USART3){

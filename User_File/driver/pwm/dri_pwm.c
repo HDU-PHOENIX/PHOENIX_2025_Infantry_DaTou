@@ -1,6 +1,6 @@
 /**
  * @file dri_pwm.c
- * @brief pwmÏà¹Øº¯Êý
+ * @brief pwmç›¸å…³å‡½æ•°
  * @author He WenXuan(hewenxuan040923@gmail.com)
  * @date 2025-4-11
  * @version 1.0
@@ -11,8 +11,8 @@
 #include "stdint.h"
 #include "main.h"
 /**
- * @brief Éè¶¨PWMµÄ±È½ÏÖµ
- * @param pwm ±È½ÏÖµµÄÖµ
+ * @brief è®¾å®šPWMçš„æ¯”è¾ƒå€¼
+ * @param pwm æ¯”è¾ƒå€¼çš„å€¼
  */
 void imu_pwm_set(uint16_t pwm)
 {
