@@ -1,6 +1,6 @@
 /**
  * @file dvc_dr16.c
- * @brief ´ó½®Ò£¿ØÆ÷Êı¾İ´¦Àí
+ * @brief ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ´ï¿½ï¿½ï¿½
  * @author He WenXuan(hewenxuan040923@gmail.com)
  * @date 2025-4-13
  * @version 1.0
@@ -8,12 +8,12 @@
  */
 #include "dvc_dr16.h"
 
-#include "main.h"
-#include "usart.h"
-#include "Chassis.h"
-#include "Gimbal.h"
-#include "Shoot.h"
-#include "dvc_supercap.h"
+extern RC_t RC;
+extern uint8_t RC_Data[18];
+extern Car_Mode_t Car_Mode;
+extern Computer_Tx_Message_t Computer_Tx_Message;
+extern float ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
+extern SuperCap_Switch_t SuperCap_Switch;
 
 
 /* è·å–é¥æ§å™¨æ‘‡æ†åç§»é‡
@@ -30,14 +30,10 @@
                         ä¸‹  -660  */
 
 /**
-<<<<<<< HEAD
- * @brief ´¦ÀíÒ£¿ØÆ÷Êı¾İ
-=======
  * @file Remote.c
  * @brief å¤„ç†é¥æ§å™¨æ•°æ®
  * @author HWX
  * @date 2024/10/20
->>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void RC_Processing_Data(void)
 {
@@ -67,7 +63,7 @@ void RC_Processing_Data(void)
 	}
 }
 /**
- * @brief ³µÁ¾×´Ì¬³õÊ¼»¯
+ * @brief ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ê¼ï¿½ï¿½
  */
 void Car_Init(void)
 {
@@ -78,14 +74,10 @@ void Car_Init(void)
 
 
 /**
-<<<<<<< HEAD
- * @brief Ñ¡ÔñÒ£¿ØÄ£Ê½
-=======
  * @file Remote.c
  * @brief é€‰æ‹©é¥æ§æ¨¡å¼
  * @author HWX
  * @date 2024/10/20
->>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 static Car_Action_t Last_Action=NORMAL;
 bool F_judge=false;

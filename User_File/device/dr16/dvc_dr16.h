@@ -1,12 +1,12 @@
 #ifndef __REMOTE_H__
 #define __REMOTE_H__
+#include "main.h"
+#include "usart.h"
+#include "Chassis.h"
+#include "Gimbal.h"
+#include "Shoot.h"
+#include "dvc_supercap.h"
 
-extern RC_t RC;
-extern uint8_t RC_Data[18];
-extern Car_Mode_t Car_Mode;
-extern Computer_Tx_Message_t Computer_Tx_Message;
-extern float ZiMiao_Add_Yaw,ZiMiao_Add_Pitch;
-extern SuperCap_Switch_t SuperCap_Switch;
 
 #define    KEY_PRESSED_OFFSET_W        ((uint16_t)0x01<<0)
 #define    KEY_PRESSED_OFFSET_S        ((uint16_t)0x01<<1)

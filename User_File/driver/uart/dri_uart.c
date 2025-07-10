@@ -1,18 +1,16 @@
 #include "dri_uart.h"
 
-#include "main.h"
-#include "dvc_dr16.h"
-#include "dvc_minipc.h"
-#include "Gimbal.h"
-#include "Usart.h"
-#include "dvc_dji_gm6020.h"
-#include <stdio.h>
-#include <string.h>
+
+extern uint8_t VOFT_Data[20];
+extern float Set_Yaw,Set_Pitch;
+extern float IMU_angle[3];
+extern Moto_GM6020_t GM6020_Yaw,GM6020_Pitch;
+extern Chassis_Speed_t Temp1_Chassis_Speed,Temp2_Chassis_Speed;
+extern Moto_M3508_t M3508_Chassis[4];
 
 #define TX_BUFFER_SIZE 256
-uint8_t txBuffer[TX_BUFFER_SIZE];  // 发送缓冲区
-volatile uint16_t txLength = 0;    // 当前缓冲区数据长度
-
+uint8_t txBuffer[TX_BUFFER_SIZE];
+volatile uint16_t txLength = 0;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if(huart->Instance == USART3){

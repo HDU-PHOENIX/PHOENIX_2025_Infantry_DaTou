@@ -1,7 +1,11 @@
 #ifndef __GM6020_H__
 #define __GM6020_H__
 
-extern Moto_GM6020_t GM6020_Yaw,GM6020_Pitch;
+#include "main.h"
+#include "can.h"
+#include "stm32f4xx.h"
+#include "alg_pid.h"
+
 
 typedef struct
 {

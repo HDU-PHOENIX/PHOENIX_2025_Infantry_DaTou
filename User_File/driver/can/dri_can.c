@@ -9,14 +9,6 @@
 
 #include "dri_can.h"
 
-#include "main.h"
-#include "can.h"
-#include "stm32f4xx.h"
-#include "dvc_dji_gm6020.h"
-#include "dvc_dji_m3508.h"
-#include "dvc_dji_m2006.h"
-#include "dvc_supercap.h"
-
 /**
  * @file BSP_Can.c
  * @brief 初始化筛选器（这里显码和掩码都是0x0000）

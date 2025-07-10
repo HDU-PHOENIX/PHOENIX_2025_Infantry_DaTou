@@ -9,21 +9,6 @@
  */
 #include "dvc_supercap.h"
 
-<<<<<<< HEAD
-#include "main.h"
-#include "can.h"
-#include "dvc_judge.h"
-#include "string.h"
-#include "dvc_dr16.h"
-#include "Car_Mode.h"
-
-/**
- * @brief ³¬µç³õÊ¼»¯º¯Êı
-=======
-/*
-ä¸åŒçš„è¶…ç”µæœ‰ä¸åŒçš„åè®®ï¼Œæˆ‘å†™çš„è¿™ä¸ªä»…ä¾›å‚è€ƒ
-*/
-
 extern SuperCap_Tx_Message_t SuperCap_Tx_Message;
 extern SuperCap_Rx_Message_t SuperCap_Rx_Message;
 extern RC_t RC;
@@ -32,10 +17,7 @@ extern SuperCap_Switch_t SuperCap_Switch;
 extern Car_Mode_t Car_Mode;
 
 /**
- * @brief è¶…ç”µåˆå§‹åŒ–å‡½æ•°
- * @author HWX
- * @date 2025/3/1
->>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
+ * @brief ³¬µç³õÊ¼»¯º¯Êı
  */
 void SuperCap_Init(void)
 {
@@ -44,13 +26,9 @@ void SuperCap_Init(void)
 }
 
 /**
-<<<<<<< HEAD
  * @brief ³¬µçÊı¾İ´¦Àí²¢·¢ËÍº¯Êı
-=======
- * @brief è¶…ç”µæ•°æ®å¤„ç†å¹¶å‘é€å‡½æ•°
  * @author HWX
  * @date 2025/3/1
->>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void SuperCap_Tx(void)
 {
@@ -73,15 +51,8 @@ void SuperCap_Tx(void)
 }
 
 /**
-<<<<<<< HEAD
  * @brief ³¬µç½ÓÊÕÊı¾İ´¦Àí
  * @param rx_data ½ÓÊÕµ½µÄÔ­Ê¼Êı¾İ
-=======
- * @brief è¶…ç”µæ¥æ”¶æ•°æ®å¤„ç†
- * @param rx_data æ¥æ”¶åˆ°çš„åŸå§‹æ•°æ®
- * @author HWX
- * @date 2025/3/1
->>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void SuperCap_Rx(uint8_t rx_data[8])
 {
@@ -110,7 +81,7 @@ void SuperCap_KeyBoard_Control(void)
 }
 
 /**
- * @brief é”®é¼ å¯åŠ¨è¶…ç”µ
+ * @brief 
  */
 bool C_judge = false;
 void SuperCap_Switch_Control(void)
@@ -118,7 +89,7 @@ void SuperCap_Switch_Control(void)
     if(SuperCap_Rx_Message.Stored_Energy <= 5)
         SuperCap_Mode = SuperCap_Off;
 
-    if(IF_KEY_PRESSED_C == 1 && C_judge == true)//ç‚¹å‡»Cå¯åŠ¨è¶…ç”µ
+    if(IF_KEY_PRESSED_C == 1 && C_judge == true)
     {
         if(SuperCap_Switch == SuperCap_Stop)
             SuperCap_Switch = SuperCap_Work;

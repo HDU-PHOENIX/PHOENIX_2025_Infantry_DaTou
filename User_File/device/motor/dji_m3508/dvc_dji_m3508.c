@@ -7,13 +7,9 @@
  * @copyright HDU-PHOENIX (c) 2025
  */
 #include "dvc_dji_m3508.h"
+extern Moto_M3508_t M3508_Chassis[4],M3508_Shoot[2];
 
-#include "main.h"
-#include "can.h"
-#include "stm32f4xx.h"
-#include "alg_pid.h"
-#include "stdint.h"
-#include "stm32f4xx_hal_can.h"
+
 /**
 <<<<<<< HEAD
  * @brief 底盘M3508接受反馈报文函数

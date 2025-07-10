@@ -1,5 +1,11 @@
 #include "Shoot.h"
-
+#include "main.h"
+#include "tim.h"
+#include "FreeRTOS.h"
+#include "dvc_dr16.h"
+#include "dvc_dji_m3508.h"
+#include "dvc_dji_m2006.h"
+#include "dvc_judge.h"
 extern RC_t RC;
 extern Car_Mode_t Car_Mode;
 extern Moto_M2006_t M2006_Rammer;

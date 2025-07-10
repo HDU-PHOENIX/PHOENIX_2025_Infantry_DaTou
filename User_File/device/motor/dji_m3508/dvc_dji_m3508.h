@@ -1,8 +1,12 @@
 #ifndef __M3508_H__
 #define __M3508_H__
 
-extern Moto_M3508_t M3508_Chassis[4],M3508_Shoot[2];
-
+#include "main.h"
+#include "can.h"
+#include "stm32f4xx.h"
+#include "alg_pid.h"
+#include "stdint.h"
+#include "stm32f4xx_hal_can.h"
 typedef struct
 {
     uint16_t can_id;//电机ID

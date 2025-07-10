@@ -1,6 +1,6 @@
 /**
  * @file dvc_dji_gm6020.c
- * @brief djigm6020µç»ú¿ØÖÆº¯Êı
+ * @brief djigm6020
  * @author He WenXuan(hewenxuan040923@gmail.com)
  * @date 2025-4-13
  * @version 1.0
@@ -8,26 +8,18 @@
  */
 #include "dvc_dji_gm6020.h"
 
-#include "main.h"
-#include "can.h"
-#include "stm32f4xx.h"
-#include "alg_pid.h"
+extern Moto_GM6020_t GM6020_Yaw,GM6020_Pitch;
+
 HAL_StatusTypeDef can_1;
 HAL_StatusTypeDef can_2;
 
 /**
-<<<<<<< HEAD
- * @brief GM6020½ÓÊÜ·´À¡±¨ÎÄº¯Êı
- * @param StdId µç»úID
- * @param rx_data CANÍ¨µÀÊÕµ½µÄÊı¾İ
-=======
  * @file GM6020.c
  * @brief GM6020æ¥å—åé¦ˆæŠ¥æ–‡å‡½æ•°
  * @param StdId ç”µæœºID
  * @param rx_data CANé€šé“æ”¶åˆ°çš„æ•°æ®
  * @author HWX
  * @date 2024/10/20
->>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void Get_GM6020_Motor_Message(uint32_t StdId,uint8_t rx_data[8])
 {
@@ -53,12 +45,6 @@ void Get_GM6020_Motor_Message(uint32_t StdId,uint8_t rx_data[8])
 }
 
 /**
-<<<<<<< HEAD
- * @brief ·¢ËÍµçÑ¹¿ØÖÆ±¨ÎÄ
- * @param hcan CANÍ¨µÀ
- * @param GM6020_Pitch PitchÖáµç»ú
- * @param GM6020_Yaw YawÖáµç»ú
-=======
  * @file GM6020.c
  * @brief å‘é€ç”µå‹æ§åˆ¶æŠ¥æ–‡
  * @param hcan CANé€šé“
@@ -66,7 +52,6 @@ void Get_GM6020_Motor_Message(uint32_t StdId,uint8_t rx_data[8])
  * @param GM6020_Yaw Yawè½´ç”µæœº
  * @author HWX
  * @date 2024/10/20
->>>>>>> e5d65cc (ğŸ fix(coded): ç¼–ç ä»GBKæ¢æˆUTF-8)
  */
 void Set_GM6020_Gimbal_Voltage(CAN_HandleTypeDef* hcan,Moto_GM6020_t GM6020_Yaw,Moto_GM6020_t GM6020_Pitch)
 {

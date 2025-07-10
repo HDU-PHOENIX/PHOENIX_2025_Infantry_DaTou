@@ -8,6 +8,7 @@
 
 #include "stdint.h"
 #include "stm32f4xx_hal.h"
+
 //#define JUDGE_BUFFER_LEN           200
 //#define IT_MASK                   ((uint16_t)0x001F)
 #define JUDGE_MAX_LENGTH           2000

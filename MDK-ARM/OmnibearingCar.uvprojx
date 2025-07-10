@@ -315,7 +315,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,_USE_MATH_DEFINES</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../User_File/algorithm/mahony;../User_File/algorithm/pid;../User_File/device/dr16;../User_File/device/imu/bmi088;../User_File/device/judge;../User_File/device/minipc;../User_File/device/supercap;../User_File/driver/can;../User_File/driver/crc;../User_File/driver/spi;../User_File/driver/uart;../User_File/task/chassis;../User_File/task/gimbal;../User_File/task/imu;../User_File/task/shoot;../User_File/task/ui;../User_File/device/motor/dji_gm6020;../User_File/device/motor/dji_m2006;../User_File/device/motor/dji_m3508;../User_File/device/imu/ist8310;../User_File/driver/pwm;../User_File/task</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../User_File/algorithm/mahony;../User_File/algorithm/pid;../User_File/device/dr16;../User_File/device/imu/bmi088;../User_File/device/judge;../User_File/device/minipc;../User_File/device/supercap;../User_File/driver/can;../User_File/driver/crc;../User_File/driver/spi;../User_File/driver/uart;../User_File/task/chassis;../User_File/task/gimbal;../User_File/task/imu;../User_File/task/shoot;../User_File/task/ui;../User_File/device/motor/dji_gm6020;../User_File/device/motor/dji_m2006;../User_File/device/motor/dji_m3508;../User_File/device/imu/ist8310;../User_File/driver/pwm;../User_File/task;..\User_File\task\chassis</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -359,7 +359,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>

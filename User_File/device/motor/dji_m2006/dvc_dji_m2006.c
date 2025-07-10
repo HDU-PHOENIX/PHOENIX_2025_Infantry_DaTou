@@ -8,11 +8,8 @@
  */
 #include "dvc_dji_m2006.h"
 
-#include "main.h"
-#include "can.h"
-#include "stm32f4xx_hal_can.h"
-#include "alg_pid.h"
-#include "stdint.h"
+extern Moto_M2006_t M2006_Rammer;
+
 /**
  * @brief 取绝对值
  * @param x 目标数据

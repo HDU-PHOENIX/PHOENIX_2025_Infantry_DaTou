@@ -2,17 +2,14 @@
 #define __COMPUTER_H__
 
 
-extern Computer_Rx_Message_t Computer_Rx_Message;
-extern Computer_Tx_Message_t Computer_Tx_Message;
-extern float IMU_angle[3];
 
 #include "main.h"
 #include "usb_device.h"
 #include "usbd_cdc_if.h"
 #include "dvc_dji_gm6020.h"
-
 #include "cmsis_os.h"
 #include "Gimbal.h"
+
 
 
 #pragma pack(1)

@@ -2,6 +2,7 @@
 
 extern Car_Mode_t Car_Mode;
 extern Moto_M3508_t M3508_Shoot[2];
+extern TIM_HandleTypeDef htim1;
 
 void ShootTask(void const * argument)
 {

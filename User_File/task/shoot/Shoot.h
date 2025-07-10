@@ -1,13 +1,6 @@
 #ifndef __SHOOT_H__
 #define __SHOOT_H__
 
-#include "main.h"
-#include "tim.h"
-#include "FreeRTOS.h"
-#include "dvc_dr16.h"
-#include "dvc_dji_m3508.h"
-#include "dvc_dji_m2006.h"
-#include "dvc_judge.h"
 
 #define Single_Angle 1024
 //#define M2006_Speed -2000
